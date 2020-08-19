@@ -27,6 +27,8 @@ public class MemberController {
 
 	@RequestMapping("/member/doJoin")
 	public String doWrite(@RequestParam Map<String, Object> param, Model model) {
+		System.out.println(param);
+		
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 		ResultData checkLoginIdJoinableResultData = memberService.checkLoginIdJoinable(Util.getAsStr(param.get("loginId")));
 
@@ -52,6 +54,8 @@ public class MemberController {
 	@RequestMapping("/member/doLogin")
 	public String doLogin(String loginId, String loginPwReal, String redirectUri, Model model, HttpSession session) {
 		String loginPw = loginPwReal;
+		
+		System.out.println("샤256 : " + loginPwReal);
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
@@ -80,7 +84,7 @@ public class MemberController {
 
 	@RequestMapping("/member/doLogout")
 	public String doLogout(HttpSession session, Model model, String redirectUri) {
-		session.removeAttribute("loginedMemberId");
+		session.removeAttribute("loggedInMemberId");
 
 		if (redirectUri == null || redirectUri.length() == 0) {
 			redirectUri = "/home/main";
@@ -88,5 +92,15 @@ public class MemberController {
 
 		model.addAttribute("redirectUri", redirectUri);
 		return "common/redirect";
+	}
+	
+	@RequestMapping("/member/myInfo")
+	public String showMyInfo() {
+		return "member/myInfo";
+	}
+	
+	@RequestMapping("/member/checkPw")
+	public String doCheckPw() {
+		return "member/myinfo";
 	}
 }

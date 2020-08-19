@@ -36,6 +36,7 @@ label[for] {
 .con {
 	margin-left: auto;
 	margin-right: auto;
+	width: 1200px;
 }
 
 .border-red {
@@ -175,4 +176,9 @@ html>head+body:nth-child(2) .height-300 {
 
 .btn-danger {
 	background-color: red;
+}
+
+/* 기타 추가 */
+.ta-c {
+	text-align: center;
 }

@@ -25,12 +25,12 @@
 	src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <!-- 공통(라이브러리) CSS -->
-<link rel="stylesheet" href="/resource/common.css" />
+<link rel="stylesheet" href="/resource/css/common.css" />
 <!-- 공통(라이브러리) JS -->
 <script src="/resource/common.js"></script>
 
 <!-- 공통 CSS -->
-<link rel="stylesheet" href="/resource/app.css" />
+<link rel="stylesheet" href="/resource/css/app.css" />
 <!-- 공통 JS -->
 <script src="/resource/app.js"></script>
 
@@ -91,21 +91,25 @@
 <body>
 	<div class="top-menu-1">
 		<div class="top-menu-1-box">
-			<div class="emptybox"><span>가나다라마바사아자차카타파하</span></div>
+			<div class="emptybox"><span>[공지사항] 뭐가 어쩌구 저쩌구 됐습니다.</span></div>
 			<c:if test="${isLoggedIn == false}">
 			<form class="headLoginForm" action="/member/doLogin" method="POST" onsubmit="MemberLoginForm__submit(this); return false;">
 				<span>아이디</span> 
-				<input type="text" placeholder="ID" size="10"> 
+				<input type="text" name="loginId" placeholder="ID" size="10"> 
 				<span>비밀번호</span>
-				<input type="password" placeholder="비밀번호" size="10"> 
+				<input type="password" name="loginPw" placeholder="비밀번호" size="10"> 
 				<input type="hidden" name="loginPwReal">
+				<input type="hidden" name="redirectUri" value="/home/main">
 				<input type="submit" value="로그인">
 				<a href="/member/join">회원가입</a>
 			</form>
 			</c:if>
 			<c:if test="${isLoggedIn}">
-				[ ${loggedInMember.nickname} ]님 환영합니다.
-				<button type="button" href="/member/doLogout">로그아웃</button>
+				<div class="btns">
+					[ ${loggedInMember.nickname} ]님 환영합니다.
+					<button type="button" onclick="location.href='/member/doLogout'">로그아웃</button>
+					<button type="button" onclick="location.href='/member/myInfo'">회원정보</button>
+				</div>
 			</c:if>
 		</div>
 	</div>
