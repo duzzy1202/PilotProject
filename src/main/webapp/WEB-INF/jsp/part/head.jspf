@@ -95,13 +95,13 @@
 			<c:if test="${isLoggedIn == false}">
 			<form class="headLoginForm" action="/member/doLogin" method="POST" onsubmit="MemberLoginForm__submit(this); return false;">
 				<span>아이디</span> 
-				<input type="text" name="loginId" placeholder="ID" size="10"> 
+				<input type="text" name="loginId" placeholder="ID" size="10" autocomplete="off"> 
 				<span>비밀번호</span>
-				<input type="password" name="loginPw" placeholder="비밀번호" size="10"> 
+				<input type="password" name="loginPw" placeholder="비밀번호" size="10" > 
 				<input type="hidden" name="loginPwReal">
 				<input type="hidden" name="redirectUri" value="/home/main">
 				<input type="submit" value="로그인">
-				<a href="/member/join">회원가입</a>
+				<button type="button" onclick="location.href='/member/join'">회원가입</button>
 			</form>
 			</c:if>
 			<c:if test="${isLoggedIn}">
@@ -115,7 +115,7 @@
 	</div>
 	<div class="top-menu-2 con">
 		<ul>
-			<li><a href="#">인기 게시물</a></li>
+			<li><a href="/home/main">인기 게시물</a></li>
 			<li><a href="#">국내축구</a></li>
 			<li><a href="#">해외축구</a></li>
 			<li><a href="#">기타</a></li>

@@ -17,4 +17,8 @@ public interface MemberDao {
 	int getLoginIdDupCount(@Param("loginId") String loginId);
 
 	Member getMemberByLoginId(@Param("loginId") String loginId);
+
+	int modifyMember(Map<String, Object> param);
+
+	int getNicknameDupCount(String nickname);
 }

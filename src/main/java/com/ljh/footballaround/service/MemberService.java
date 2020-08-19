@@ -52,4 +52,18 @@ public class MemberService {
 		return memberDao.getMemberByLoginId(loginId);
 	}
 
+	public int modifyMember(Map<String, Object> param) {
+		return memberDao.modifyMember(param);
+	}
+
+	public ResultData checkNicknameAbleToUse(String nickname) {
+		int count = memberDao.getNicknameDupCount(nickname);
+
+		if (count == 0) {
+			return new ResultData("S-1", "사용가능한 닉네임입니다.", "nickname", nickname);
+		}
+
+		return new ResultData("F-1", "이미 사용중인 닉네임입니다.", "nickname", nickname);
+	}
+
 }

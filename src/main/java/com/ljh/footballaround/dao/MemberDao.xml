@@ -34,4 +34,21 @@
 		nickname = #{nickname},
 		email = #{email}
 	</insert>
+	
+	<update id="modifyMember" keyProperty="id">
+		UPDATE member
+		<set>
+			updateDate = NOW(),
+			<if test="loginPw != '' ">loginPw = #{loginPw},</if>
+			<if test="nickname != '' ">nickname = #{nickname},</if>
+		</set>
+		WHERE id = #{memberId}
+	</update>
+	
+	<select id="getNicknameDupCount" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM member
+		WHERE nickname = #{nickname}
+	</select>
+
 </mapper>

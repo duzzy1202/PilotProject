@@ -112,7 +112,7 @@
 				<td>
 					<div class="form-control-box">
 						<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
-							maxlength="30" />
+							maxlength="30" autocomplete="off"/>
 					</div>
 				</td>
 			</tr>
@@ -139,7 +139,7 @@
 				<td>
 					<div class="form-control-box">
 						<input type="text" placeholder="이름을 입력해주세요." name="name"
-							maxlength="20" />
+							maxlength="20" autocomplete="off"/>
 					</div>
 				</td>
 			</tr>
@@ -148,7 +148,7 @@
 				<td>
 					<div class="form-control-box">
 						<input type="text" placeholder="활동명 입력해주세요." name="nickname"
-							maxlength="20" />
+							maxlength="20" autocomplete="off"/>
 					</div>
 				</td>
 			</tr>
@@ -157,7 +157,9 @@
 				<td>
 					<div class="form-control-box">
 						<input type="email" placeholder="이메일 입력해주세요." name="email"
-							maxlength="50" />
+							maxlength="50" autocomplete="off"/>
+						<span>*현재 이메일 변경이 불가하므로 정확히 입력하지 않으면
+							이메일 인증이 불가할 수 있으니, 정확히 입력해주시길 바랍니다.</span>
 					</div>
 				</td>
 			</tr>

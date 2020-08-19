@@ -3,6 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="정보수정" />
+
 <%@ include file="../part/head.jspf"%>
 
 <script>
@@ -13,78 +14,42 @@
 			return;
 		}
 
-		form.loginId.value = form.loginId.value.trim();
-		form.loginId.value = form.loginId.value.replaceAll('-', '');
-		form.loginId.value = form.loginId.value.replaceAll('_', '');
-		form.loginId.value = form.loginId.value.replaceAll(' ', '');
-
-		if (form.loginId.value.length == 0) {
-			form.loginId.focus();
-			alert('로그인 아이디를 입력해주세요.');
-
-			return;
-		}
-
-		if (form.loginId.value.length < 4) {
-			form.loginId.focus();
-			alert('로그인 아이디 4자 이상 입력해주세요.');
-
-			return;
-		}
-
 		form.loginPw.value = form.loginPw.value.trim();
 
-		if (form.loginPw.value.length == 0) {
+		if (form.loginPw.value.length < 5 && form.loginPw.value.length > 0) {
 			form.loginPw.focus();
-			alert('로그인 비밀번호를 입력해주세요.');
+			alert('비밀번호를 5자 이상 입력해주세요.');
 
 			return;
 		}
 
-		if (form.loginPw.value.length < 5) {
-			form.loginPw.focus();
-			alert('로그인 비밀번호를 5자 이상 입력해주세요.');
-
-			return;
-		}
-
-		if (form.loginPwConfirm.value.length == 0) {
+		if (form.loginPwConfirm.value.length == 0 && form.loginPw.value.length > 0) {
 			form.loginPwConfirm.focus();
-			alert('로그인 비밀번호 확인을 입력해주세요.');
+			alert('비밀번호 확인을 입력해주세요.');
+
+			return;
+		}
+
+		if (form.loginPwConfirm.value.length > 0 && form.loginPw.value.length == 0) {
+			form.loginPwConfirm.focus();
+			alert('비밀번호를 입력하지 않았습니다.');
 
 			return;
 		}
 
 		if (form.loginPw.value != form.loginPwConfirm.value) {
 			form.loginPwConfirm.focus();
-			alert('로그인 비밀번호 확인이 일치하지 않습니다.');
+			alert('비밀번호 확인이 일치하지 않습니다.');
 
 			return;
 		}
 
-		form.name.value = form.name.value.trim();
-
-		if (form.name.value.length == 0) {
-			form.name.focus();
-			alert('이름을 입력해주세요.');
-
-			return;
-		}
 
 		form.nickname.value = form.nickname.value.trim();
 
-		if (form.nickname.value.length == 0) {
-			form.nickname.focus();
-			alert('활동명을 입력해주세요.');
-
-			return;
-		}
-
-		form.email.value = form.email.value.trim();
-
-		if (form.email.value.length == 0) {
-			form.email.focus();
-			alert('이메일을 입력해주세요.');
+		if (form.nickname.value.length == 0 && form.loginPw.value.length == 0) {
+			form.loginPw.focus();
+			alert('아무정보도 입력하지 않았습니다.');
 
 			return;
 		}
@@ -97,9 +62,9 @@
 		MemberJoinForm__submitDone = true;
 	}
 </script>
-<form method="POST" class="table-box con form1" action="doJoin"
+<form method="POST" class="table-box con form1 margin-top-20" action="doModify"
 	onsubmit="MemberJoinForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/home/main">
+	<input type="hidden" name="redirectUri" value="/member/myInfo">
 	<input type="hidden" name="loginPwReal" >
 
 	<table>
@@ -108,25 +73,21 @@
 		</colgroup>
 		<tbody>
 			<tr>
-				<th>로그인 아이디</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
-							maxlength="30" />
-					</div>
-				</td>
+				<th>아이디</th>
+				<td>${loggedInMember.loginId }</td>
 			</tr>
 			<tr>
-				<th>로그인 비번</th>
+				<th>비밀번호</th>
 				<td>
 					<div class="form-control-box">
 						<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
 							name="loginPw" maxlength="30" />
+						<span>* 비밀번호 변경을 원하지 않는경우, 공란으로 두시면 됩니다.</span>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<th>로그인 비번 확인</th>
+				<th>비밀번호 확인</th>
 				<td>
 					<div class="form-control-box">
 						<input type="password" placeholder="로그인 비밀번호 확인을 입력해주세요."
@@ -136,39 +97,25 @@
 			</tr>
 			<tr>
 				<th>이름</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="이름을 입력해주세요." name="name"
-							maxlength="20" />
-					</div>
-				</td>
+				<td>${loggedInMember.name }</td>
 			</tr>
 			<tr>
 				<th>닉네임</th>
 				<td>
 					<div class="form-control-box">
-						<input type="text" placeholder="활동명 입력해주세요." name="nickname"
-							maxlength="20" />
+						<input type="text" placeholder="${loggedInMember.nickname }" name="nickname"
+							maxlength="20" autocomplete="off"/>
+						<span>* 닉네임 변경을 원하지 않는경우, 공란으로 두시면 됩니다.</span>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
-				<td>
-					<div class="form-control-box">
-						<input type="email" placeholder="이메일 입력해주세요." name="email"
-							maxlength="50" />
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>가입</th>
-				<td>
-					<button class="btn btn-primary" type="submit">가입</button>
-				</td>
+				<td>${loggedInMember.email }</td>
 			</tr>
 		</tbody>
 	</table>
+	<button class="block margin-auto margin-top-20" type="submit">수정완료</button>
 </form>
 
 <%@ include file="../part/foot.jspf"%>

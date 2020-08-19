@@ -47,7 +47,7 @@
 		</tbody>
 	</table>
 	<div class="btns">
-		<button type="button" onclick="location.href='/member/modify'">정보수정</button>
+		<button type="button" onclick="location.href='/member/checkPw'">정보수정</button>
 	</div>
 </div>
 

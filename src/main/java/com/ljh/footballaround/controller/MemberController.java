@@ -27,10 +27,15 @@ public class MemberController {
 
 	@RequestMapping("/member/doJoin")
 	public String doWrite(@RequestParam Map<String, Object> param, Model model) {
-		System.out.println(param);
-		
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 		ResultData checkLoginIdJoinableResultData = memberService.checkLoginIdJoinable(Util.getAsStr(param.get("loginId")));
+		ResultData checkNicknameJoinableResultData = memberService.checkNicknameAbleToUse(Util.getAsStr(param.get("nickname")));
+
+		if (checkNicknameJoinableResultData.isFail()) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", checkNicknameJoinableResultData.getMsg());
+			return "common/redirect";
+		}
 
 		if (checkLoginIdJoinableResultData.isFail()) {
 			model.addAttribute("historyBack", true);
@@ -54,8 +59,6 @@ public class MemberController {
 	@RequestMapping("/member/doLogin")
 	public String doLogin(String loginId, String loginPwReal, String redirectUri, Model model, HttpSession session) {
 		String loginPw = loginPwReal;
-		
-		System.out.println("샤256 : " + loginPwReal);
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
@@ -100,7 +103,76 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/member/checkPw")
-	public String doCheckPw() {
-		return "member/myinfo";
+	public String checkPw() {
+		return "member/checkPw";
+	}
+	
+	@RequestMapping("/member/doCheckPw")
+	public String doCheckPw(String loginPwReal, String redirectUri, Model model, HttpSession session) {
+		String loginPw = loginPwReal;
+		int memberId = (int)session.getAttribute("loggedInMemberId");
+		Member member = memberService.getMemberById(memberId);
+
+		if (member.getLoginPw().equals(loginPw) == false) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+			return "common/redirect";
+		}
+
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = "/home/main";
+		}
+
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", String.format("비밀번호가 확인되었습니다."));
+
+		return "common/redirect";
+	}
+	
+	@RequestMapping("/member/modify")
+	public String modifyMember() {
+		return "member/modify";
+	}
+	
+	@RequestMapping("/member/doModify")
+	public String doModifyMember(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
+		Util.changeMapKey(param, "loginPwReal", "loginPw");
+
+		String loginPw = (String)param.get("loginPw");
+		
+		// 암호화된 공란을 다시 ""로 변경
+		String sha = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+		if (loginPw.equals(sha)) {
+			loginPw = "";
+			param.put("loginPw", loginPw);
+		}
+		
+		String nickname = (String)param.get("nickname");
+		int memberId = (int) session.getAttribute("loggedInMemberId");
+		param.put("memberId", memberId);
+		
+		if (nickname.length() > 0) {
+			ResultData checkNicknameJoinableResultData = memberService.checkNicknameAbleToUse(nickname);
+
+			if (checkNicknameJoinableResultData.isFail()) {
+				model.addAttribute("historyBack", true);
+				model.addAttribute("alertMsg", checkNicknameJoinableResultData.getMsg());
+				return "common/redirect";
+			}
+		}
+		
+		int id = -1;
+		id = memberService.modifyMember(param);
+		
+		if (id == -1) {
+			model.addAttribute("alertMsg", String.format("정보수정에 실패하였습니다."));
+			return "common/redirect";
+		}
+
+		String redirectUri = (String) param.get("redirectUri");
+		model.addAttribute("alertMsg", "정보수정에 성공하였습니다.");
+		model.addAttribute("redirectUri", redirectUri);
+
+		return "common/redirect";
 	}
 }
