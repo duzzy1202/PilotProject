@@ -45,15 +45,4 @@
 	margin: 15px;
 }
 
-.myinfo > .btns {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-top: 20px;
-}
-
-.myinfo > .btns > bitton {
-	margin: 8px;
-	padding: 3px;
-}
 

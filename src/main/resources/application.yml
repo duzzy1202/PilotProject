@@ -31,3 +31,10 @@ spring:
       max-request-size: 100MB      
 mybatis:
   type-aliases-package: com.ljh.footballaround.dto
+custom:
+  siteName: FOOTBALL AROUND
+  siteMainUri: http://localhost:8083/home/main
+  logoText: FOOTBALL AROUND
+  emailFrom: footballaroundcomnunity@gmail.com
+  emailFromName: FOOTBALL AROUND COMMUNITY 
+ 

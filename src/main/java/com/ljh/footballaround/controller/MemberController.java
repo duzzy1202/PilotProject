@@ -10,8 +10,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Member;
 import com.ljh.footballaround.dto.ResultData;
+import com.ljh.footballaround.service.AttrService;
 import com.ljh.footballaround.service.MemberService;
 import com.ljh.footballaround.util.Util;
 
@@ -19,6 +21,8 @@ import com.ljh.footballaround.util.Util;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private AttrService attrService;
 
 	@RequestMapping("/member/join")
 	public String showWrite() {
@@ -30,16 +34,25 @@ public class MemberController {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 		ResultData checkLoginIdJoinableResultData = memberService.checkLoginIdJoinable(Util.getAsStr(param.get("loginId")));
 		ResultData checkNicknameJoinableResultData = memberService.checkNicknameAbleToUse(Util.getAsStr(param.get("nickname")));
+		ResultData checkEmailJoinableResultData = memberService.checkEmailAbleToUse(Util.getAsStr(param.get("email")));
 
+		
+
+		if (checkLoginIdJoinableResultData.isFail()) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", checkLoginIdJoinableResultData.getMsg());
+			return "common/redirect";
+		}
+		
 		if (checkNicknameJoinableResultData.isFail()) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", checkNicknameJoinableResultData.getMsg());
 			return "common/redirect";
 		}
-
-		if (checkLoginIdJoinableResultData.isFail()) {
+		
+		if (checkEmailJoinableResultData.isFail()) {
 			model.addAttribute("historyBack", true);
-			model.addAttribute("alertMsg", checkLoginIdJoinableResultData.getMsg());
+			model.addAttribute("alertMsg", checkEmailJoinableResultData.getMsg());
 			return "common/redirect";
 		}
 
@@ -62,13 +75,13 @@ public class MemberController {
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
-			model.addAttribute("historyBack", true);
+			model.addAttribute("redirectUri", "/member/login");
 			model.addAttribute("alertMsg", "존재하지 않는 회원입니다.");
 			return "common/redirect";
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
-			model.addAttribute("historyBack", true);
+			model.addAttribute("redirectUri", "/member/login");
 			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
 			return "common/redirect";
 		}
@@ -172,6 +185,77 @@ public class MemberController {
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("alertMsg", "정보수정에 성공하였습니다.");
 		model.addAttribute("redirectUri", redirectUri);
+
+		return "common/redirect";
+	}
+	
+	@RequestMapping("/member/findId")
+	public String findId() {
+		return "member/findId";
+	}
+	
+	@RequestMapping("/member/doFindId")
+	public String doFindId(@RequestParam Map<String, Object> param, Model model) {
+		String name = (String)param.get("name");
+		String email = (String)param.get("email");
+		
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+		
+		if (member == null) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "입력하신 정보가 올바르지 않거나, 존재하지 않는 회원입니다.");
+			return "common/redirect";
+		}
+		
+		memberService.sendFindId(member);
+
+		String redirectUri = (String) param.get("redirectUri");
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", "입력하신 이메일 주소로 회원님의 ID가 발송되었습니다.");
+
+		return "common/redirect";
+	}
+	
+	@RequestMapping("/member/findPw")
+	public String findPw() {
+		return "member/findPw";
+	}
+	
+	@RequestMapping("/member/doFindPw")
+	public String doFindPw(@RequestParam Map<String, Object> param, Model model) {
+		String loginId = (String)param.get("loginId");
+		String name = (String)param.get("name");
+		String email = (String)param.get("email");
+		
+		/* 입력한 내용의 회원이 있는지 확인 */
+		Member member = memberService.getMemberByLoginIdAndNameAndEmail(loginId, name, email);
+		if (member == null) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "입력하신 정보가 올바르지 않거나, 존재하지 않는 회원입니다.");
+			return "common/redirect";
+		}
+		
+		/* 임시비밀번호 생성, 임시비밀번호 암호화, attr 이름 생성 */
+		String tempPw = Util.getTempPassword(10);
+		String tempPwSHA = Util.sha256(tempPw);
+		String attrName = "member__"+ member.getId() + "__extra__tempPw";
+		
+		/* 현재 비밀번호를 찾는 유저의 임시비밀번호 발급 기록이 있는지 확인. 
+		 * 기록이 있으면 업데이트로 밸류값만 변경, 기록이 없으면 새로 생성*/
+		Attr attr = attrService.get(attrName);
+		if (attr == null) {
+			attrService.setValue(attrName, tempPwSHA);
+		} else {
+			attrService.updateValue(attrName, tempPwSHA);
+		}
+		
+		/* 이 유저의 비밀번호를 임시비밀번호로 변경, 이메일로 임시비밀번호 발송 */
+		memberService.changePwToTempPw(member, tempPwSHA);
+		memberService.sendFindPw(member, tempPw);
+
+		String redirectUri = (String) param.get("redirectUri");
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", "입력하신 이메일 주소로 회원님의 임시비밀번호가 발송되었습니다.");
 
 		return "common/redirect";
 	}

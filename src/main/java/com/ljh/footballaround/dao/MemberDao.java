@@ -21,4 +21,10 @@ public interface MemberDao {
 	int modifyMember(Map<String, Object> param);
 
 	int getNicknameDupCount(String nickname);
+
+	int getEmailDupCount(String email);
+
+	Member getMemberByNameAndEmail(String name, String email);
+
+	Member getMemberByLoginIdAndNameAndEmail(String loginId, String name, String email);
 }

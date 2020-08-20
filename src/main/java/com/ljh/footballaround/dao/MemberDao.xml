@@ -50,5 +50,26 @@
 		FROM member
 		WHERE nickname = #{nickname}
 	</select>
+	
+	<select id="getEmailDupCount" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM member
+		WHERE email = #{email}
+	</select>
+	
+	<select id="getMemberByNameAndEmail" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE name = #{name}
+		AND email = #{email}
+	</select>
+	
+	<select id="getMemberByLoginIdAndNameAndEmail" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE loginId = #{loginId}
+		AND name = #{name}
+		AND email = #{email}
+	</select>
 
 </mapper>

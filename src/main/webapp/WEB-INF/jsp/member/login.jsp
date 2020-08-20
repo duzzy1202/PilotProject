@@ -72,7 +72,7 @@
 				<td>
 					<div class="form-control-box">
 						<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
-							maxlength="30" autofocus="autofocus" />
+							maxlength="30" autofocus="autofocus" autocomplete="off"/>
 					</div>
 				</td>
 			</tr>
@@ -81,18 +81,17 @@
 				<td>
 					<div class="form-control-box">
 						<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
-							name="loginPw" maxlength="30" />
+							name="loginPw" maxlength="30" autocomplete="off"/>
 					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>로그인</th>
-				<td>
-					<button class="btn btn-primary" type="submit">로그인</button>
 				</td>
 			</tr>
 		</tbody>
 	</table>
+	<div class="btns flex flex-jc-c">
+		<button class="btn btn-margin" type="submit">로그인</button>
+		<button class="btn btn-margin" type="button" onclick="location.href='/member/findId'">아이디 찾기</button>
+		<button class="btn btn-margin" type="button" onclick="location.href='/member/findPw'">비밀번호 찾기</button>
+	</div>
 </form>
 
 <%@ include file="../part/foot.jspf"%>

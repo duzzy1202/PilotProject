@@ -46,8 +46,8 @@
 			</tr>
 		</tbody>
 	</table>
-	<div class="btns">
-		<button type="button" onclick="location.href='/member/checkPw'">정보수정</button>
+	<div class="btns flex flex-jc-c">
+		<button class="btn btn-margin" type="button" onclick="location.href='/member/checkPw'">정보수정</button>
 	</div>
 </div>
 

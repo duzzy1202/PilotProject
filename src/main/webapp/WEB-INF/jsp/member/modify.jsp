@@ -115,7 +115,9 @@
 			</tr>
 		</tbody>
 	</table>
-	<button class="block margin-auto margin-top-20" type="submit">수정완료</button>
+	<div class="btns flex flex-jc-c">
+		<button class="btn btn-margin" type="submit">수정완료</button>
+	</div>
 </form>
 
 <%@ include file="../part/foot.jspf"%>
