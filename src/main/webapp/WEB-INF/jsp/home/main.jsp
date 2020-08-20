@@ -4,7 +4,9 @@
 
 <c:set var="pageName" value="메인" />
 <%@ include file="../part/head.jspf"%>
-
-<h1> 메인화면 </h1>
+<div class="con">
+	<h1> 메인화면 </h1>
+	<h2> 인기게시물 게시판 </h2>
+</div>
 
 <%@ include file="../part/foot.jspf"%>

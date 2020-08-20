@@ -116,8 +116,19 @@
 	<div class="top-menu-2 con">
 		<ul>
 			<li><a href="/home/main">인기 게시물</a></li>
-			<li><a href="#">국내축구</a></li>
-			<li><a href="#">해외축구</a></li>
+			<li>
+				<a href="/article/national-list">국내축구</a>
+				<ul>
+					<li><a href="/article/kl1-list">K-리그 1</a></li>
+					<li><a href="/article/kl2-list">K-리그 2</a></li>
+					<li><a href="/article/kl3-list">K3리그</a></li>
+					<li><a href="/article/kl4-list">K4리그</a></li>
+					<li><a href="/article/wkl-list">WK리그</a></li>
+				</ul>
+			</li>
+			<li><a href="/article/foreign-list">해외축구</a></li>
 			<li><a href="#">기타</a></li>
+			<li><a href="/article/notice-list">공지사항</a></li>
 		</ul>
 	</div>
+	<div class="top-menu-3 con"></div>
