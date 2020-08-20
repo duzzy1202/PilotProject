@@ -138,3 +138,23 @@ title = '제목3',
 `body` = '내용3',
 displayStatus = 1,
 `memberId` = 1;
+
+DROP TABLE IF EXISTS club;
+CREATE TABLE club (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME,
+    updateDate DATETIME,
+    delDate DATETIME,
+	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    leagueId INT(10) UNSIGNED NOT NULL,
+	`name` CHAR(20) NOT NULL,
+	ranking INT(10) UNSIGNED NOT NULL,
+	play INT(10) UNSIGNED NOT NULL,
+	points INT(10) UNSIGNED NOT NULL,
+	win INT(10) UNSIGNED NOT NULL,
+	defeat INT(10) UNSIGNED NOT NULL,
+	draw INT(10) UNSIGNED NOT NULL,
+	goal INT(10) UNSIGNED NOT NULL,
+	goalAgainst INT(10) UNSIGNED NOT NULL,
+	goalDefference INT(10) UNSIGNED NOT NULL
+);

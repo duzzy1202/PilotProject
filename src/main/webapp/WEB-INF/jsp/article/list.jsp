@@ -7,6 +7,9 @@
 
 <!-- PC용 -->
 <div class="table-box con visible-on-md-up">
+	<h1>${board.name} 게시판</h1>
+	<div class="">	
+	</div>
 	<table>
 		<colgroup>
 			<col width="100" />
