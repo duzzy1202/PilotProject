@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljh.footballaround.dao.AttrDao">
+	<insert id="setValue" useGeneratedKeys="true" keyProperty="id">
+		INSERT INTO attr
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		relTypeCode = #{relTypeCode},
+		relId = #{relId},
+		typeCode = #{typeCode},
+		type2Code = #{type2Code},
+		value = #{value}
+	</insert>
+	
+	<select id="getValue" resultType="String">
+		SELECT value FROM attr
+		WHERE 1
+		AND relTypeCode = #{relTypeCode}
+		AND relId = #{relId}
+		AND typeCode = #{typeCode}
+		AND type2Code = #{type2Code}
+	</select>
+	
+	<select id="get" resultType="Attr">
+		SELECT * 
+		FROM attr
+		WHERE 1
+		AND relTypeCode = #{relTypeCode}
+		AND relId = #{relId}
+		AND typeCode = #{typeCode}
+		AND type2Code = #{type2Code}
+	</select>
+	
+	<update id="updateValue" >
+		UPDATE attr
+		SET updateDate = NOW(),
+		value = #{value}
+		WHERE 1
+		AND relTypeCode = #{relTypeCode}
+		AND relId = #{relId}
+		AND typeCode = #{typeCode}
+		AND type2Code = #{type2Code} 
+	</update>
+
+</mapper>

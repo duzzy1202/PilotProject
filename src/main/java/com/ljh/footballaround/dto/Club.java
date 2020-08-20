@@ -1,7 +1,5 @@
 package com.ljh.footballaround.dto;
 
-import java.util.Map;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,12 +8,21 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class Board {
+public class Club {
 	private int id;
 	private String regDate;
 	private String updateDate;
+	private boolean delStatus;
+	private String delDate;
 	private String name;
-	private String code;
 	private int leagueId;
-	private Map<String, Object> extra;
+	private int ranking;
+	private int play;
+	private int points;
+	private int win;
+	private int draw;
+	private int defeat;
+	private int goal;
+	private int goalAgainst;
+
 }

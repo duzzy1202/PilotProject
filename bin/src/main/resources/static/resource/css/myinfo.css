@@ -1,0 +1,48 @@
+.myinfo > table {
+	width: 70%;
+	margin-left: auto;
+	margin-right: auto;
+	display: flex;
+	justify-content: center;	
+}
+
+.myinfo > h2 {
+	display: block;
+	text-align: center;
+}
+
+.myinfo > table > .member-info-box {
+	border: 1px solid black;
+	width: 100%;
+}
+
+.myinfo > table > .member-info-box > tr {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.myinfo > table > .member-info-box > tr > th {
+	border: 1px solid black;
+	width: 30%;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.myinfo > table > .member-info-box > tr > td {
+	border: 1px solid black;
+	width: 70%;
+	height: 50px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.myinfo > table > .member-info-box > tr > td > a {
+	margin: 15px;
+}
+
+

@@ -14,25 +14,33 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ljh.footballaround.dto.Article;
 import com.ljh.footballaround.dto.Board;
+import com.ljh.footballaround.dto.Club;
 import com.ljh.footballaround.dto.Member;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.service.ArticleService;
+import com.ljh.footballaround.service.ClubdataService;
 import com.ljh.footballaround.util.Util;
 
 @Controller
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private ClubdataService clubdataService;
 
 	@RequestMapping("/article/{boardCode}-list")
 	public String showList(Model model, @PathVariable("boardCode") String boardCode) {
 		Board board = articleService.getBoardByCode(boardCode);
 		int boardId = board.getId();
+		int leagueId = board.getLeagueId();
 		model.addAttribute("board", board);
 		
 		List<Article> articles = articleService.getForPrintArticles(boardId);
-
+		
+		List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
+		
 		model.addAttribute("articles", articles);
+		model.addAttribute("clubs", clubs);
 
 		return "article/list";
 	}

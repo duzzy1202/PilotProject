@@ -8,42 +8,8 @@
 <!-- PC용 -->
 <div class="table-box con visible-on-md-up">
 	<h1>${board.name} 게시판</h1>
-	<c:if test="${board.leagueId > 0 }">
-	<div class="leaderBoard">
-		<table>
-			<thead>
-				<tr>
-					<th>순위</th>
-					<th>구단</th>
-					<th>경기수</th>
-					<th>승점</th>
-					<th>승</th>
-					<th>무</th>
-					<th>패</th>
-					<th>득점</th>
-					<th>실점</th>
-					<th>득실차</th>
-				</tr>
-			</thead>
-			<tbody>
-			<c:forEach var="club" items="${clubs}">
-				<tr>
-					<th>${club.ranking}</th>
-					<th>${club.name}</th>
-					<th>${club.play}</th>
-					<th>${club.points}</th>
-					<th>${club.win}</th>
-					<th>${club.draw}</th>
-					<th>${club.defeat}</th>
-					<th>${club.goal}</th>
-					<th>${club.goalAgainst}</th>
-					<th>${club.goal - goalAgainst}</th>
-				</tr>
-			</c:forEach>
-			</tbody>
-		</table>
+	<div class="">	
 	</div>
-	</c:if>
 	<table>
 		<colgroup>
 			<col width="100" />

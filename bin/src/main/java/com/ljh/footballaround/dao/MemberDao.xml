@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljh.footballaround.dao.MemberDao">
+	<select id="getMemberById" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE
+		id = #{id}
+	</select>
+
+	<select id="getLoginIdDupCount" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM member
+		WHERE loginId = #{loginId}
+	</select>
+	
+	<select id="getMemberByLoginId" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE loginId = #{loginId}
+	</select>
+
+	<insert id="join" useGeneratedKeys="true" keyProperty="id">
+		INSERT
+		INTO member
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		level = 1,
+		loginId = #{loginId},
+		loginPw = #{loginPw},
+		`name` = #{name},
+		nickname = #{nickname},
+		email = #{email}
+	</insert>
+	
+	<update id="modifyMember" keyProperty="id">
+		UPDATE member
+		<set>
+			updateDate = NOW(),
+			<if test="loginPw != '' ">loginPw = #{loginPw},</if>
+			<if test="nickname != '' ">nickname = #{nickname},</if>
+		</set>
+		WHERE id = #{memberId}
+	</update>
+	
+	<select id="getNicknameDupCount" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM member
+		WHERE nickname = #{nickname}
+	</select>
+	
+	<select id="getEmailDupCount" resultType="int">
+		SELECT COUNT(*) AS cnt
+		FROM member
+		WHERE email = #{email}
+	</select>
+	
+	<select id="getMemberByNameAndEmail" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE name = #{name}
+		AND email = #{email}
+	</select>
+	
+	<select id="getMemberByLoginIdAndNameAndEmail" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE loginId = #{loginId}
+		AND name = #{name}
+		AND email = #{email}
+	</select>
+
+</mapper>

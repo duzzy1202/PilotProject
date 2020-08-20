@@ -42,7 +42,6 @@ html {
 	padding: 0 10px;
 	display: flex;
 	align-items: center;
-	color: white;
 }
 
 .top-menu-1 > .top-menu-1-box > .headLoginForm {
@@ -52,8 +51,6 @@ html {
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
-	height: 100%;
-	padding: 0 5px;
 }
 
 .top-menu-1 > .top-menu-1-box > .btns {
