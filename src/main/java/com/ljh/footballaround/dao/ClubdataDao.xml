@@ -10,5 +10,20 @@
 		ORDER BY ranking ASC
 	</select>
 	
+	<update id="updateLeagueDataByLeagueIdAndClubName">
+		UPDATE club
+		SET updateDate = NOW(),
+		ranking = #{ranking},
+		play = #{play},
+		points = #{points},
+		win = #{win},
+		draw = #{draw},
+		defeat = #{defeat},
+		goal = #{goal},
+		goalAgainst = #{goalAgainst}
+		WHERE leagueId = #{leagueId}
+		AND name = #{name}
+	</update>
+	
 </mapper>
 

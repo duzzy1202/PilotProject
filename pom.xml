@@ -20,6 +20,12 @@
 	</properties>
 
 	<dependencies>
+	<!-- 크롤링을 위한 jsoup -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.13.1</version>
+		</dependency>
 	<!-- 스프링 JDBC -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

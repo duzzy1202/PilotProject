@@ -5,6 +5,9 @@
 <c:set var="pageTitle" value="${board.name} 게시물 리스트" />
 <%@ include file="../part/head.jspf"%>
 
+<!-- 리스트 CSS -->
+<link rel="stylesheet" href="/resource/css/articleList.css" />
+
 <!-- PC용 -->
 <div class="table-box con visible-on-md-up">
 	<h1>${board.name}게시판</h1>
@@ -28,16 +31,16 @@
 				<tbody>
 					<c:forEach var="club" items="${clubs}">
 						<tr>
-							<th>${club.ranking}</th>
-							<th>${club.name}</th>
-							<th>${club.play}</th>
-							<th>${club.points}</th>
-							<th>${club.win}</th>
-							<th>${club.draw}</th>
-							<th>${club.defeat}</th>
-							<th>${club.goal}</th>
-							<th>${club.goalAgainst}</th>
-							<th>${club.goal - goalAgainst}</th>
+							<td>${club.ranking}</td>
+							<td>${club.name}</td>
+							<td>${club.play}</td>
+							<td>${club.points}</td>
+							<td>${club.win}</td>
+							<td>${club.draw}</td>
+							<td>${club.defeat}</td>
+							<td>${club.goal}</td>
+							<td>${club.goalAgainst}</td>
+							<td>${club.goal - club.goalAgainst}</td>
 						</tr>
 					</c:forEach>
 				</tbody>

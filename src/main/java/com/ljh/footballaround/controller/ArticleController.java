@@ -1,5 +1,6 @@
 package com.ljh.footballaround.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,7 @@ import com.ljh.footballaround.dto.Member;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.service.ArticleService;
 import com.ljh.footballaround.service.ClubdataService;
+import com.ljh.footballaround.service.CrawlingService;
 import com.ljh.footballaround.util.Util;
 
 @Controller
@@ -27,13 +29,24 @@ public class ArticleController {
 	private ArticleService articleService;
 	@Autowired
 	private ClubdataService clubdataService;
+	@Autowired
+	private CrawlingService crawlingService;
 
 	@RequestMapping("/article/{boardCode}-list")
-	public String showList(Model model, @PathVariable("boardCode") String boardCode) {
+	public String showList(Model model, @PathVariable("boardCode") String boardCode) throws IOException {
 		Board board = articleService.getBoardByCode(boardCode);
 		int boardId = board.getId();
 		int leagueId = board.getLeagueId();
 		model.addAttribute("board", board);
+		
+		if (boardCode.equals("kl1")) {
+			crawlingService.crawlingKL1();
+		}
+		if (boardCode.equals("kl3")) {
+			crawlingService.crawlingKL3();
+		}
+		
+		
 		
 		List<Article> articles = articleService.getForPrintArticles(boardId);
 		
