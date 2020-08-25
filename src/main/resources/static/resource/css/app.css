@@ -36,13 +36,25 @@ html {
 	background-color: orangered;
 }
 
+.top-menu-1 > .logo-box > a > img {
+	background-color: skyblue;
+	position: absolute;
+}
+
+.top-menus {
+	width: 1082px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .top-menu-1 > .top-menu-1-box > .emptybox {
-	width: 60%;
+	width: 50%;
 	height: 100%;
 	padding: 0 10px;
 	display: flex;
 	align-items: center;
 	color: white;
+	margin-left: 118px;
 }
 
 .top-menu-1 > .top-menu-1-box > .headLoginForm {

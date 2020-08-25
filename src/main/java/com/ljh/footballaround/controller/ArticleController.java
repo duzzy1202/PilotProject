@@ -39,21 +39,33 @@ public class ArticleController {
 		int leagueId = board.getLeagueId();
 		model.addAttribute("board", board);
 		
+		
 		if (boardCode.equals("kl1")) {
 			crawlingService.crawlingKL1();
+			
+			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
+			
+			model.addAttribute("clubs", clubs);
 		}
-		if (boardCode.equals("kl3")) {
-			crawlingService.crawlingKL3();
+		else if (boardCode.equals("kl2")) {
+			crawlingService.crawlingKL2();
+			
+			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
+			
+			model.addAttribute("clubs", clubs);
 		}
-		
-		
+		else if (boardCode.equals("wkl")) {
+			crawlingService.crawlingWKL();
+			
+			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
+			
+			model.addAttribute("clubs", clubs);
+		}
 		
 		List<Article> articles = articleService.getForPrintArticles(boardId);
 		
-		List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
-		
 		model.addAttribute("articles", articles);
-		model.addAttribute("clubs", clubs);
+		
 
 		return "article/list";
 	}

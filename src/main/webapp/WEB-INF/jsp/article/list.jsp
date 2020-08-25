@@ -11,7 +11,7 @@
 <!-- PC용 -->
 <div class="table-box con visible-on-md-up">
 	<h1>${board.name}게시판</h1>
-	<c:if test="${board.leagueId > 0 }">
+	<c:if test="${board.leagueId == 1 || board.leagueId == 2 || board.leagueId == 5 }">
 		<div class="leaderBoard">
 			<table>
 				<thead>

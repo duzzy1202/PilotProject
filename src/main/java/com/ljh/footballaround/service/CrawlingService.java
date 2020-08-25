@@ -39,9 +39,7 @@ public class CrawlingService {
 		String[] data = sbdata.split(",");
 		
 		List<Map<String, Object>> leagueData = organizeData(1, data);
-		
-		System.out.println("HI");
-		
+
 		for (Map<String, Object> teamData : leagueData) {
 			if ( teamData.size()  > 0 ) {
 				System.out.println(teamData);
@@ -49,6 +47,31 @@ public class CrawlingService {
 				clubdataDao.updateLeagueDataByLeagueIdAndClubName(teamData);				
 			}
 		}
+
+		return "{\"1\":\"1\"}";
+	}
+	
+	public String crawlingKL2() throws IOException {
+
+		String url = "http://www.kleague.com/rank/get_rank_html?select_league=2&select_year=2020&select_competition=7ZWY64KY7JuQ7YGQIEvrpqzqt7gyIDIwMjA%3D&select_r_detail=&return_type=html";
+
+		Document doc = Jsoup.connect(url).get();
+
+		Elements element = doc.select("body");
+
+		String sbdata = element.select("body").text();
+		String[] data = sbdata.split(" ");
+		
+		List<Map<String, Object>> leagueData = organizeData(2, data);
+
+		for (Map<String, Object> teamData : leagueData) {
+			if ( teamData.size()  > 0 ) {
+				System.out.println(teamData);
+				teamData.put("leagueId", 2);
+				clubdataDao.updateLeagueDataByLeagueIdAndClubName(teamData);				
+			}
+		}
+		
 
 		return "{\"1\":\"1\"}";
 	}
@@ -83,6 +106,41 @@ public class CrawlingService {
 			}
 		}
 		*/
+		return "{\"1\":\"1\"}";
+	}
+	
+	public String crawlingWKL() throws IOException {
+
+		String url = "https://kwff.info/kwff/record-league.html";
+
+		Document doc = Jsoup.connect(url).get();
+
+		Elements element = doc.select("div.row>");
+
+		StringBuilder sb = new StringBuilder();
+		for (Element el : element.select("table")) {
+			sb.append(el.text() + ",");
+		}
+		
+		String sbdata = sb.toString();
+		String[] data = sbdata.split(",");
+		
+		System.out.println("리그 다타 : " + sbdata);
+		
+		List<Map<String, Object>> leagueData = organizeData(1, data);
+		
+		System.out.println("리그 다타2 : " + leagueData);
+		
+		/*
+		for (Map<String, Object> teamData : leagueData) {
+			if ( teamData.size()  > 0 ) {
+				System.out.println(teamData);
+				teamData.put("leagueId", 1);
+				clubdataDao.updateLeagueDataByLeagueIdAndClubName(teamData);				
+			}
+		}
+		*/
+
 		return "{\"1\":\"1\"}";
 	}
 
@@ -126,5 +184,7 @@ public class CrawlingService {
 		
 		return leagueData;
 	}
+
+
 
 }
