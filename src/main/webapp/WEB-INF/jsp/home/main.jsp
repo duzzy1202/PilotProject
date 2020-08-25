@@ -6,7 +6,8 @@
 <%@ include file="../part/head.jspf"%>
 <div class="con">
 	<h1> 메인화면 </h1>
-	<h2> 인기게시물 게시판 </h2>
+	<h2> 메인화면</h2>
+	<img src="/resource/img/das_beer_boot.png" width="1200px" height="690px">
 </div>
 
 <%@ include file="../part/foot.jspf"%>

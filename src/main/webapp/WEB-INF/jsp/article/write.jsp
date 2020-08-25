@@ -1,12 +1,13 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <c:set var="pageTitle" value="${board.name} 게시물 작성" />
 <%@ include file="../part/head.jspf"%>
+<%@ include file="../part/toastuiEditor.jspf"%>
 
 <script>
 	var ArticleWriteForm__submitDone = false;
+
 	function ArticleWriteForm__submit(form) {
 		if (ArticleWriteForm__submitDone) {
 			alert('처리중입니다.');
@@ -21,14 +22,18 @@
 			return;
 		}
 
-		form.body.value = form.body.value.trim();
+		var bodyEditor = $(form).find('.toast-editor.input-body').data('data-toast-editor');
 
-		if (form.body.value.length == 0) {
-			form.body.focus();
+		var body = bodyEditor.getMarkdown().trim();
+
+		if (body.length == 0) {
+			bodyEditor.focus();
 			alert('내용을 입력해주세요.');
 
 			return;
 		}
+
+		form.body.value = body;
 
 		var maxSizeMb = 50;
 		var maxSize = maxSizeMb * 1024 * 1024 //50MB
@@ -83,7 +88,6 @@
 			});
 		}
 
-		ArticleWriteForm__submitDone = true;
 		startUploadFiles(function(data) {
 			var fileIdsStr = '';
 
@@ -95,27 +99,31 @@
 			form.file__article__0__common__attachment__1.value = '';
 			form.file__article__0__common__attachment__2.value = '';
 
+			if (bodyEditor.inBodyFileIdsStr) {
+				form.fileIdsStr.value += bodyEditor.inBodyFileIdsStr;
+			}
+
 			form.submit();
+			ArticleWriteForm__submitDone = true;
 		});
 	}
 </script>
-<form method="POST" class="table-box con form1"
-	action="${board.code}-doWrite"
-	onsubmit="ArticleWriteForm__submit(this); return false;">
-	<input type="hidden" name="fileIdsStr" /> <input type="hidden"
-		name="redirectUri" value="/article/${board.code}-detail?id=#id">
+<form method="POST" class="table-box table-box-vertical con form1" action="${board.code}-doWrite" onsubmit="ArticleWriteForm__submit(this); return false;">
+	<input type="hidden" name="fileIdsStr" />
+	<input type="hidden" name="body" />
+	<input type="hidden" name="redirectUri" value="/article/${board.code}-detail?id=#id">
 
 	<table>
 		<colgroup>
-            <col class="table-first-col">
-        </colgroup>
+			<col class="table-first-col">
+			<col />
+		</colgroup>
 		<tbody>
 			<tr>
 				<th>제목</th>
 				<td>
 					<div class="form-control-box">
-						<input type="text" placeholder="제목을 입력해주세요." name="title"
-							maxlength="100" />
+						<input type="text" placeholder="제목을 입력해주세요." name="title" maxlength="100" />
 					</div>
 				</td>
 			</tr>
@@ -123,31 +131,30 @@
 				<th>내용</th>
 				<td>
 					<div class="form-control-box">
-						<textarea placeholder="내용을 입력해주세요." name="body" maxlength="2000"></textarea>
+						<script type="text/x-template">
+
+                        </script>
+						<div data-relTypeCode="artile" data-relId="0" class="toast-editor input-body"></div>
 					</div>
 				</td>
 			</tr>
 			<c:forEach var="i" begin="1" end="3" step="1">
 				<c:set var="fileNo" value="${String.valueOf(i)}" />
-				<c:set var="fileExtTypeCode"
-					value="${appConfig.getAttachmentFileExtTypeCode('article', i)}" />
+				<c:set var="fileExtTypeCode" value="${appConfig.getAttachmentFileExtTypeCode('article', i)}" />
 				<tr>
-					<th>첨부${fileNo}
-						${appConfig.getAttachmentFileExtTypeDisplayName('article', i)}</th>
+					<th>첨부${fileNo} ${appConfig.getAttachmentFileExtTypeDisplayName('article', i)}</th>
 					<td>
 						<div class="form-control-box">
-							<input type="file"
-								accept="${appConfig.getAttachemntFileInputAccept('article', i)}"
-								name="file__article__0__common__attachment__${fileNo}">
+							<input type="file" accept="${appConfig.getAttachemntFileInputAccept('article', i)}" name="file__article__0__common__attachment__${fileNo}">
 						</div>
 					</td>
 				</tr>
 			</c:forEach>
-			<tr>
+			<tr class="tr-do">
 				<th>작성</th>
 				<td>
-					<button class="btn btn-primary" type="submit">작성</button> <a
-					class="btn btn-info" href="${listUrl}">리스트</a>
+					<button class="btn btn-primary" type="submit">작성</button>
+					<a class="btn btn-info" href="${listUrl}">리스트</a>
 				</td>
 			</tr>
 		</tbody>

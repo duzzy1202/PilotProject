@@ -54,13 +54,14 @@ public class ArticleController {
 			
 			model.addAttribute("clubs", clubs);
 		}
-		else if (boardCode.equals("wkl")) {
+		
+		/*else if (boardCode.equals("wkl")) {
 			crawlingService.crawlingWKL();
 			
 			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
 			
 			model.addAttribute("clubs", clubs);
-		}
+		}*/
 		
 		List<Article> articles = articleService.getForPrintArticles(boardId);
 		
@@ -80,8 +81,10 @@ public class ArticleController {
 		Board board = articleService.getBoardByCode(boardCode);
 		model.addAttribute("board", board);
 		
-		int id = Integer.parseInt((String) param.get("id"));
+		System.out.println("파람 : " + param);
 		
+		int id = Integer.parseInt((String) param.get("id"));
+
 		Member loggedInMember = (Member)req.getAttribute("loggedInMember");
 
 		Article article = articleService.getForPrintArticleById(loggedInMember, id);

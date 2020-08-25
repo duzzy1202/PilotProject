@@ -1,7 +1,10 @@
 package com.ljh.footballaround.service;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.ljh.footballaround.dao.ArticleDao;
 import com.ljh.footballaround.dto.Article;
 import com.ljh.footballaround.dto.Board;
+import com.ljh.footballaround.dto.File;
 import com.ljh.footballaround.dto.Member;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.util.Util;
@@ -17,11 +21,8 @@ import com.ljh.footballaround.util.Util;
 public class ArticleService {
 	@Autowired
 	private ArticleDao articleDao;
-	
-	/* 파일 관련
 	@Autowired
 	private FileService fileService;
-	*/
 
 	public List<Article> getForPrintArticles(int boardId) {
 		List<Article> articles = articleDao.getForPrintArticles(boardId);
@@ -48,8 +49,6 @@ public class ArticleService {
 		Article article = articleDao.getForPrintArticleById(id);
 
 		updateForPrintInfo(actor, article);
-		
-		/* 파일 관련 코드
 
 		List<File> files = fileService.getFiles("article", article.getId(), "common", "attachment");
 
@@ -60,20 +59,34 @@ public class ArticleService {
 		}
 
 		Util.putExtraVal(article, "file__common__attachment", filesMap);
-		 */
+
 		return article;
 	}
 
 	public int write(Map<String, Object> param) {
 		articleDao.write(param);
 		int id = Util.getAsInt(param.get("id"));
-		
-		/* 파일업로드 관련 코드
+
 		String fileIdsStr = (String) param.get("fileIdsStr");
 
 		if (fileIdsStr != null && fileIdsStr.length() > 0) {
-			List<Integer> fileIds = Arrays.asList(fileIdsStr.split(",")).stream().map(s -> Integer.parseInt(s.trim()))
-					.collect(Collectors.toList());
+			fileIdsStr = fileIdsStr.trim();
+
+			if (fileIdsStr.startsWith(",")) {
+				fileIdsStr = fileIdsStr.substring(1);
+			}
+		}
+
+		if (fileIdsStr != null && fileIdsStr.length() > 0) {
+			fileIdsStr = fileIdsStr.trim();
+
+			if (fileIdsStr.equals(",")) {
+				fileIdsStr = "";
+			}
+		}
+
+		if (fileIdsStr != null && fileIdsStr.length() > 0) {
+			List<Integer> fileIds = Arrays.asList(fileIdsStr.split(",")).stream().map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
 
 			// 파일이 먼저 생성된 후에, 관련 데이터가 생성되는 경우에는, file의 relId가 일단 0으로 저장된다.
 			// 그것을 뒤늦게라도 이렇게 고처야 한다.
@@ -81,7 +94,6 @@ public class ArticleService {
 				fileService.changeRelId(fileId, id);
 			}
 		}
-		*/
 
 		return id;
 	}
@@ -104,15 +116,21 @@ public class ArticleService {
 
 	public void modify(Map<String, Object> param) {
 		articleDao.modify(param);
-		
-		/* 파일 업로드 관련 코드
+
 		int id = Util.getAsInt(param.get("id"));
-		
+
 		String fileIdsStr = (String) param.get("fileIdsStr");
 
 		if (fileIdsStr != null && fileIdsStr.length() > 0) {
-			List<Integer> fileIds = Arrays.asList(fileIdsStr.split(",")).stream().map(s -> Integer.parseInt(s.trim()))
-					.collect(Collectors.toList());
+			fileIdsStr = fileIdsStr.trim();
+
+			if (fileIdsStr.startsWith(",")) {
+				fileIdsStr = fileIdsStr.substring(1);
+			}
+		}
+
+		if (fileIdsStr != null && fileIdsStr.length() > 0) {
+			List<Integer> fileIds = Arrays.asList(fileIdsStr.split(",")).stream().map(s -> Integer.parseInt(s.trim())).collect(Collectors.toList());
 
 			// 파일이 먼저 생성된 후에, 관련 데이터가 생성되는 경우에는, file의 relId가 일단 0으로 저장된다.
 			// 그것을 뒤늦게라도 이렇게 고처야 한다.
@@ -120,7 +138,6 @@ public class ArticleService {
 				fileService.changeRelId(fileId, id);
 			}
 		}
-		*/
 	}
 
 	public Board getBoardByCode(String boardCode) {

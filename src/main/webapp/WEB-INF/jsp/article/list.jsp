@@ -9,9 +9,9 @@
 <link rel="stylesheet" href="/resource/css/articleList.css" />
 
 <!-- PC용 -->
-<div class="table-box con visible-on-md-up">
-	<h1>${board.name}게시판</h1>
-	<c:if test="${board.leagueId == 1 || board.leagueId == 2 || board.leagueId == 5 }">
+<div class="list-box con">
+	<h1>[${board.name}] 게시판</h1>
+	<c:if test="${board.leagueId == 1 || board.leagueId == 2 }">
 		<div class="leaderBoard">
 			<table>
 				<thead>
@@ -47,28 +47,32 @@
 			</table>
 		</div>
 	</c:if>
-	<table>
-		<colgroup>
-			<col width="100" />
-			<col width="200" />
-		</colgroup>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>날짜</th>
-				<th>제목</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${articles}" var="article">
+	<div class="article-list">
+		<table>
+			<colgroup>
+				<col width="100" />
+				<col width="200" />
+			</colgroup>
+			<thead>
 				<tr>
-					<td>${article.id}</td>
-					<td>${article.regDate}</td>
-					<td><a href="${article.getDetailLink(board.code)}">${article.forPrintTitle}</a></td>
+					<th>번호</th>
+					<th>제목</th>
+					<th>작성자</th>
+					<th>날짜</th>
 				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:forEach items="${articles}" var="article">
+					<tr>
+						<td>${article.id}</td>
+						<td><a href="${article.getDetailLink(board.code)}">${article.forPrintTitle}</a></td>
+						<td>${article.extra.writer}</td>
+						<td>${article.regDate}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
 </div>
 
 <!-- 모바일 용 -->
@@ -99,8 +103,8 @@
 </div>
  -->
 
-<div class="btn-box con margin-top-20">
-	<a class="btn btn-primary" href="./${board.code}-write">글쓰기</a>
+<div class="list-btn-box con">
+	<a class="list-btn" href="./${board.code}-write">글쓰기</a>
 </div>
 
 <%@ include file="../part/foot.jspf"%>

@@ -1,30 +1,99 @@
-.table-box > .leaderBoard > table {
+/* 리그 순위표 */
+.list-box > .leaderBoard > table {
 	margin: 15px;
 	text-align: center;
-	width: 600px;
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #EEEEEE;
 }
 
-.table-box > .leaderBoard > table > thead {
+.list-box > .leaderBoard > table > thead {
 	border: 1px solid black;
 }
 
-.table-box > .leaderBoard > table > thead > tr {
-	
-}
-
-.table-box > .leaderBoard > table > thead > tr > th {
-	border: 1px solid black;
+.list-box > .leaderBoard > table > thead > tr > th {
 	width: 8%;
+	background-color: #AFDEFF;
+	padding: 5px;
 }
 
-.table-box > .leaderBoard > table > thead > tr > th:nth-child(2) {
+.list-box > .leaderBoard > table > thead > tr > th:nth-child(2) {
 	width: 20%;
 }
 
-.table-box > .leaderBoard > table > tbody {
+.list-box > .leaderBoard > table > tbody {
 	border: 1px solid black;
 }
 
-.table-box > .leaderBoard > table > tbody > tr > td {
-	border: 1px solid black;
+.list-box > .leaderBoard > table > tbody > tr > td {
+	background-color: #F5A9A9;
+	padding: 3px;
+}
+
+.list-box > .leaderBoard > table > tbody > tr > td:nth-child(2) {
+	font-weight: bold;
+}
+
+/* 게시물 리스트 */
+.list-box > .article-list {
+	width: 100%;
+}
+
+.list-box > .article-list > table {
+	width: 100%;
+}
+.list-box > .article-list > table th {
+	background-color: #AFDEFF;
+	padding: 8px;
+}
+.list-box > .article-list > table td {
+	background-color: #F5A9A9;
+	padding: 6px;
+}
+.list-box > .article-list > table tr th:nth-child(1) {
+	width: 5%;
+	text-align: center;
+}
+.list-box > .article-list > table tr th:nth-child(2) {
+	width: 70%;
+}
+.list-box > .article-list > table tr th:nth-child(3) {
+	width: 10%;
+	text-align: center;
+}
+.list-box > .article-list > table tr th:nth-child(4) {
+	width: 15%;
+	text-align: center;
+}
+.list-box > .article-list > table tr td {
+	text-align: center;
+}
+.list-box > .article-list > table tr td:nth-child(2) {
+	text-align: left;
+	font-weight: bold;
+}
+
+.list-box > .article-list > table tr:hover td {
+	background-color: #F78181;
+}
+
+/* 버튼 */
+
+.list-btn-box {
+	margin-top: 10px;
+	display: flex;
+	justify-content: center;
+}
+
+.list-btn-box > .list-btn { 
+	display: block;
+	padding: 5px;
+	margin: 10px;
+	background-color: #A9F5A9;
+	border-radius: 5px;
+}
+
+.list-btn-box > .list-btn:hover {
+	background-color: #2EFE2E;
 }

@@ -111,14 +111,14 @@ public class CrawlingService {
 	
 	public String crawlingWKL() throws IOException {
 
-		String url = "https://kwff.info/kwff/record-league.html";
+		String url = "https://www.kwff.or.kr/record-league";
 
 		Document doc = Jsoup.connect(url).get();
 
-		Elements element = doc.select("div.row>");
+		Elements element = doc.select("table.table.table-responsive");
 
 		StringBuilder sb = new StringBuilder();
-		for (Element el : element.select("table")) {
+		for (Element el : element.select("td")) {
 			sb.append(el.text() + ",");
 		}
 		

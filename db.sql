@@ -17,11 +17,13 @@ CREATE TABLE `member` (
     delDate DATETIME
 );
 
-SELECT * FROM `member`
-SELECT * FROM attr
-SELECT * FROM `board`
-SELECT * FROM article
-SELECT * FROM club
+SELECT * FROM `member`;
+SELECT * FROM attr;
+SELECT * FROM `board`;
+SELECT * FROM article;
+SELECT * FROM club;
+SELECT * FROM reply;
+SELECT * FROM `file`;
 
 DROP TABLE IF EXISTS attr;
 CREATE TABLE attr (
@@ -59,57 +61,67 @@ INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'notice',
-`name` = '공지사항'
+leagueId = 0,
+`name` = '공지사항';
 
 INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'national',
-`name` = '국내축구'
+leagueId = 0,
+`name` = '국내축구';
 
 INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'foreign',
-`name` = '해외축구'
+leagueId = 0,
+`name` = '해외축구';
 
 INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'kl1',
-`name` = 'K리그 1'
+leagueId = 1,
+`name` = 'K리그 1';
 
 INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'kl2',
-`name` = 'K리그 2'
+leagueId = 2,
+`name` = 'K리그 2';
 
 INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'kl3',
-`name` = 'K3 리그'
+leagueId = 3,
+`name` = 'K3 리그';
 
 INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'kl4',
-`name` = 'K4 리그'
+leagueId = 4,
+`name` = 'K4 리그';
 
 INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'wkl',
-`name` = 'WK 리그'
+leagueId = 5,
+`name` = 'WK 리그';
 
 INSERT INTO `board`
 SET regDate = NOW(),
 updateDate = NOW(),
 `code` = 'free',
-`name` = '자유'
+leagueId = 0,
+`name` = '자유';
 
 # article 테이블 세팅
+DROP TABLE IF EXISTS article
 CREATE TABLE article (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME,
@@ -166,186 +178,50 @@ CREATE TABLE club (
 	goalAgainst INT(10) UNSIGNED NOT NULL
 );
 
-ALTER TABLE club DROP goalDefference
-
 INSERT INTO club
 SET regDate = NOW(),
 updateDate = NOW(),
-leagueId = 1,
-`name` = '울산',
-ranking = 1,
-play = 16,
-points = 39,
-win = 12,
-defeat = 1,
-draw = 3,
-goal = 36,
-goalAgainst = 10;
+leagueId = 0,
+`name` = '팀이름',
+ranking = 0,
+play = 0,
+points = 0,
+win = 0,
+defeat = 0,
+draw = 0,
+goal = 0,
+goalAgainst = 0;
 
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '울산',
-ranking = 1,
-play = 16,
-points = 39,
-win = 12,
-defeat = 1,
-draw = 3,
-goal = 36,
-goalAgainst = 10;
+DROP TABLE IF EXISTS `file`;
+CREATE TABLE `file` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME,
+    updateDate DATETIME,
+    delDate DATETIME,
+	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+	relTypeCode CHAR(50) NOT NULL,
+	relId INT(10) UNSIGNED NOT NULL,
+    originFileName VARCHAR(100) NOT NULL,
+    fileExt CHAR(10) NOT NULL,
+    typeCode CHAR(20) NOT NULL,
+    type2Code CHAR(20) NOT NULL,
+    fileSize INT(10) UNSIGNED NOT NULL,
+    fileExtTypeCode CHAR(10) NOT NULL,
+    fileExtType2Code CHAR(10) NOT NULL,
+    fileNo TINYINT(2) UNSIGNED NOT NULL,
+    `body` LONGBLOB
+);
 
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '전북',
-ranking = 2,
-play = 16,
-points = 38,
-win = 12,
-defeat = 2,
-draw = 2,
-goal = 28,
-goalAgainst = 10;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '상주',
-ranking = 3,
-play = 16,
-points = 28,
-win = 8,
-defeat = 4,
-draw = 4,
-goal = 20,
-goalAgainst = 20;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '포항',
-ranking = 4,
-play = 16,
-points = 25,
-win = 7,
-defeat = 5,
-draw = 4,
-goal = 28,
-goalAgainst = 20;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '대구',
-ranking = 5,
-play = 16,
-points = 25,
-win = 7,
-defeat = 5,
-draw = 4,
-goal = 26,
-goalAgainst = 19;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '서울',
-ranking = 6,
-play = 16,
-points = 19,
-win = 6,
-defeat = 9,
-draw = 1,
-goal = 16,
-goalAgainst = 31;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '성남',
-ranking = 7,
-play = 16,
-points = 18,
-win = 4,
-defeat = 6,
-draw = 6,
-goal = 13,
-goalAgainst = 17;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '강원',
-ranking = 8,
-play = 16,
-points = 17,
-win = 4,
-defeat = 7,
-draw = 5,
-goal = 20,
-goalAgainst = 26;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '부산',
-ranking = 9,
-play = 16,
-points = 16,
-win = 3,
-defeat = 6,
-draw = 7,
-goal = 16,
-goalAgainst = 22;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '광주',
-ranking = 1,
-play = 16,
-points = 16,
-win = 4,
-defeat = 8,
-draw = 4,
-goal = 16,
-goalAgainst = 23;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '수원',
-ranking = 11,
-play = 16,
-points = 14,
-win = 3,
-defeat = 8,
-draw = 5,
-goal = 14,
-goalAgainst = 20;
-
-INSERT INTO club
-SET regDate = NOW(),
-updateDate = NOW(),
-leagueId = 1,
-`name` = '인천',
-ranking = 12,
-play = 16,
-points = 8,
-win = 1,
-defeat = 10,
-draw = 5,
-goal = 9,
-goalAgainst = 24;
+DROP TABLE IF EXISTS reply;
+CREATE TABLE reply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME,
+    updateDate DATETIME,
+    memberId INT(10) UNSIGNED NOT NULL,
+    relTypeCode CHAR(50) NOT NULL,
+    relId INT(10) UNSIGNED NOT NULL,
+    delDate DATETIME,
+	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+	displayStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    `body` LONGTEXT NOT NULL
+);
