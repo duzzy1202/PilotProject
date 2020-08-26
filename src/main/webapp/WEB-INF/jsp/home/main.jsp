@@ -7,7 +7,7 @@
 <div class="con">
 	<h1> 메인화면 </h1>
 	<h2> 메인화면</h2>
-	<img src="/resource/img/das_beer_boot.png" width="1200px" height="690px">
+	<img src="/resource/img/jotduya.jpg" width="1200px" height="690px">
 </div>
 
 <%@ include file="../part/foot.jspf"%>

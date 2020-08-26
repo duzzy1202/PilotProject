@@ -71,11 +71,11 @@
 }
 .list-box > .article-list > table tr td:nth-child(2) {
 	text-align: left;
-	font-weight: bold;
 }
 
 .list-box > .article-list > table tr:hover td {
 	background-color: #F78181;
+	font-weight: bold;
 }
 
 /* 버튼 */

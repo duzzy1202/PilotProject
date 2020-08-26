@@ -6,76 +6,67 @@
 <%@ include file="../part/head.jspf"%>
 <%@ include file="../part/toastuiEditor.jspf"%>
 
-<div class="article-detail-box table-box table-box-vertical con">
-	<table>
-		<colgroup>
-			<col class="table-first-col">
-		</colgroup>
-		<tbody>
-			<tr>
-				<th>번호</th>
-				<td>${article.id}</td>
-			</tr>
-			<tr>
-				<th>날짜</th>
-				<td>${article.regDate}</td>
-			</tr>
-			<tr>
-				<th>제목</th>
-				<td>${article.forPrintTitle}</td>
-			</tr>
-			<tr>
-				<th>내용</th>
-				<td>
-				    <script type="text/x-template">${article.body}</script>
-                    <div class="toast-editor toast-editor-viewer"></div>
-				</td>
-			</tr>
-			<c:forEach var="i" begin="1" end="3" step="1">
-				<c:set var="fileNo" value="${String.valueOf(i)}" />
-				<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
-				<c:if test="${file != null}">
-					<tr>
-						<th>첨부파일 ${fileNo}</th>
-						<td>
-							<c:if test="${file.fileExtTypeCode == 'video'}">
-								<div class="video-box">
-									<video controls src="/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
-								</div>
-							</c:if>
-							<c:if test="${file.fileExtTypeCode == 'img'}">
-								<div class="img-box img-box-auto">
-									<img src="/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
-								</div>
-							</c:if>
-						</td>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</tbody>
-	</table>
+<!-- 리스트 CSS -->
+<link rel="stylesheet" href="/resource/css/detail.css" />
+
+<div class="article-detail con">
+	<div class="article-detail-thead"></div>
+	<div class="detail-table">
+		<div class="detail-box-title">
+			<div class="detail-title">${article.forPrintTitle}</div>
+		</div>
+		<div class="detail-box-etc">
+			<div class="detail-writer">${article.extra.writer}</div>
+			<div class="detail-regDate">${article.regDate}</div>
+		</div>
+		<div class="detail-body">
+			<script type="text/x-template">${article.body}</script>
+            <div class="toast-editor toast-editor-viewer"></div>
+		</div>
+		<c:forEach var="i" begin="1" end="3" step="1">
+			<c:set var="fileNo" value="${String.valueOf(i)}" />
+			<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
+			<c:if test="${file != null}">
+				<div>
+					<span>첨부파일 ${fileNo}</span>
+					<span>
+						<c:if test="${file.fileExtTypeCode == 'video'}">
+							<div class="video-box">
+								<video controls src="/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
+							</div>
+						</c:if>
+						<c:if test="${file.fileExtTypeCode == 'img'}">
+							<div class="img-box img-box-auto">
+								<img src="/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
+							</div>
+						</c:if>
+					</span>
+				</div>
+			</c:if>
+		</c:forEach>
+	</div>
 </div>
 
-<div class="btn-box con margin-top-20">
+<div class="button-box con">
 	<c:if test="${article.extra.actorCanModify}">
-		<a class="btn btn-info" href="${board.code}-modify?id=${article.id}&listUrl=${Util.getUriEncoded(listUrl)}">수정</a>
+		<a class="article-modibtn artbtn" href="${board.code}-modify?id=${article.id}&listUrl=${Util.getUriEncoded(listUrl)}">수정</a>
 	</c:if>
 	<c:if test="${article.extra.actorCanDelete}">
-		<a class="btn btn-danger" href="${board.code}-doDelete?id=${article.id}" onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
+		<a class="article-delbtn artbtn" href="${board.code}-doDelete?id=${article.id}" onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
 	</c:if>
 
-	<a href="${listUrl}" class="btn btn-info">목록</a>
+	<a href="${listUrl}" class="article-listbtn artbtn">목록</a>
 </div>
 
 <c:if test="${isLoggedIn}">
-	<h2 class="con">댓글 작성</h2>
+	<h2 class="con">댓글</h2>
 
 	<script>
 		var WriteReplyForm__submitDone = false;
 	
 		function WriteReplyForm__submit(form) {
 			
-			if (WriteReplyForm__submitDone) {
+			if (WriteReplyForm__submitDone = false) {
 				alert('처리중입니다.');
 			}
 
@@ -135,8 +126,6 @@
 				});
 			};
 
-			WriteReplyForm__submitDone = true;
-
 			startUploadFiles(function(data) {
 
 				var idsStr = '';
@@ -164,54 +153,39 @@
 						form.file__reply__0__common__attachment__3.value = '';
 					}
 
-					endLoading();
+					WriteReplyForm__submitDone = true;
 				});
 			});
 		}
 	</script>
 
-	<form class="table-box table-box-vertical con form1" onsubmit="WriteReplyForm__submit(this); return false;">
+	<form class="reply-write con" onsubmit="WriteReplyForm__submit(this); return false;">
 		<input type="hidden" name="relTypeCode" value="article" />
 		<input type="hidden" name="relId" value="${article.id}" />
 		<input type="hidden" name="id" value="${article.id}" />
-
-		<table>
-			<colgroup>
-				<col class="table-first-col">
-			</colgroup>
-			<tbody>
-				<tr>
-					<th>내용</th>
-					<td>
-						<div class="form-control-box">
-							<textarea maxlength="300" name="body" placeholder="내용을 입력해주세요." class="height-300"></textarea>
-						</div>
-					</td>
-				</tr>
-				<c:forEach var="i" begin="1" end="3" step="1">
-					<c:set var="fileNo" value="${String.valueOf(i)}" />
-					<c:set var="fileExtTypeCode" value="${appConfig.getAttachmentFileExtTypeCode('reply', i)}" />
-					<tr>
-						<th>첨부${fileNo} ${appConfig.getAttachmentFileExtTypeDisplayName('reply', i)}</th>
-						<td>
-							<div class="form-control-box">
-								<input type="file" accept="${appConfig.getAttachemntFileInputAccept('article', i)}" name="file__reply__0__common__attachment__${fileNo}">
-							</div>
-						</td>
-					</tr>
-				</c:forEach>
-				<tr class="tr-do">
-					<th>작성</th>
-					<td>
-						<input class="btn btn-primary" type="submit" value="작성">
-					</td>
-				</tr>
-			</tbody>
-		</table>
+		
+		<div class="reply-write-box">
+			<div class="write-box">
+				<div class="reply-text-box-th">댓글</div>
+				<div class="reply-text-box">
+					<textarea maxlength="300" name="body" placeholder="내용을 입력해주세요."></textarea>
+				</div>
+			</div>
+		</div>
+		<div class="button-box">
+			<c:forEach var="i" begin="1" end="1" step="1">
+			<c:set var="fileNo" value="${String.valueOf(i)}" />
+			<c:set var="fileExtTypeCode" value="${appConfig.getAttachmentFileExtTypeCode('reply', i)}" />
+			<div class="file-th">파일 첨부 ${appConfig.getAttachmentFileExtTypeDisplayName('reply', i)}</div>
+			<div class="file-control">
+				<input type="file" accept="${appConfig.getAttachemntFileInputAccept('article', i)}" name="file__reply__0__common__attachment__${fileNo}">
+			</div>
+			</c:forEach>
+			<input class="reply-submit" type="submit" value="댓글 등록">
+		</div>
 	</form>
+	<div class="line"></div>
 </c:if>
-
-<h2 class="con">댓글 목록</h2>
 
 <style>
 .reply-list-box .media-box > * {
@@ -227,28 +201,10 @@
 } 
 </style>
 
-<div class="reply-list-box table-box table-box-data con">
-	<table>
-		<colgroup>
-			<col class="table-first-col">
-			<col width="100">
-			<col width="140">
-			<col>
-			<col width="180">
-		</colgroup>
-		<thead>
-			<tr>
-				<th>번호</th>
-				<th>날짜</th>
-				<th>작성자</th>
-				<th>내용</th>
-				<th>비고</th>
-			</tr>
-		</thead>
-		<tbody>
+<div class="reply-list-box con">
+	<div class="reply-list">
 
-		</tbody>
-	</table>
+	</div>
 </div>
 
 <style>
@@ -335,7 +291,7 @@
 
 <script>
 	var ReplyList__$box = $('.reply-list-box');
-	var ReplyList__$tbody = ReplyList__$box.find('tbody');
+	var ReplyList__$tbody = ReplyList__$box.find('.reply-list');
 
 	var ReplyList__lastLodedId = 0;
 
@@ -607,7 +563,7 @@
 
             html += '</div>';
 
-            html += '<div class="img-box img-box-auto" data-img-name="reply__' + reply.id + '__common__attachment__' + fileNo + '" data-file-no="' + fileNo + '">';
+            html += '<div class="img-box" data-img-name="reply__' + reply.id + '__common__attachment__' + fileNo + '" data-file-no="' + fileNo + '">';
 
             if (file && file.fileExtTypeCode == 'img') {
                 html += '<img src="/file/img?id=' + file.id + '&updateDate=' + file.updateDate + '">';
@@ -621,29 +577,30 @@
 
 	function ReplyList__drawReply(reply) {
 		var html = '';
-		html += '<tr data-id="' + reply.id + '">';
-		html += '<td>' + reply.id + '</td>';
-		html += '<td class="visible-on-md-up">' + reply.regDate + '</td>';
-		html += '<td class="visible-on-md-up">' + reply.extra.writer + '</td>';
-		html += '<td>';
+		html += '<div class="reply-content" data-id="' + reply.id + '">';
+		html += '<div class="reply-etc-box">';
+		html += '<div class="reply-writer">[ ' + reply.extra.writer + ' ]</div>';
+		html += '<div class="reply-regdate">( ' + reply.regDate + ' )</div>';
+		html += '</div>';
+		html += '<div class="reply-body-box">';
 		html += '<div class="reply-body">' + reply.forPrintBody + '</div>';
 
 		html += ReplyList__getMediaHtml(reply);
 
-		html += '</td>';
-		html += '<td>';
-
+		html += '</div>';
+		
+		html += '<div class="button-box">';
 		if (reply.extra.actorCanDelete) {
-			html += '<button class="btn btn-danger" type="button" onclick="ReplyList__delete(this);">삭제</button>';
+			html += '<button class="reply-delbtn" type="button" onclick="ReplyList__delete(this);">삭제</button>';
 		}
 
 		if (reply.extra.actorCanModify) {
-			html += '<button class="btn btn-info" type="button" onclick="ReplyList__showModifyFormModal(this);">수정</button>';
+			html += '<button class="reply-modibtn" type="button" onclick="ReplyList__showModifyFormModal(this);">수정</button>';
 		}
+		html += '</div>';
+		html += '</div>';
 
-		html += '</td>';
-
-        html += '</tr>';
+        
 
         var $tr = $(html);
         $tr.data('data-originBody', reply.body);

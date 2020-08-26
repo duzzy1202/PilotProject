@@ -9,7 +9,7 @@
 	var ArticleWriteForm__submitDone = false;
 
 	function ArticleWriteForm__submit(form) {
-		if (ArticleWriteForm__submitDone) {
+		if (ArticleWriteForm__submitDone = false) {
 			alert('처리중입니다.');
 			return;
 		}

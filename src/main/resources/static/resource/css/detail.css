@@ -1,0 +1,217 @@
+/* 게시물 디테일 */
+.article-detail {
+	background-color: #EEEEEE;
+}
+
+.article-detail .article-detail-thead {
+	display: block;
+	height: 150px;
+	width: 100%;
+	background-color: silver;
+}
+
+.article-detail > .detail-table {
+	width: 100%;
+}
+
+.article-detail > .detail-table > .detail-box-title {
+	background-color: #F5A9A9;
+	width: 100%;
+	display: flex;
+	margin: 0;
+	padding: 10px;
+	border: 1px solid #EEEEEE;
+	box-sizing: border-box;
+}
+.article-detail > .detail-table > .detail-box-title > .detail-title {
+	padding: 0 20px;
+	font-size: 1.5rem;
+}
+.article-detail > .detail-table > .detail-box-etc {
+	background-color: #AFDEFF;
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid #EEEEEE;
+	box-sizing: border-box;
+	padding: 5px;
+	color: grey;
+}
+.article-detail > .detail-table > .detail-box-etc > .detail-writer {
+	width: 10%;
+	padding: 0 25px;
+}
+.article-detail > .detail-table > .detail-box-etc > .detail-regDate {
+	width: 20%;
+	text-align: right;
+	padding: 0 25px;
+}
+.article-detail > .detail-table > .detail-body {
+	background-color: white;
+	padding: 10px;
+	min-height: 300px;
+	border: 20px solid #EEEEEE;
+	box-sizing: border-box;
+}
+.article-detail > .detail-table > .detail-body > .toast-editor {
+	padding: 0 5px;
+}
+.button-box {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+.button-box > .artbtn {
+	margin: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 10px;
+	background-color: #AFDEFF;
+} 
+.button-box > .artbtn:hover {
+	background-color: skyblue;
+	font-weight: bold;
+}
+
+/* 댓글 등록 */
+.reply-write {
+	border: 20px solid #EEEEEE;
+	box-sizing: border-box;
+}
+.reply-write > .reply-write-box {
+}
+
+.reply-write > .reply-write-box > .write-box {
+	display: flex;
+	align-items: center;
+	background-color: #F5A9A9;
+}
+.reply-write > .reply-write-box > .write-box > .reply-text-box-th {
+	width: 10%;
+	text-align: center;
+	font-weight: bold;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.reply-write > .reply-write-box > .write-box > .reply-text-box {
+	width: 90%;
+	height: 100px;
+	display: flex;
+	justify-content: center;
+}
+.reply-write > .reply-write-box > .write-box > .reply-text-box > textarea {
+	width: 1044px;
+	height: 94px;
+	resize: none;
+}
+.reply-write > .button-box {
+	display: flex;
+	align-items: center;
+	background-color: #AFDEFF;
+	padding: 5px;
+}
+.reply-write > .button-box > .file-th {
+	width: 10%;
+	text-align: center;
+	font-weight: bold;
+}
+.reply-write > .button-box > .file-control {
+	width: 82%;
+	padding: 0 10px;
+}
+.reply-write > .button-box > .reply-submit {
+	width: 8%;
+}
+.line {
+	height: 5px;
+	width: 1200px;
+	background-color: white;
+}
+
+/* 댓글 목록 */
+.reply-list-box > .reply-list {
+	border: 20px solid #EEEEEE;
+	box-sizing: border-box;
+	margin-bottom: 100px;
+}
+.reply-list-box > .reply-list > .reply-content {
+	border-bottom: 5px solid #EEEEEE;
+}
+.reply-list-box > .reply-list > .reply-content > .reply-etc-box {
+	display: flex;
+	justify-content: space-between;
+	background-color: #F5A9A9;
+	padding: 5px;
+	box-sizing: border-box;
+	height: 35px;
+}
+.reply-list-box > .reply-list > .reply-content > .reply-etc-box > .reply-writer {
+	width: 10%;
+	text-align: center;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.reply-list-box > .reply-list > .reply-content > .reply-etc-box > .reply-regdate {
+	width: 20%;
+	text-align: center;
+	margin-top: auto;
+	margin-bottom: auto;
+}
+.reply-list-box > .reply-list > .reply-content > .reply-body-box {
+	background-color: #EEEEEE;
+	display: flex;
+	flex-wrap: nowrap;
+	width: 100%;
+	justify-content: space-between;
+	padding: 10px;
+	box-sizing: border-box;
+}
+
+.reply-list-box > .reply-list > .reply-content > .reply-body-box > .reply-body {
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: white;
+	word-break:break-all;
+}
+
+.reply-list-box > .reply-list > .reply-content > .reply-body-box > .media-box {
+	width: 50%;
+}
+.reply-list-box > .reply-list > .reply-content > .reply-body-box > .media-box > .img-box {
+	padding: 0;
+	margin: 0;
+}
+.reply-list-box > .reply-list > .reply-content > .reply-body-box > .media-box > .video-box {
+	padding: 0;
+	margin: 0;
+}
+.reply-list-box > .reply-list > .reply-content > .reply-body-box > .media-box img {
+	max-height: 300px;
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.reply-list-box > .reply-list > .reply-content > .reply-body-box > .media-box video {
+	max-height: 300px;
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.reply-list-box > .reply-list > .reply-content > .button-box {
+	padding: 5px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	background-color: #AFDEFF;
+ 	height: 25px;
+}
+.reply-list-box > .reply-list > .reply-content > .button-box > .reply-delbtn {
+	margin: 0 10px;
+}
+.reply-list-box > .reply-list > .reply-content > .button-box > .reply-modibtn {
+	margin: 0 10px;
+}

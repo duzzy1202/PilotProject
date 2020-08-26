@@ -10,7 +10,7 @@
 	var ArticleModifyForm__submitDone = false;
 
 	function ArticleModifyForm__submit(form) {
-		if (ArticleModifyForm__submitDone) {
+		if (ArticleModifyForm__submitDone = false) {
 			alert('처리중입니다.');
 			return;
 		}

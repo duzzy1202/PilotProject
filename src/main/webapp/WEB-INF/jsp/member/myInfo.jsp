@@ -40,6 +40,9 @@
 					</c:when>
 						<c:when test="${loggedInMember.level == 3 }">
 						관리자
+						<button class="update-clubdata-btn" type="button" onclick="location.href='/home/updateClubData'">
+							데이터 업데이트
+						</button>
 					</c:when>
 					</c:choose>
 				</td>
