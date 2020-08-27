@@ -25,5 +25,34 @@
 		AND name = #{name}
 	</update>
 	
+	<select id="getClubdataByClubCode" resultType="Club">
+		SELECT *
+		FROM club
+		WHERE clubCode = #{clubCode}
+	</select>
+	
+	<insert id="addClubData" useGeneratedKeys="true">
+		INSERT INTO club
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		leagueId = #{leagueId},
+		clubCode = #{clubCode},
+		name = #{name},
+		fullname = #{fullname},
+		location = #{location},
+		homeGround = #{homeGround},
+		since = #{since},
+		coach = #{coach},
+		ranking = #{ranking},
+		play = #{play},
+		points = #{points},
+		win = #{win},
+		draw = #{draw},
+		defeat = #{defeat},
+		goal = #{goal},
+		goalAgainst = #{goalAgainst}
+		
+	</insert>
+	
 </mapper>
 

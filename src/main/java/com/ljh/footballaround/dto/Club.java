@@ -15,6 +15,12 @@ public class Club {
 	private boolean delStatus;
 	private String delDate;
 	private String name;
+	private String fullname;
+	private String clubCode;
+	private String location;
+	private String since;
+	private String coach;
+	private String homeGround;
 	private int leagueId;
 	private int ranking;
 	private int play;
@@ -24,5 +30,4 @@ public class Club {
 	private int defeat;
 	private int goal;
 	private int goalAgainst;
-
 }

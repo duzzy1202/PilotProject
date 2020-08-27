@@ -11,6 +11,9 @@
 
 <div class="article-detail con">
 	<div class="article-detail-thead"></div>
+	<div class="detail-boardname">
+		<span><a href="/article/${board.code}-list">${board.name} 게시판</a></span>
+	</div>
 	<div class="detail-table">
 		<div class="detail-box-title">
 			<div class="detail-title">${article.forPrintTitle}</div>

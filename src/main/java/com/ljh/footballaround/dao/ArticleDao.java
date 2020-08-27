@@ -22,4 +22,6 @@ public interface ArticleDao {
 	void modify(Map<String, Object> param);
 
 	Board getBoardByCode(String boardCode);
+
+	Board getBoardByLeagueId(int leagueId);
 }

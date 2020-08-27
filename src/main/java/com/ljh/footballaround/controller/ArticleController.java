@@ -35,7 +35,7 @@ public class ArticleController {
 		int leagueId = board.getLeagueId();
 		model.addAttribute("board", board);
 		
-		
+		/* 게시판 코드와 연결되는 리그의 클럽들 데이터를 가져옴 */
 		if (boardCode.equals("kl1")) {
 			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
 			
@@ -46,16 +46,39 @@ public class ArticleController {
 			
 			model.addAttribute("clubs", clubs);
 		}
-		
+		/* 게시판 번호와 맞는 게시물들의 리스트를 가져옴 */
 		List<Article> articles = articleService.getForPrintArticles(boardId);
 		
 		model.addAttribute("articles", articles);
 
 		return "article/list";
 	}
+	
+	@RequestMapping("/article/{boardCode}-clubHouse")
+	public String showClubHouse(Model model, @PathVariable("boardCode") String boardCode) {
+		Board board = articleService.getBoardByCode(boardCode);
+		int boardId = board.getId();
+		model.addAttribute("board", board);
+		
+		/* 게시판 코드와 연결되는 클럽의 데이터를 가져옴 */
+		
+		Club club = clubdataService.getClubdataByClubCode(boardCode);
+		Board clubLeague = articleService.getBoardByLeagueId(club.getLeagueId());
+		
+		model.addAttribute("club", club);
+		model.addAttribute("clubLeague", clubLeague);
+		
+		/* 게시판 번호와 맞는 게시물들의 리스트를 가져옴 */
+		List<Article> articles = articleService.getForPrintArticles(boardId);
+		
+		model.addAttribute("articles", articles);
+
+		return "article/clubHouse";
+	}
 
 	@RequestMapping("/article/{boardCode}-detail")
 	public String showDetail(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, String listUrl) {
+		
 		if ( listUrl == null ) {
 			listUrl = "./" + boardCode + "-list";
 		}
@@ -63,8 +86,6 @@ public class ArticleController {
 		
 		Board board = articleService.getBoardByCode(boardCode);
 		model.addAttribute("board", board);
-		
-		System.out.println("파람 : " + param);
 		
 		int id = Integer.parseInt((String) param.get("id"));
 
@@ -75,6 +96,35 @@ public class ArticleController {
 		model.addAttribute("article", article);
 
 		return "article/detail";
+	}
+	
+	@RequestMapping("/article/{boardCode}-write")
+	public String showWrite(@PathVariable("boardCode") String boardCode, Model model, String listUrl) {
+		if ( listUrl == null ) {
+			listUrl = "./" + boardCode + "-list";
+		}
+		model.addAttribute("listUrl", listUrl);
+		Board board = articleService.getBoardByCode(boardCode);
+		model.addAttribute("board", board);
+		
+		return "article/write";
+	}
+	
+	@RequestMapping("/article/{boardCode}-doWrite")
+	public String doWrite(@RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, Model model) {
+		Board board = articleService.getBoardByCode(boardCode);
+		model.addAttribute("board", board);
+		
+		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body", "fileIdsStr");
+		int loggedInMemberId = (int)req.getAttribute("loggedInMemberId");
+		newParam.put("boardId", board.getId());
+		newParam.put("memberId", loggedInMemberId);
+		int newArticleId = articleService.write(newParam);
+
+		String redirectUri = (String) param.get("redirectUri");
+		redirectUri = redirectUri.replace("#id", newArticleId + "");
+
+		return "redirect:" + redirectUri;
 	}
 	
 	@RequestMapping("/article/{boardCode}-modify")
@@ -92,18 +142,6 @@ public class ArticleController {
 		model.addAttribute("article", article);
 
 		return "article/modify";
-	}
-
-	@RequestMapping("/article/{boardCode}-write")
-	public String showWrite(@PathVariable("boardCode") String boardCode, Model model, String listUrl) {
-		if ( listUrl == null ) {
-			listUrl = "./" + boardCode + "-list";
-		}
-		model.addAttribute("listUrl", listUrl);
-		Board board = articleService.getBoardByCode(boardCode);
-		model.addAttribute("board", board);
-		
-		return "article/write";
 	}
 	
 	@RequestMapping("/article/{boardCode}-doModify")
@@ -129,20 +167,5 @@ public class ArticleController {
 		return "redirect:" + redirectUri;
 	}
 
-	@RequestMapping("/article/{boardCode}-doWrite")
-	public String doWrite(@RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, Model model) {
-		Board board = articleService.getBoardByCode(boardCode);
-		model.addAttribute("board", board);
-		
-		Map<String, Object> newParam = Util.getNewMapOf(param, "title", "body", "fileIdsStr");
-		int loggedInMemberId = (int)req.getAttribute("loggedInMemberId");
-		newParam.put("boardId", board.getId());
-		newParam.put("memberId", loggedInMemberId);
-		int newArticleId = articleService.write(newParam);
-
-		String redirectUri = (String) param.get("redirectUri");
-		redirectUri = redirectUri.replace("#id", newArticleId + "");
-
-		return "redirect:" + redirectUri;
-	}
+	
 }

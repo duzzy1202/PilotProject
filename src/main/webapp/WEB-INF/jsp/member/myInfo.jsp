@@ -43,6 +43,7 @@
 						<button class="update-clubdata-btn" type="button" onclick="location.href='/home/updateClubData'">
 							데이터 업데이트
 						</button>
+						<button type="button" onclick="location.href='/home/dataCenter'">데이터 센터</button>
 					</c:when>
 					</c:choose>
 				</td>

@@ -208,7 +208,7 @@
 			}
 			var height = jq_attr($el, 'data-toast-editor-height', 500);
 			height = parseInt(height);
-			var initialEditType = jq_attr($el, 'data-toast-editor-initialEditType', "markdown");
+			var initialEditType = jq_attr($el, 'data-toast-editor-initialEditType', "wysiwyg");
 			var previewStyle = jq_attr($el, 'data-toast-editor-previewStyle', "vertical");
 			var initialValue = ToastEditor__getBodyFromXTemplate($el.prev());
 

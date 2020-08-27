@@ -11,7 +11,7 @@
 <!-- PC용 -->
 <div class="list-box con">
 	<h1>[${board.name}] 게시판</h1>
-	<c:if test="${board.leagueId == 1 || board.leagueId == 2 }">
+	<c:if test="${board.code.equals('kl1') || board.code.equals('kl2') }">
 		<div class="leaderBoard">
 			<table>
 				<thead>
@@ -32,7 +32,7 @@
 					<c:forEach var="club" items="${clubs}">
 						<tr>
 							<td>${club.ranking}</td>
-							<td>${club.name}</td>
+							<td><a href="/article/${club.clubCode}-clubHouse">${club.name}</a></td>
 							<td>${club.play}</td>
 							<td>${club.points}</td>
 							<td>${club.win}</td>
@@ -47,6 +47,7 @@
 			</table>
 		</div>
 	</c:if>
+	
 	<div class="article-list">
 		<table>
 			<colgroup>
@@ -102,9 +103,10 @@
 	</table>
 </div>
  -->
-
+<<c:if test="${isLoggedIn == true }">
 <div class="list-btn-box con">
 	<a class="list-btn" href="./${board.code}-write">글쓰기</a>
 </div>
+</c:if>
 
 <%@ include file="../part/foot.jspf"%>

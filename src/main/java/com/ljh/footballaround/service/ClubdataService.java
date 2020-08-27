@@ -1,6 +1,7 @@
 package com.ljh.footballaround.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,4 +17,15 @@ public class ClubdataService {
 	public List<Club> getClubdataByleagueId(int leagueId) {
 		return clubdataDao.getClubdataByleagueId(leagueId);
 	}
+
+	public Club getClubdataByClubCode(String boardCode) {
+		return clubdataDao.getClubdataByClubCode(boardCode);
+	}
+
+	public void addClubData(Map<String, Object> param) {
+		clubdataDao.addClubData(param);
+		
+	}
+	
+	
 }

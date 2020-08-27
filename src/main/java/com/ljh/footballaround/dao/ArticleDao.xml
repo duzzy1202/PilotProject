@@ -39,6 +39,13 @@
 		WHERE
 		`code` = #{code}
 	</select>
+	
+	<select id="getBoardByLeagueId" resultType="Board">
+		SELECT *
+		FROM
+		board
+		WHERE leagueId = #{leagueId}
+	</select>
 
 	<insert id="write" useGeneratedKeys="true" keyProperty="id">
 		INSERT

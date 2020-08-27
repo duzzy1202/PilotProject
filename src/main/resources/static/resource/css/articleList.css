@@ -14,7 +14,7 @@
 
 .list-box > .leaderBoard > table > thead > tr > th {
 	width: 8%;
-	background-color: #AFDEFF;
+	background-color: #F5A9A9;
 	padding: 5px;
 }
 
@@ -27,7 +27,7 @@
 }
 
 .list-box > .leaderBoard > table > tbody > tr > td {
-	background-color: #F5A9A9;
+	background-color: #AFDEFF;
 	padding: 3px;
 }
 
@@ -44,11 +44,11 @@
 	width: 100%;
 }
 .list-box > .article-list > table th {
-	background-color: #AFDEFF;
+	background-color: #F5A9A9;
 	padding: 8px;
 }
 .list-box > .article-list > table td {
-	background-color: #F5A9A9;
+	background-color: #AFDEFF;
 	padding: 6px;
 }
 .list-box > .article-list > table tr th:nth-child(1) {
@@ -96,4 +96,96 @@
 
 .list-btn-box > .list-btn:hover {
 	background-color: #2EFE2E;
+}
+
+/* 클럽데이터 */
+
+.clubData-chart {
+	display: flex;
+	width: 780px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+	background-color: #EEEEEE;
+}
+
+.clubData-chart > .clubData-chart-left {
+	background-color: #F5A9A9;
+	padding: 10px;
+}
+.clubData-chart > .clubData-chart-left > .cl {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
+.clubData-chart > .clubData-chart-left > .leagueName {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #AFDEFF;
+}
+.clubData-chart > .clubData-chart-left > .leagueName > img {
+	max-height: 60px;
+	margin-right: 20px;
+} 
+.clubData-chart > .clubData-chart-left > .leagueName > span {
+	font-size: 1.4rem;
+	font-weight: bold;
+}
+.clubData-chart > .clubData-chart-left > .club-logo {
+	margin: 0;
+	display: flex;
+	justify-content: center;
+	background-color: #AFDEFF;
+}
+.clubData-chart > .clubData-chart-left > .club-logo > img {
+	max-height: 300px;
+}
+.clubData-chart > .clubData-chart-left > .club-fullname {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+	background-color: #AFDEFF;
+}
+.clubData-chart > .clubData-chart-left > .mascot {
+	background-color: #AFDEFF;
+}
+.clubData-chart > .clubData-chart-left > .mascot > .cl {
+	text-align: center;
+	font-weight: bold;
+	font-size: 1.2rem;
+	padding-bottom: 10px;
+}
+.clubData-chart > .clubData-chart-left > .mascot > img {
+	max-width: 300px;
+}
+
+.clubData-chart > .clubData-chart-right {
+	background-color: #F5A9A9;
+	height: 100%;
+	padding: 10px;
+} 
+.clubData-chart > .clubData-chart-right > div {
+	display: flex;
+	justify-content: space-around;
+}
+.clubData-chart > .clubData-chart-right > div > div {
+	margin: 10px;
+	width: 190px;
+}
+.clubData-chart > .clubData-chart-right > div > div > span {
+	display: block;
+	padding: 10px;
+	box-sizing: border-box;
+	background-color: #EEEEEE;
+	text-align: center;
+	width: 100%;
+}
+.clubData-chart > .clubData-chart-right > div > div > .item {
+	font-weight: bold;
+	background-color: #AFDEFF;
+	width: 100%;
+}
+.clubData-chart > .clubData-chart-right > div > div > img {
+	max-width: 190px;
 }

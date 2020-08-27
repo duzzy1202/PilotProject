@@ -10,6 +10,16 @@
 	background-color: silver;
 }
 
+.article-detail > .detail-boardname {
+	height: 25px;
+	padding: 10px;
+}
+.article-detail > .detail-boardname > span {
+	font-size: 1.2rem;
+	font-weight: bold;
+	padding: 0 10px;
+}
+
 .article-detail > .detail-table {
 	width: 100%;
 }
@@ -180,6 +190,7 @@
 
 .reply-list-box > .reply-list > .reply-content > .reply-body-box > .media-box {
 	width: 50%;
+	background-color: white;
 }
 .reply-list-box > .reply-list > .reply-content > .reply-body-box > .media-box > .img-box {
 	padding: 0;

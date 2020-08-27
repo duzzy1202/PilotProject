@@ -15,4 +15,8 @@ public interface ClubdataDao {
 
 	void updateLeagueDataByLeagueIdAndClubName(Map<String, Object> param);
 
+	Club getClubdataByClubCode(String boardCode);
+
+	void addClubData(Map<String, Object> param);
+
 }
