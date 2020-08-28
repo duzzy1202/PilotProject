@@ -32,21 +32,21 @@
 			<div>
 				<div>
 					<span class="item">연고지</span>
-					<span>울산광역시</span>
+					<span>${club.location}</span>
 				</div>
 				<div>
 					<span class="item">창단년</span>
-					<span>1983년</span>
+					<span>${club.since }</span>
 				</div>
 			</div>
 			<div>
 				<div>
 					<span class="item">홈 구장</span>
-					<span>울산 문수 축구경기장</span>
+					<span>${club.homeGround }</span>
 				</div>
 				<div>
 					<span class="item">감독</span>
-					<span>김도훈</span>
+					<span>${club.coach }</span>
 				</div>
 			</div>
 			<div>

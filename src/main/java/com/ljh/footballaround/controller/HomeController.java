@@ -52,7 +52,7 @@ public class HomeController {
 	public String AddClubData(Model model, @RequestParam Map<String, Object> param) {
 		clubdataService.addClubData(param);
 		
-		model.addAttribute("redirectUri", "/home/main");
+		model.addAttribute("redirectUri", "/home/dataCenter");
 		model.addAttribute("alertMsg", "데이터 추가가 완료되었습니다.");
 		return "common/redirect";
 		

@@ -38,12 +38,22 @@ public class ArticleController {
 		/* 게시판 코드와 연결되는 리그의 클럽들 데이터를 가져옴 */
 		if (boardCode.equals("kl1")) {
 			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
-			
 			model.addAttribute("clubs", clubs);
 		}
 		else if (boardCode.equals("kl2")) {
 			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
-			
+			model.addAttribute("clubs", clubs);
+		}
+		else if (boardCode.equals("kl3")) {
+			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
+			model.addAttribute("clubs", clubs);
+		}
+		else if (boardCode.equals("kl4")) {
+			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
+			model.addAttribute("clubs", clubs);
+		}
+		else if (boardCode.equals("wkl")) {
+			List<Club> clubs = clubdataService.getClubdataByleagueId(leagueId);
 			model.addAttribute("clubs", clubs);
 		}
 		/* 게시판 번호와 맞는 게시물들의 리스트를 가져옴 */

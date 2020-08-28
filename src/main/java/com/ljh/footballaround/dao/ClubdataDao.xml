@@ -51,7 +51,6 @@
 		defeat = #{defeat},
 		goal = #{goal},
 		goalAgainst = #{goalAgainst}
-		
 	</insert>
 	
 </mapper>

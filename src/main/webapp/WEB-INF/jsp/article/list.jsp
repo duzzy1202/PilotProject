@@ -11,7 +11,7 @@
 <!-- PC용 -->
 <div class="list-box con">
 	<h1>[${board.name}] 게시판</h1>
-	<c:if test="${board.code.equals('kl1') || board.code.equals('kl2') }">
+	<c:if test="${board.code.equals('kl1') || board.code.equals('kl2') || board.code.equals('kl3') || board.code.equals('kl4') || board.code.equals('wkl') }">
 		<div class="leaderBoard">
 			<table>
 				<thead>
