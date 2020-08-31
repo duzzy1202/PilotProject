@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="/resource/css/myinfo.css" />
 
 <div class="dataCenter con">
-	<form class="dataCenter-box" action="/home/addData" method="GET">
+	<form class="dataCenter-box" action="adm/admin/addData" method="GET">
 		<div class="block">
 			<div class="flex">
 				<span>팀명</span>

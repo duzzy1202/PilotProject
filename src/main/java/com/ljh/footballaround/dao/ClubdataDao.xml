@@ -53,5 +53,9 @@
 		goalAgainst = #{goalAgainst}
 	</insert>
 	
+	<select id="getAllClubs" resultType="Club">
+		SELECT *
+		FROM club
+	</select>
 </mapper>
 

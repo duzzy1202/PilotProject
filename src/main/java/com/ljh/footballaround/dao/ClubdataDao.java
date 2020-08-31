@@ -19,4 +19,6 @@ public interface ClubdataDao {
 
 	void addClubData(Map<String, Object> param);
 
+	List<Club> getAllClubs();
+
 }

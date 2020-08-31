@@ -26,6 +26,10 @@ public class ClubdataService {
 		clubdataDao.addClubData(param);
 		
 	}
+
+	public List<Club> getAllClubs() {
+		return clubdataDao.getAllClubs();
+	}
 	
 	
 }
