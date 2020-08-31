@@ -59,7 +59,7 @@
 </script>
 <form method="POST" class="table-box con form1" action="doLogin"
 	onsubmit="MemberLoginForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/home/main">
+	<input type="hidden" name="redirectUri" value="/usr/home/main">
 	<input type="hidden" name="loginPwReal">
 
 	<table>
@@ -89,8 +89,8 @@
 	</table>
 	<div class="btns flex flex-jc-c">
 		<button class="btn btn-margin" type="submit">로그인</button>
-		<button class="btn btn-margin" type="button" onclick="location.href='/member/findId'">아이디 찾기</button>
-		<button class="btn btn-margin" type="button" onclick="location.href='/member/findPw'">비밀번호 찾기</button>
+		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/findId'">아이디 찾기</button>
+		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/findPw'">비밀번호 찾기</button>
 	</div>
 </form>
 

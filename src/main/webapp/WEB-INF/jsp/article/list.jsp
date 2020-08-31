@@ -32,7 +32,7 @@
 					<c:forEach var="club" items="${clubs}">
 						<tr>
 							<td>${club.ranking}</td>
-							<td><a href="/article/${club.clubCode}-clubHouse">${club.name}</a></td>
+							<td><a href="/usr/article/${club.clubCode}-clubHouse">${club.name}</a></td>
 							<td>${club.play}</td>
 							<td>${club.points}</td>
 							<td>${club.win}</td>

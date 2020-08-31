@@ -28,7 +28,7 @@ public class ArticleController {
 	@Autowired
 	private ClubdataService clubdataService;
 
-	@RequestMapping("/article/{boardCode}-list")
+	@RequestMapping("/usr/article/{boardCode}-list")
 	public String showList(Model model, @PathVariable("boardCode") String boardCode) {
 		Board board = articleService.getBoardByCode(boardCode);
 		int boardId = board.getId();
@@ -64,7 +64,7 @@ public class ArticleController {
 		return "article/list";
 	}
 	
-	@RequestMapping("/article/{boardCode}-clubHouse")
+	@RequestMapping("/usr/article/{boardCode}-clubHouse")
 	public String showClubHouse(Model model, @PathVariable("boardCode") String boardCode) {
 		Board board = articleService.getBoardByCode(boardCode);
 		int boardId = board.getId();
@@ -86,7 +86,7 @@ public class ArticleController {
 		return "article/clubHouse";
 	}
 
-	@RequestMapping("/article/{boardCode}-detail")
+	@RequestMapping("/usr/article/{boardCode}-detail")
 	public String showDetail(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, String listUrl) {
 		
 		if ( listUrl == null ) {
@@ -108,7 +108,7 @@ public class ArticleController {
 		return "article/detail";
 	}
 	
-	@RequestMapping("/article/{boardCode}-write")
+	@RequestMapping("/usr/article/{boardCode}-write")
 	public String showWrite(@PathVariable("boardCode") String boardCode, Model model, String listUrl) {
 		if ( listUrl == null ) {
 			listUrl = "./" + boardCode + "-list";
@@ -120,7 +120,7 @@ public class ArticleController {
 		return "article/write";
 	}
 	
-	@RequestMapping("/article/{boardCode}-doWrite")
+	@RequestMapping("/usr/article/{boardCode}-doWrite")
 	public String doWrite(@RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, Model model) {
 		Board board = articleService.getBoardByCode(boardCode);
 		model.addAttribute("board", board);
@@ -137,7 +137,7 @@ public class ArticleController {
 		return "redirect:" + redirectUri;
 	}
 	
-	@RequestMapping("/article/{boardCode}-modify")
+	@RequestMapping("/usr/article/{boardCode}-modify")
 	public String showModify(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, String listUrl) {
 		model.addAttribute("listUrl", listUrl);
 		
@@ -154,7 +154,7 @@ public class ArticleController {
 		return "article/modify";
 	}
 	
-	@RequestMapping("/article/{boardCode}-doModify")
+	@RequestMapping("/usr/article/{boardCode}-doModify")
 	public String doModify(@RequestParam Map<String, Object> param, HttpServletRequest req, int id, @PathVariable("boardCode") String boardCode, Model model) {
 		Board board = articleService.getBoardByCode(boardCode);
 		model.addAttribute("board", board);

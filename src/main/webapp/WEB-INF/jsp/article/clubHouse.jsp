@@ -15,7 +15,7 @@
 		<div class="clubData-chart-left">
 			<div class="leagueName cl">
 				<img src="/resource/img/logo_${club.leagueId}.png"> 
-				<span><a href="/article/${clubLeague.code}-list">대한민국 ${clubLeague.name}</a></span>
+				<span><a href="/usr/article/${clubLeague.code}-list">대한민국 ${clubLeague.name}</a></span>
 			</div>
 			<div class="club-logo cl">
 				<img src="/resource/img/emblem/logo_${club.clubCode}.png">

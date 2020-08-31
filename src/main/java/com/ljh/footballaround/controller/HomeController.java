@@ -22,7 +22,7 @@ public class HomeController {
 	@Autowired
 	private ClubdataService clubdataService;
 	
-	@RequestMapping("/home/main")
+	@RequestMapping("/usr/home/main")
 	public String showMain(Model model) {
 		return "home/main";
 	}
@@ -32,23 +32,23 @@ public class HomeController {
 		return "redirect:/home/main";
 	}
 	
-	@RequestMapping("/home/updateClubData")
+	@RequestMapping("/adm/home/updateClubData")
 	public String updateClubData(Model model) throws IOException {
 		crawlingService.crawlingKL1();
 		crawlingService.crawlingKL2();
 		
-		model.addAttribute("redirectUri", "/home/main");
+		model.addAttribute("redirectUri", "/usr/home/main");
 		model.addAttribute("alertMsg", "업데이트가 완료되었습니다.");
 		return "common/redirect";
 		
 	}
 	
-	@RequestMapping("/home/dataCenter")
+	@RequestMapping("/adm/home/dataCenter")
 	public String dataCenter() {
 		return "home/dataCenter";
 	}
 	
-	@RequestMapping("/home/addData")
+	@RequestMapping("/usr/home/addData")
 	public String AddClubData(Model model, @RequestParam Map<String, Object> param) {
 		clubdataService.addClubData(param);
 		

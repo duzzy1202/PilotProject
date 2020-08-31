@@ -37,7 +37,7 @@
 </script>
 <form method="POST" class="table-box con form1" action="doFindId"
 	onsubmit="MemberJoinForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/member/login">
+	<input type="hidden" name="redirectUri" value="/usr/member/login">
 
 	<table>
 		<colgroup>

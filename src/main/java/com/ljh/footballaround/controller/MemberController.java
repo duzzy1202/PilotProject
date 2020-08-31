@@ -24,12 +24,12 @@ public class MemberController {
 	@Autowired
 	private AttrService attrService;
 
-	@RequestMapping("/member/join")
+	@RequestMapping("/usr/member/join")
 	public String showWrite() {
 		return "member/join";
 	}
 
-	@RequestMapping("/member/doJoin")
+	@RequestMapping("/usr/member/doJoin")
 	public String doWrite(@RequestParam Map<String, Object> param, Model model) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 		ResultData checkLoginIdJoinableResultData = memberService.checkLoginIdJoinable(Util.getAsStr(param.get("loginId")));
@@ -64,12 +64,12 @@ public class MemberController {
 		return "common/redirect";
 	}
 
-	@RequestMapping("/member/login")
+	@RequestMapping("/usr/member/login")
 	public String showLogin() {
 		return "member/login";
 	}
 
-	@RequestMapping("/member/doLogin")
+	@RequestMapping("/usr/member/doLogin")
 	public String doLogin(String loginId, String loginPwReal, String redirectUri, Model model, HttpSession session) {
 		String loginPw = loginPwReal;
 		Member member = memberService.getMemberByLoginId(loginId);
@@ -98,7 +98,7 @@ public class MemberController {
 		return "common/redirect";
 	}
 
-	@RequestMapping("/member/doLogout")
+	@RequestMapping("/usr/member/doLogout")
 	public String doLogout(HttpSession session, Model model, String redirectUri) {
 		session.removeAttribute("loggedInMemberId");
 
@@ -110,17 +110,17 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("/member/myInfo")
+	@RequestMapping("/usr/member/myInfo")
 	public String showMyInfo() {
 		return "member/myInfo";
 	}
 	
-	@RequestMapping("/member/checkPw")
+	@RequestMapping("/usr/member/checkPw")
 	public String checkPw() {
 		return "member/checkPw";
 	}
 	
-	@RequestMapping("/member/doCheckPw")
+	@RequestMapping("/usr/member/doCheckPw")
 	public String doCheckPw(String loginPwReal, String redirectUri, Model model, HttpSession session) {
 		String loginPw = loginPwReal;
 		int memberId = (int)session.getAttribute("loggedInMemberId");
@@ -142,12 +142,12 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("/member/modify")
+	@RequestMapping("/usr/member/modify")
 	public String modifyMember() {
 		return "member/modify";
 	}
 	
-	@RequestMapping("/member/doModify")
+	@RequestMapping("/usr/member/doModify")
 	public String doModifyMember(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
@@ -189,12 +189,12 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("/member/findId")
+	@RequestMapping("/usr/member/findId")
 	public String findId() {
 		return "member/findId";
 	}
 	
-	@RequestMapping("/member/doFindId")
+	@RequestMapping("/usr/member/doFindId")
 	public String doFindId(@RequestParam Map<String, Object> param, Model model) {
 		String name = (String)param.get("name");
 		String email = (String)param.get("email");
@@ -216,12 +216,12 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("/member/findPw")
+	@RequestMapping("/usr/member/findPw")
 	public String findPw() {
 		return "member/findPw";
 	}
 	
-	@RequestMapping("/member/doFindPw")
+	@RequestMapping("/usr/member/doFindPw")
 	public String doFindPw(@RequestParam Map<String, Object> param, Model model) {
 		String loginId = (String)param.get("loginId");
 		String name = (String)param.get("name");

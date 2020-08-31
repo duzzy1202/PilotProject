@@ -33,7 +33,7 @@
 </script>
 <form method="POST" class="table-box con form1" action="doCheckPw"
 	onsubmit="MemberLoginForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/member/modify">
+	<input type="hidden" name="redirectUri" value="/usr/member/modify">
 	<input type="hidden" name="loginPwReal">
 
 	<table>

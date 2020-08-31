@@ -64,7 +64,7 @@
 </script>
 <form method="POST" class="table-box con form1 margin-top-20" action="doModify"
 	onsubmit="MemberJoinForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/member/myInfo">
+	<input type="hidden" name="redirectUri" value="/usr/member/myInfo">
 	<input type="hidden" name="loginPwReal" >
 
 	<table>

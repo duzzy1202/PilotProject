@@ -40,10 +40,10 @@
 					</c:when>
 						<c:when test="${loggedInMember.level == 3 }">
 						관리자
-						<button class="update-clubdata-btn" type="button" onclick="location.href='/home/updateClubData'">
+						<button class="update-clubdata-btn" type="button" onclick="location.href='/adm/home/updateClubData'">
 							데이터 업데이트
 						</button>
-						<button type="button" onclick="location.href='/home/dataCenter'">데이터 센터</button>
+						<button type="button" onclick="location.href='/adm/home/dataCenter'">데이터 센터</button>
 					</c:when>
 					</c:choose>
 				</td>
@@ -51,7 +51,7 @@
 		</tbody>
 	</table>
 	<div class="btns flex flex-jc-c">
-		<button class="btn btn-margin" type="button" onclick="location.href='/member/checkPw'">정보수정</button>
+		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/checkPw'">정보수정</button>
 	</div>
 </div>
 
