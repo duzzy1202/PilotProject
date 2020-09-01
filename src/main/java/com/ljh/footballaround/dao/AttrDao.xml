@@ -33,6 +33,17 @@
 		AND type2Code = #{type2Code}
 	</select>
 	
+	<select id="getAttr" resultType="Attr">
+		SELECT * 
+		FROM attr
+		WHERE 1
+		AND relTypeCode = #{relTypeCode}
+		AND relId = #{relId}
+		AND typeCode = #{typeCode}
+		AND type2Code = #{type2Code}
+		AND value = #{value}
+	</select>
+	
 	<update id="updateValue" >
 		UPDATE attr
 		SET updateDate = NOW(),
@@ -43,5 +54,11 @@
 		AND typeCode = #{typeCode}
 		AND type2Code = #{type2Code} 
 	</update>
-
+	
+	<select id="getReportedArticlesByRelTypeCode" resultType="Attr">
+		SELECT * FROM attr
+		WHERE 1
+		AND relTypeCode = #{relTypeCode}
+	</select>
+	
 </mapper>

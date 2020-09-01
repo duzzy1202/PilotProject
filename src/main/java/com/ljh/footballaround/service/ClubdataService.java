@@ -30,6 +30,10 @@ public class ClubdataService {
 	public List<Club> getAllClubs() {
 		return clubdataDao.getAllClubs();
 	}
+
+	public void updateClubdata(Map<String, Object> param) {
+		clubdataDao.updateClubdata(param);
+	}
 	
 	
 }

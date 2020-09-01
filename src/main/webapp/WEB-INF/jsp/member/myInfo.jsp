@@ -40,7 +40,7 @@
 					</c:when>
 						<c:when test="${loggedInMember.level == 3 }">
 						관리자
-						<button type="button" onclick="location.href='/adm/admin/dataCenter'">데이터 센터</button>
+						<button type="button" onclick="location.href='/adm/admin/adminPage'">관리자 페이지</button>
 					</c:when>
 					</c:choose>
 				</td>

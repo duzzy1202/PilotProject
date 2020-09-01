@@ -19,4 +19,5 @@ public class Member {
 	private String nickname;
 	private String email;
 	private int level;
+	private int redLine;
 }

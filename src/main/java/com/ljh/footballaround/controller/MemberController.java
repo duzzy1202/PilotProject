@@ -75,13 +75,13 @@ public class MemberController {
 		Member member = memberService.getMemberByLoginId(loginId);
 
 		if (member == null) {
-			model.addAttribute("redirectUri", "/member/login");
+			model.addAttribute("redirectUri", "/usr/member/login");
 			model.addAttribute("alertMsg", "존재하지 않는 회원입니다.");
 			return "common/redirect";
 		}
 
 		if (member.getLoginPw().equals(loginPw) == false) {
-			model.addAttribute("redirectUri", "/member/login");
+			model.addAttribute("redirectUri", "/usr/member/login");
 			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
 			return "common/redirect";
 		}
@@ -89,7 +89,7 @@ public class MemberController {
 		session.setAttribute("loggedInMemberId", member.getId());
 
 		if (redirectUri == null || redirectUri.length() == 0) {
-			redirectUri = "/home/main";
+			redirectUri = "/usr/home/main";
 		}
 
 		model.addAttribute("redirectUri", redirectUri);
@@ -103,7 +103,7 @@ public class MemberController {
 		session.removeAttribute("loggedInMemberId");
 
 		if (redirectUri == null || redirectUri.length() == 0) {
-			redirectUri = "/home/main";
+			redirectUri = "/usr/home/main";
 		}
 
 		model.addAttribute("redirectUri", redirectUri);
@@ -133,7 +133,7 @@ public class MemberController {
 		}
 
 		if (redirectUri == null || redirectUri.length() == 0) {
-			redirectUri = "/home/main";
+			redirectUri = "/usr/home/main";
 		}
 
 		model.addAttribute("redirectUri", redirectUri);

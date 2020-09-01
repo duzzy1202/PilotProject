@@ -147,4 +147,8 @@ public class ArticleService {
 	public Board getBoardByLeagueId(int leagueId) {
 		return articleDao.getBoardByLeagueId(leagueId);
 	}
+
+	public Article getArticleById(int relId) {
+		return articleDao.getArticleById(relId);
+	}
 }

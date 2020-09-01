@@ -57,6 +57,9 @@
 	<c:if test="${article.extra.actorCanDelete}">
 		<a class="article-delbtn artbtn" href="${board.code}-doDelete?id=${article.id}" onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
 	</c:if>
+	<c:if test="${isLoggedIn && article.memberId != loggedInMemberId}">
+		<a class="article-repbtn artbtn" href="doSendReport?id=${article.id}" onclick="if ( confirm('신고하시겠습니까?') == false ) return false;">신고</a>
+	</c:if>
 
 	<a href="${listUrl}" class="article-listbtn artbtn">목록</a>
 </div>

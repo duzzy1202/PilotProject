@@ -42,6 +42,6 @@ public class Article {
 	}
 
 	public String getDetailLink(String boardCode) {
-		return "/article/" + boardCode + "-detail?id=" + id;
+		return "/usr/article/" + boardCode + "-detail?id=" + id;
 	}
 }

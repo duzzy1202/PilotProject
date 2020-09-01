@@ -21,4 +21,6 @@ public interface ClubdataDao {
 
 	List<Club> getAllClubs();
 
+	void updateClubdata(Map<String, Object> param);
+
 }

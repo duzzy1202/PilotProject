@@ -1,0 +1,23 @@
+.dataUpdate > .dataUpdate-box > div > div > span {
+	width: 50%;
+	text-align: center;
+}
+
+.dataUpdate > .dataUpdate-box > div > div > input {
+	width: 50%;
+	text-align: center;
+}
+
+.dataUpdate > .dataUpdate-box > div > div {
+	display: flex;
+	justify-content: center;
+	padding: 10px;
+}
+
+.dataUpdate > .dataUpdate-box > select {
+	display: flex;
+	width: 100px;
+	justify-content: center;
+	margin: 10px;
+	
+}

@@ -57,5 +57,30 @@
 		SELECT *
 		FROM club
 	</select>
+	
+	<update id="updateClubdata">
+		UPDATE club
+		<set>
+			updateDate = NOW(),
+			<if test="leagueId != ''">leagueId = #{leagueId},</if>
+			<if test="clubCode != ''">clubCode = #{clubCode},</if>
+			<if test="name != ''">name = #{name},</if>
+			<if test="fullname != ''">fullname = #{fullname},</if>
+			<if test="location != ''">location = #{location},</if>
+			<if test="homeGround != ''">homeGround = #{homeGround},</if>
+			<if test="since != ''">since = #{since},</if>
+			<if test="coach != ''">coach = #{coach},</if>
+			<if test="ranking != ''">ranking = #{ranking},</if>
+			<if test="play != ''">play = #{play},</if>
+			<if test="points != ''">points = #{points},</if>
+			<if test="win != ''">win = #{win},</if>
+			<if test="draw != ''">draw = #{draw},</if>
+			<if test="defeat != ''">defeat = #{defeat},</if>
+			<if test="goal != ''">goal = #{goal},</if>
+			<if test="goalAgainst != ''">goalAgainst = #{goalAgainst},</if>
+		</set>
+		WHERE id = #{id}
+	</update>
+
 </mapper>
 

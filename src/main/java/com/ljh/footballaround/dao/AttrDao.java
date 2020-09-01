@@ -1,5 +1,6 @@
 package com.ljh.footballaround.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -16,4 +17,8 @@ public interface AttrDao {
 	Attr get(Map<String, Object> attr);
 
 	void updateValue(Map<String, Object> attr);
+
+	Attr getAttr(Map<String, Object> attr);
+
+	List<Attr> getReportedArticlesByRelTypeCode(String relTypeCode);
 }

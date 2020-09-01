@@ -7,9 +7,15 @@
 <%@ include file="../part/head.jspf"%>
 
 <div class="adminPage con">
-	<div class="buttonbox" style="padding: 15px;">
+	<h1>관리자 페이지</h1>
+	<h2>데이터 관리 센터</h2>
+	<div class="dataCenterBox flex flex-jc-sa" style="padding: 15px; border: 2px solid black;">
 		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/newData'" >새 데이터 추가</button>
 		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/updateData'" >데이터 업데이트</button>
 		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/crwalData'" >크롤링 데이터 (K리그 1,2)</button>
+	</div>
+	<h2>신고 관리 센터</h2>
+	<div class="articleCenterBox flex flex-jc-sa" style="padding: 15px; border: 2px solid black;">
+		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/reportList'" >신고 게시판</button>
 	</div>
 </div>

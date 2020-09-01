@@ -1,6 +1,7 @@
 package com.ljh.footballaround.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,4 +78,22 @@ public class AttrService {
 		attrDao.updateValue(attr);
 	}
 
+	public Attr getAttr(String name) {
+		String[] nameBits = name.split("__");
+		
+		Map<String, Object> attr = new HashMap<>();
+		attr.put("relTypeCode", nameBits[0]);
+		attr.put("relId", Integer.parseInt(nameBits[1]));
+		attr.put("typeCode", nameBits[2]);
+		attr.put("type2Code", nameBits[3]);
+		attr.put("value", nameBits[4]);
+		
+		return attrDao.getAttr(attr);
+	}
+	
+	public List<Attr> getReportedArticlesByRelTypeCode() {
+		String relTypeCode = "reportArticle";
+		return attrDao.getReportedArticlesByRelTypeCode(relTypeCode);
+	}
+	
 }

@@ -5,16 +5,17 @@
 <c:set var="pageTitle" value="회원정보" />
 
 <%@ include file="../part/head.jspf"%>
+<link rel="stylesheet" href="/resource/css/admin.css" />
 
-<div class="dataCenter con">
-	<form class="dataCenter-box" action="/adm/admin/addData" method="GET">
-		<select name="club">
+<div class="dataUpdate con">
+	<form class="dataUpdate-box" action="/adm/admin/doUpdateData" method="GET">
+		<select name="id" >
 			<c:forEach var="club" items="${clubs}" >
 				<option value="${club.id}">${club.name}</option>
 			</c:forEach>
 		</select>
 		<div class="block">
-			<div class="flex">
+			<div class="flex flex-jc-sa">
 				<span>팀명</span>
 				<input type="text" name="name" placeholder="name" autocomplete="off">
 			</div>
