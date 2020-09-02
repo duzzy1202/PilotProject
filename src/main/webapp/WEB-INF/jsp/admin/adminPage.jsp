@@ -16,7 +16,9 @@
 	</div>
 	<h2>신고 관리 센터</h2>
 	<div class="articleCenterBox flex flex-jc-sa" style="padding: 15px; border: 2px solid black;">
-		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/reportList'" >미처리 신고 게시판</button>
-		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/processedReportList'" >처리된 신고 게시판</button>
+		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/articleReportList'" >미처리 신고 게시판</button>
+		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/processedArticleReportList'" >처리된 신고 게시판</button>
+		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/replyReportList'" >미처리 신고 댓글 게시판</button>
+		<button type="button" style="padding: 15px;" onclick="location.href='/adm/admin/processedReplyReportList'" >처리된 신고 댓글 게시판</button>
 	</div>
 </div>

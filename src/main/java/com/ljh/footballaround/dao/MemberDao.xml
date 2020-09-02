@@ -71,5 +71,12 @@
 		AND name = #{name}
 		AND email = #{email}
 	</select>
+	
+	<update id="updateRedLine" >
+		UPDATE member
+		SET updateDate = NOW(),
+		redLine = #{writersRedLine}
+		WHERE id = #{memberId}
+	</update>
 
 </mapper>

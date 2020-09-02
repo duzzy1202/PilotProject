@@ -121,4 +121,8 @@ public class MemberService {
 		memberDao.modifyMember(param);
 	}
 
+	public void updateRedLine(int memberId, int writersRedLine) {
+		memberDao.updateRedLine(memberId, writersRedLine);
+	}
+
 }

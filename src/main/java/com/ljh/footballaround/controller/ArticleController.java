@@ -185,8 +185,8 @@ public class ArticleController {
 		return "redirect:" + redirectUri;
 	}
 	
-	@RequestMapping("/usr/article/doSendReport")
-	public String doSendReport(@RequestParam Map<String, Object> param, HttpServletRequest req, int id, Model model) {
+	@RequestMapping("/usr/article/doSendArticleReport")
+	public String doSendArticleReport(@RequestParam Map<String, Object> param, HttpServletRequest req, int id, Model model) {
 		
 		int memberId = (int)req.getAttribute("loggedInMemberId");
 		Attr isMemberReportedThisArticle = attrService.getAttr("member__" + memberId + "__extra__reportedArticleId__" + id);

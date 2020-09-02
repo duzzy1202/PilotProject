@@ -26,6 +26,15 @@
 				<td>${loggedInMember.name}</td>
 			</tr>
 			<tr>
+				<th>활동 정지 기록</th>
+				<c:if test="${loggedInMember.redLine == 0}">
+					<td>기록 없음</td>
+				</c:if>
+				<c:if test="${loggedInMember.redLine > 0}">
+					<td>전과 ${loggedInMember.redLine}범</td>
+				</c:if>
+			</tr>
+			<tr>
 				<th>이메일</th>
 				<td>${loggedInMember.email}</td>
 			</tr>

@@ -3,6 +3,15 @@ CREATE DATABASE FootballAround;
 
 USE FootballAround;
 
+SELECT * FROM `member`;
+SELECT * FROM attr;
+SELECT * FROM report;
+SELECT * FROM `board`;
+SELECT * FROM article;
+SELECT * FROM club;
+SELECT * FROM reply;
+SELECT * FROM `file`;
+
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -18,14 +27,6 @@ CREATE TABLE `member` (
     delDate DATETIME,
     redLine INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
-
-SELECT * FROM `member`;
-SELECT * FROM attr;
-SELECT * FROM `board`;
-SELECT * FROM article;
-SELECT * FROM club;
-SELECT * FROM reply;
-SELECT * FROM `file`;
 
 DROP TABLE IF EXISTS attr;
 CREATE TABLE attr (
@@ -126,4 +127,18 @@ CREATE TABLE reply (
 	delStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
 	displayStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
     `body` LONGTEXT NOT NULL
+);
+
+DROP TABLE IF EXISTS report;
+CREATE TABLE report (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME,
+    updateDate DATETIME,
+    processDate DATETIME,
+    reportedType CHAR(50) NOT NULL,
+    reportedId INT(10) UNSIGNED NOT NULL,
+    reportedCount INT(10) UNSIGNED NOT NULL,
+    reportedReason CHAR(200) NOT NULL,
+    isProcessed TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+    processMemberId INT(10) UNSIGNED NOT NULL DEFAULT 0
 );

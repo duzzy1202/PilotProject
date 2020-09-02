@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ljh.footballaround.dto.Article;
-import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Club;
 import com.ljh.footballaround.dto.Member;
+import com.ljh.footballaround.dto.Reply;
 import com.ljh.footballaround.dto.Report;
 import com.ljh.footballaround.service.AdminService;
 import com.ljh.footballaround.service.ArticleService;
@@ -25,6 +25,7 @@ import com.ljh.footballaround.service.AttrService;
 import com.ljh.footballaround.service.ClubdataService;
 import com.ljh.footballaround.service.CrawlingService;
 import com.ljh.footballaround.service.MemberService;
+import com.ljh.footballaround.service.ReplyService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -43,6 +44,8 @@ public class AdminController {
 	private ArticleService articleService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private ReplyService replyService;
 	
 	
 	
@@ -122,8 +125,8 @@ public class AdminController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("/adm/admin/reportList")
-	public String showReportList(Model model, HttpServletRequest req) {
+	@RequestMapping("/adm/admin/articleReportList")
+	public String articleReportList(Model model, HttpServletRequest req) {
 		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
 		if (member == null || member.getLevel() != 3) {
 			model.addAttribute("redirectUri", "/usr/home/main");
@@ -141,11 +144,11 @@ public class AdminController {
 		model.addAttribute("reportedArticles", reportedArticles);
 		model.addAttribute("articles", articles);
 		
-		return "/admin/reportList";
+		return "/admin/articleReportList";
 	}
 	
-	@RequestMapping("/adm/admin/processedReportList")
-	public String processedReportList(Model model, HttpServletRequest req) {
+	@RequestMapping("/adm/admin/processedArticleReportList")
+	public String processedArticleReportList(Model model, HttpServletRequest req) {
 		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
 		if (member == null || member.getLevel() != 3) {
 			model.addAttribute("redirectUri", "/usr/home/main");
@@ -163,7 +166,7 @@ public class AdminController {
 		model.addAttribute("reportedArticles", reportedArticles);
 		model.addAttribute("articles", articles);
 		
-		return "/admin/processedReportList";
+		return "/admin/processedArticleReportList";
 	}
 	
 	@RequestMapping("/adm/admin/reportDetail")
@@ -196,14 +199,21 @@ public class AdminController {
 		}
 		
 		int articleId = Integer.parseInt((String)param.get("articleId"));
+		int memberId = Integer.parseInt((String)param.get("memberId"));
 		String articleProcess = (String)param.get("processArticle");
+		String processMember = (String)param.get("processMember");
 		String reportedType = (String)param.get("reportedType");
 		
 		if (articleProcess.equals("delete")) {
 			articleService.deleteArticleById(articleId);
 		}
 		
-		adminService.setMemberAccountSuspensionDate(param);
+		if (!processMember.equals("none")) {
+			adminService.setMemberAccountSuspensionDate(param);
+			Member writer = memberService.getMemberById(memberId);
+			int writersRedLine = writer.getRedLine() + 1;
+			memberService.updateRedLine(memberId, writersRedLine);
+		}
 		
 		int adminMemberId = (int)req.getAttribute("loggedInMemberId");
 		adminService.processReport(articleId, reportedType, adminMemberId);
@@ -214,4 +224,47 @@ public class AdminController {
 		return "common/redirect";
 	}
 	
+	@RequestMapping("/adm/admin/replyReportList")
+	public String replyReportList(Model model, HttpServletRequest req) {
+		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
+		if (member == null || member.getLevel() != 3) {
+			model.addAttribute("redirectUri", "/usr/home/main");
+			model.addAttribute("alertMsg", "접근 권한이 없습니다.");
+			return "common/redirect";
+		}
+		
+		List<Report> reportedReplys = adminService.getReportedListByReportedType("Reply");
+		List<Reply> replys = new ArrayList<>();
+		for (Report data : reportedReplys) {
+			Reply reply = replyService.getForPrintReplyById(data.getReportedId());
+			replys.add(reply);
+		}
+		
+		model.addAttribute("reportedReplys", reportedReplys);
+		model.addAttribute("replys", replys);
+		
+		return "/admin/replyReportList";
+	}
+	
+	@RequestMapping("/adm/admin/processedReplyReportList")
+	public String processedReplyReportList(Model model, HttpServletRequest req) {
+		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
+		if (member == null || member.getLevel() != 3) {
+			model.addAttribute("redirectUri", "/usr/home/main");
+			model.addAttribute("alertMsg", "접근 권한이 없습니다.");
+			return "common/redirect";
+		}
+		
+		List<Report> reportedReplys = adminService.getProcessedReportListByReportedType("Reply");
+		List<Reply> replys = new ArrayList<>();
+		for (Report data : reportedReplys) {
+			Reply reply = replyService.getForPrintReplyById(data.getReportedId());
+			replys.add(reply);
+		}
+		
+		model.addAttribute("reportedReplys", reportedReplys);
+		model.addAttribute("replys", replys);
+		
+		return "/admin/processedReplyReportList";
+	}
 }

@@ -27,4 +27,6 @@ public interface MemberDao {
 	Member getMemberByNameAndEmail(String name, String email);
 
 	Member getMemberByLoginIdAndNameAndEmail(String loginId, String name, String email);
+
+	void updateRedLine(int memberId, int writersRedLine);
 }
