@@ -151,4 +151,8 @@ public class ArticleService {
 	public Article getArticleById(int relId) {
 		return articleDao.getArticleById(relId);
 	}
+
+	public void deleteArticleById(int id) {
+		articleDao.deleteArticleById(id);
+	}
 }

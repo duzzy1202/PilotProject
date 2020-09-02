@@ -91,9 +91,12 @@ public class AttrService {
 		return attrDao.getAttr(attr);
 	}
 	
-	public List<Attr> getReportedArticlesByRelTypeCode() {
-		String relTypeCode = "reportArticle";
+	public List<Attr> getReportedArticlesByRelTypeCode(String relTypeCode) {
 		return attrDao.getReportedArticlesByRelTypeCode(relTypeCode);
+	}
+
+	public void deleteAttr(int id) {
+		attrDao.deleteAttr(id);
 	}
 	
 }

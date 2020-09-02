@@ -21,4 +21,10 @@ public interface AttrDao {
 	Attr getAttr(Map<String, Object> attr);
 
 	List<Attr> getReportedArticlesByRelTypeCode(String relTypeCode);
+
+	void deleteAttr(int id);
+
+	void updateRelTypeCode(int relId, String relTypeCode, String typeCode, String type2Code);
+
+	
 }

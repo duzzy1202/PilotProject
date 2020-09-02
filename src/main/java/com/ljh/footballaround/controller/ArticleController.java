@@ -17,7 +17,9 @@ import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Board;
 import com.ljh.footballaround.dto.Club;
 import com.ljh.footballaround.dto.Member;
+import com.ljh.footballaround.dto.Report;
 import com.ljh.footballaround.dto.ResultData;
+import com.ljh.footballaround.service.AdminService;
 import com.ljh.footballaround.service.ArticleService;
 import com.ljh.footballaround.service.AttrService;
 import com.ljh.footballaround.service.ClubdataService;
@@ -31,6 +33,8 @@ public class ArticleController {
 	private ClubdataService clubdataService;
 	@Autowired
 	private AttrService attrService;
+	@Autowired
+	private AdminService adminService;
 
 	@RequestMapping("/usr/article/{boardCode}-list")
 	public String showList(Model model, @PathVariable("boardCode") String boardCode) {
@@ -193,15 +197,19 @@ public class ArticleController {
 			return "common/redirect";
 		}
 		
-		Attr attr = attrService.get("reportArticle__"+ id +"__extra__reportedCount");
-		if (attr == null) {
-			int a = attrService.setValue("reportArticle__"+ id +"__extra__reportedCount", "1");
-		} else {
-			int val = Integer.parseInt(attr.getValue()) + 1;
-			String valStr = val + "";
-			attrService.updateValue("reportArticle__"+ id +"__extra__reportedCount", valStr);
-			attr.getValue();
+		Report report = adminService.getReportByReportedIdAndReportedType(id, "Article");
+		if (report != null) {
+			int newReportedCount = report.getReportedCount() + 1;
+			adminService.updateReportedCount(report.getId(), newReportedCount);
+			
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "신고 되었습니다.");
+			
+			return "common/redirect";
 		}
+		
+		adminService.newReport(param);
+		
 		int b = attrService.setValue("member__" + memberId + "__extra__reportedArticleId", id+"");
 		
 		model.addAttribute("historyBack", true);

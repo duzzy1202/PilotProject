@@ -81,6 +81,37 @@
 				<div>${member.level}</div>
 			</div>
 		</div>
+		<c:if test="${report.isProcessed == 0}">
+		<div class="process-report-box" style="padding: 20px;">
+			<h2>처리하기</h2>
+			<form class="process-report flex flex-jc-sa" action="/adm/admin/processReport">
+				<input type="hidden" name="memberId" value="${member.id}">
+				<input type="hidden" name="articleId" value="${article.id}">
+				<input type="hidden" name="reportedType" value="Article">
+				<span>게시글 처리</span>
+				<select name="processArticle">
+					<option value="none">처리하지 않음</option>
+					<option value="delete">삭제 처리</option>
+				</select>
+				<span>작성 회원 처리</span>
+				<select name="processMember">
+					<option value="none">처리하지 않음</option>
+					<option value="1day">활동정지 1일</option>
+					<option value="3days">활동정지 3일</option>
+					<option value="7days">활동정지 7일</option>
+					<option value="14days">활동정지 14일</option>
+					<option value="30days">활동정지 30일</option>
+					<option value="90days">활동정지 90일</option>
+					<option value="365days">활동정지 365일</option>
+					<option value="forever">영구 활동정지</option>
+				</select>
+				<input type="submit" value="처리하기">
+			</form>
+		</div>
+		</c:if>
+		<c:if test="${report.isProcessed == 1}">
+			<div>이미 처리된 신고</div>
+		</c:if>
 	</div>
 </div>
 

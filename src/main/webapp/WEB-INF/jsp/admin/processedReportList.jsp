@@ -10,7 +10,7 @@
 
 <!-- PC용 -->
 <div class="list-box con">
-	<h1>미처리 신고 게시판</h1>
+	<h1>처리된 신고 게시판</h1>
 
 	<div class="article-list">
 		<div class="thead">

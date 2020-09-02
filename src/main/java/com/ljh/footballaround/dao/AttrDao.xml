@@ -61,4 +61,9 @@
 		AND relTypeCode = #{relTypeCode}
 	</select>
 	
+	<delete id="deleteAttr" >
+		DELETE FROM attr
+		WHERE id = #{id}
+	</delete>
+
 </mapper>

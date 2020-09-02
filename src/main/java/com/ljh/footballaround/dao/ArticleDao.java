@@ -24,4 +24,6 @@ public interface ArticleDao {
 	Board getBoardByCode(String boardCode);
 
 	Board getBoardByLeagueId(int leagueId);
+
+	void deleteArticleById(int id);
 }

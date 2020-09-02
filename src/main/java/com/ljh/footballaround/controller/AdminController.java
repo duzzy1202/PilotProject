@@ -1,6 +1,7 @@
 package com.ljh.footballaround.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,8 @@ import com.ljh.footballaround.dto.Article;
 import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Club;
 import com.ljh.footballaround.dto.Member;
+import com.ljh.footballaround.dto.Report;
+import com.ljh.footballaround.service.AdminService;
 import com.ljh.footballaround.service.ArticleService;
 import com.ljh.footballaround.service.AttrService;
 import com.ljh.footballaround.service.ClubdataService;
@@ -38,6 +41,9 @@ public class AdminController {
 	private AttrService attrService;
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private AdminService adminService;
+	
 	
 	
 	@RequestMapping("/adm/admin/crwalData")
@@ -125,17 +131,39 @@ public class AdminController {
 			return "common/redirect";
 		}
 		
-		List<Attr> reportedArticlesData = attrService.getReportedArticlesByRelTypeCode();
-		List<Article> reportedArticles = new ArrayList<>();
-		for (Attr data : reportedArticlesData) {
-			Article article = articleService.getArticleById(data.getRelId());
-			reportedArticles.add(article);
+		List<Report> reportedArticles = adminService.getReportedListByReportedType("Article");
+		List<Article> articles = new ArrayList<>();
+		for (Report data : reportedArticles) {
+			Article article = articleService.getArticleById(data.getReportedId());
+			articles.add(article);
 		}
 		
-		model.addAttribute("reportedArticlesData", reportedArticlesData);
 		model.addAttribute("reportedArticles", reportedArticles);
+		model.addAttribute("articles", articles);
 		
 		return "/admin/reportList";
+	}
+	
+	@RequestMapping("/adm/admin/processedReportList")
+	public String processedReportList(Model model, HttpServletRequest req) {
+		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
+		if (member == null || member.getLevel() != 3) {
+			model.addAttribute("redirectUri", "/usr/home/main");
+			model.addAttribute("alertMsg", "접근 권한이 없습니다.");
+			return "common/redirect";
+		}
+		
+		List<Report> reportedArticles = adminService.getProcessedReportListByReportedType("Article");
+		List<Article> articles = new ArrayList<>();
+		for (Report data : reportedArticles) {
+			Article article = articleService.getArticleById(data.getReportedId());
+			articles.add(article);
+		}
+		
+		model.addAttribute("reportedArticles", reportedArticles);
+		model.addAttribute("articles", articles);
+		
+		return "/admin/processedReportList";
 	}
 	
 	@RequestMapping("/adm/admin/reportDetail")
@@ -149,11 +177,41 @@ public class AdminController {
 		
 		Article article = articleService.getArticleById(id);
 		Member writer = memberService.getMemberById(article.getMemberId());
+		Report report = adminService.getReportByReportedIdAndReportedType(article.getId(), "Article");
 		
 		model.addAttribute("article", article);
 		model.addAttribute("member", writer);
+		model.addAttribute("report", report);
 		
 		return "/admin/reportDetail";
+	}
+	
+	@RequestMapping("/adm/admin/processReport")
+	public String processReport(Model model, HttpServletRequest req, @RequestParam Map<String, Object> param) throws ParseException {
+		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
+		if (member == null || member.getLevel() != 3) {
+			model.addAttribute("redirectUri", "/usr/home/main");
+			model.addAttribute("alertMsg", "접근 권한이 없습니다.");
+			return "common/redirect";
+		}
+		
+		int articleId = Integer.parseInt((String)param.get("articleId"));
+		String articleProcess = (String)param.get("processArticle");
+		String reportedType = (String)param.get("reportedType");
+		
+		if (articleProcess.equals("delete")) {
+			articleService.deleteArticleById(articleId);
+		}
+		
+		adminService.setMemberAccountSuspensionDate(param);
+		
+		int adminMemberId = (int)req.getAttribute("loggedInMemberId");
+		adminService.processReport(articleId, reportedType, adminMemberId);
+		
+		model.addAttribute("redirectUri", "/adm/admin/reportList");
+		model.addAttribute("alertMsg", "처리가 완료되었습니다.");
+		
+		return "common/redirect";
 	}
 	
 }

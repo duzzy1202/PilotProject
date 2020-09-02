@@ -1,5 +1,9 @@
 package com.ljh.footballaround.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -70,7 +74,7 @@ public class MemberController {
 	}
 
 	@RequestMapping("/usr/member/doLogin")
-	public String doLogin(String loginId, String loginPwReal, String redirectUri, Model model, HttpSession session) {
+	public String doLogin(String loginId, String loginPwReal, String redirectUri, Model model, HttpSession session) throws ParseException {
 		String loginPw = loginPwReal;
 		Member member = memberService.getMemberByLoginId(loginId);
 
@@ -84,6 +88,22 @@ public class MemberController {
 			model.addAttribute("redirectUri", "/usr/member/login");
 			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
 			return "common/redirect";
+		}
+		
+		Attr attr = attrService.get("member__" + member.getId() + "__extra__AccountSuspension");
+		if (attr != null) {
+			Date now = new Date();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(now);
+			Date valueDate = format.parse(attr.getValue());
+			if (valueDate.after(now)) {
+				model.addAttribute("redirectUri", "/usr/home/main");
+				model.addAttribute("alertMsg", "["+attr.getValue()+"] 까지 활동이 정지된 회원입니다.");
+				return "common/redirect";
+			} else if (valueDate.before(now)) {
+				attrService.deleteAttr(attr.getId());
+			}
 		}
 
 		session.setAttribute("loggedInMemberId", member.getId());

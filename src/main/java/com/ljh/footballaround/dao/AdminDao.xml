@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ljh.footballaround.dao.AdminDao">
+	<insert id="newReport" useGeneratedKeys="true">
+		INSERT INTO report
+		SET regDate = NOW(),
+		updateDate = NOW(),
+		reportedType = #{reportedType},
+		reportedId = #{id},
+		reportedCount = 1,
+		reportedReason = #{reportedReason}
+	</insert>
+	
+	<select id="getReportByReportedIdAndReportedType" resultType="Report">
+		SELECT * 
+		FROM report
+		WHERE reportedId = #{reportedId}
+		AND reportedType = #{reportedType}
+	</select>
+	
+	<select id="getReportedListByReportedType" resultType="Report">
+		SELECT * 
+		FROM report
+		WHERE reportedType = #{reportedType}
+		AND isProcessed = 0
+		ORDER BY id DESC
+	</select>
+	
+	<select id="getProcessedReportListByReportedType" resultType="Report">
+		SELECT * 
+		FROM report
+		WHERE reportedType = #{reportedType}
+		AND isProcessed = 1
+		ORDER BY id DESC
+	</select>
+	
+	<update id="updateReportedCount" >
+		UPDATE report
+		SET updateDate = NOW(),
+		reportedCount = #{newReportedCount}
+		WHERE id = #{id}
+	</update>
+	
+	<update id="processReport" >
+		UPDATE report
+		SET processDate = NOW(),
+		isProcessed = 1,
+		processMemberId = #{adminMemberId}
+		WHERE reportedType = #{reportedType}
+		AND reportedId = #{reportedId}
+	</update>
+	
+	<delete id="deleteAttr" >
+		DELETE FROM attr
+		WHERE id = #{id}
+	</delete>
+
+</mapper>
