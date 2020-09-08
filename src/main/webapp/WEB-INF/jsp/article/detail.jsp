@@ -12,7 +12,12 @@
 <div class="article-detail con">
 	<div class="article-detail-thead"></div>
 	<div class="detail-boardname">
-		<span><a href="/usr/article/${board.code}-list">${board.name} 게시판</a></span>
+		<c:if test="${board.leagueId < 10 }">
+			<span><a href="/usr/article/${board.code}-list">${board.name} 게시판</a></span>
+		</c:if>
+		<c:if test="${board.leagueId == 10 }">
+			<span><a href="/usr/article/${board.code}-clubHouse">${board.name} 게시판</a></span>
+		</c:if>
 	</div>
 	<div class="detail-table">
 		<div class="detail-box-title">
@@ -31,16 +36,16 @@
 			<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
 			<c:if test="${file != null}">
 				<div>
-					<span>첨부파일 ${fileNo}</span>
+					<span>첨부파일 ${fileNo} ${file}</span>
 					<span>
 						<c:if test="${file.fileExtTypeCode == 'video'}">
 							<div class="video-box">
-								<video controls src="/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
+								<video controls src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
 							</div>
 						</c:if>
 						<c:if test="${file.fileExtTypeCode == 'img'}">
 							<div class="img-box img-box-auto">
-								<img src="/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
+								<img src="/usr/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
 							</div>
 						</c:if>
 					</span>
@@ -88,14 +93,6 @@
 
 				if (needToUpload == false) {
 					needToUpload = form.file__reply__0__common__attachment__1 && form.file__reply__0__common__attachment__1.value.length > 0;
-				}
-
-				if (needToUpload == false) {
-					needToUpload = form.file__reply__0__common__attachment__2 && form.file__reply__0__common__attachment__2.value.length > 0;
-				}
-
-				if (needToUpload == false) {
-					needToUpload = form.file__reply__0__common__attachment__3 && form.file__reply__0__common__attachment__3.value.length > 0;
 				}
 
 				if (needToUpload == false) {
@@ -149,14 +146,6 @@
 
 					if (form.file__reply__0__common__attachment__1) {
 						form.file__reply__0__common__attachment__1.value = '';
-					}
-
-					if (form.file__reply__0__common__attachment__2) {
-						form.file__reply__0__common__attachment__2.value = '';
-					}
-
-					if (form.file__reply__0__common__attachment__3) {
-						form.file__reply__0__common__attachment__3.value = '';
 					}
 
 					WriteReplyForm__submitDone = true;
@@ -377,7 +366,7 @@
 			var fileUploadFormData = new FormData(form);
 
 			$.ajax({
-				url : './../file/doUploadAjax',
+				url : './../usr/file/doUploadAjax',
 				data : fileUploadFormData,
 				processData : false,
 				contentType : false,
@@ -554,9 +543,11 @@
 	}
 
 	function ReplyList__getMediaHtml(reply) {
+		
 		var html = '';
 		for (var fileNo = 1; fileNo <= 3; fileNo++) {
             var file = null;
+            console.log(reply.extra.file__common__attachment[fileNo][fileId]);
             if (reply.extra.file__common__attachment && reply.extra.file__common__attachment[fileNo]) {
                 file = reply.extra.file__common__attachment[fileNo];
             }
@@ -564,7 +555,7 @@
             html += '<div class="video-box" data-video-name="reply__' + reply.id + '__common__attachment__' + fileNo + '" data-file-no="' + fileNo + '">';
 
             if (file && file.fileExtTypeCode == 'video') {
-                html += '<video controls src="/file/streamVideo?id=' + file.id + '&updateDate=' + file.updateDate + '"></video>';
+                html += '<video controls src="/usr/file/streamVideo?id=' + file.id + '&updateDate=' + file.updateDate + '"></video>';
             }
 
             html += '</div>';
@@ -572,7 +563,7 @@
             html += '<div class="img-box" data-img-name="reply__' + reply.id + '__common__attachment__' + fileNo + '" data-file-no="' + fileNo + '">';
 
             if (file && file.fileExtTypeCode == 'img') {
-                html += '<img src="/file/img?id=' + file.id + '&updateDate=' + file.updateDate + '">';
+                html += '<img src="/usr/file/img?id=' + file.id + '&updateDate=' + file.updateDate + '">';
             }
 
             html += '</div>';

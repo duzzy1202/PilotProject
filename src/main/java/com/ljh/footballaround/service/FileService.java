@@ -124,13 +124,13 @@ public class FileService {
 		fileDao.deleteFile(id);
 	}
 
-	public Map<Integer, File> getFilesMapKeyFileNo(String relTypeCode, int relId, String typeCode, String type2Code) {
+	public Map<String, File> getFilesMapKeyFileNo(String relTypeCode, int relId, String typeCode, String type2Code) {
 		List<File> files = getFiles(relTypeCode, relId, typeCode, type2Code);
 		
-		Map<Integer, File> filesMap = new HashMap<>();
+		Map<String, File> filesMap = new HashMap<>();
 		
 		for ( File file : files ) {
-			filesMap.put(file.getFileNo(), file);			
+			filesMap.put(file.getFileNo() + "", file);			
 		}
 		
 		return filesMap;

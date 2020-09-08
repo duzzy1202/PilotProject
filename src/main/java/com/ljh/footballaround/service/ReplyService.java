@@ -93,7 +93,16 @@ public class ReplyService {
 	public Reply getForPrintReplyById(int id) {
 		Reply reply = replyDao.getForPrintReplyById(id);
 
-		Map<Integer, File> filesMap = fileService.getFilesMapKeyFileNo("reply", id, "common", "attachment");
+		Map<String, File> filesMap = fileService.getFilesMapKeyFileNo("reply", id, "common", "attachment");
+		Util.putExtraVal(reply, "file__common__attachment", filesMap);
+
+		return reply;
+	}
+	
+	public Reply getReplyById(int id) {
+		Reply reply = replyDao.getReplyById(id);
+
+		Map<String, File> filesMap = fileService.getFilesMapKeyFileNo("reply", id, "common", "attachment");
 		Util.putExtraVal(reply, "file__common__attachment", filesMap);
 
 		return reply;

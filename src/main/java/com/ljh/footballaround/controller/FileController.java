@@ -141,7 +141,7 @@ public class FileController {
 				fileInf.put("fileExt", fileExt);
 				fileInf.put("fileSize", fileSize);
 				fileInf.put("id", fileId);
-				fileInf.put("url", "/file/img?id=" + fileId + "&updateDate=" + Util.getNowDateStr().replace("-", "").replace(":", "").replace(" ", ""));
+				fileInf.put("url", "/usr/file/img?id=" + fileId + "&updateDate=" + Util.getNowDateStr().replace("-", "").replace(":", "").replace(" ", ""));
 				fileInfs.add(fileInf);
 			}
 		}

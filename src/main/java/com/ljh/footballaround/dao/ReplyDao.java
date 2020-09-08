@@ -19,4 +19,6 @@ public interface ReplyDao {
 	Reply getForPrintReplyById(@Param("id") int id);
 
 	void modifyReply(Map<String, Object> param);
+
+	Reply getReplyById(int id);
 }

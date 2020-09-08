@@ -234,7 +234,7 @@
 						fd.append('file__' + relTypeCode + '__' + relId + '__common__inBody__1', blob);
 						$.ajax({
 							type : 'POST',
-							url : '/file/doUploadEditorBlobAjax',
+							url : '/usr/file/doUploadEditorBlobAjax',
 							data : fd,
 							processData : false,
 							contentType : false

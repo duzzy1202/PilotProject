@@ -15,19 +15,23 @@
 	<div class="article-list">
 		<div class="thead">
 			<div class="flex">
-				<div style="padding: 5px;">글번호</div>
-				<div style="padding: 5px;">제목</div>
+				<div style="padding: 5px;">댓글번호</div>
+				<div style="padding: 5px;">댓글 내용</div>
 				<div style="padding: 5px;">신고 당한 수</div>
 				<div style="padding: 5px;">작성일</div>
 			</div>
 		</div>
 		<div class="tbody">
 			<c:forEach var="reply" items="${replys}" varStatus="status">
-				<div class="flex" style="padding: 5px; ">
-					<div style="padding: 5px;">${reply.id}</div>
-					<div style="padding: 5px;">${reply.body}</div>
-					<div style="padding: 5px;">${reportedReplys[status.index].reportedCount}</div>
-					<div style="padding: 5px;">${reply.regDate}</div>
+				<div class="block">
+					<div class="flex" style="padding: 5px;">
+						<div style="padding: 5px;">${reply.id}</div>
+						<div style="padding: 5px;"><a href="/adm/admin/reportReplyDetail?id=${reply.id}">${reply.body}</a></div>
+						<div style="padding: 5px;">${reportedReplys[status.index].reportedCount}</div>
+						<div style="padding: 5px;">${reply.regDate}</div>
+					</div>
+					
+					<div class="flex" style="padding: 5px;"></div>
 				</div>
 			</c:forEach>
 		</div>

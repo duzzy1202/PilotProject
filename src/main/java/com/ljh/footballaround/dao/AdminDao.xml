@@ -56,5 +56,11 @@
 		DELETE FROM attr
 		WHERE id = #{id}
 	</delete>
+	
+	<select id="getPunishment" resultType="Punishment>
+		SELECT * 
+		FROM punishment
+		WHERE memberId = #{memberId}
+	</select>
 
 </mapper>

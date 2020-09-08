@@ -47,6 +47,15 @@ public class ReplyController {
 
 		return new ResultData("S-1", String.format("%d개의 댓글을 불러왔습니다.", replies.size()), rsDataBody);
 	}
+	
+	@RequestMapping("/usr/reply/getReply")
+	@ResponseBody
+	public ResultData getReply(int id, HttpServletRequest req) {
+	
+		Reply reply = replyService.getForPrintReplyById(id);
+
+		return new ResultData("S-1", String.format("1개의 댓글을 불러왔습니다."), reply);
+	}
 
 	@RequestMapping("/usr/reply/doWriteReplyAjax")
 	@ResponseBody

@@ -46,6 +46,19 @@
 		AND AR.id
 		= #{id}
 	</select>
+	
+	<select id="getReplyById" resultMap="reply">
+		SELECT AR.*,
+		M.nickname AS extra__writer
+		FROM reply AS
+		AR
+		INNER JOIN member AS M
+		ON
+		AR.memberId = M.id
+		WHERE AR.id = #{id}
+		AND AR.id
+		= #{id}
+	</select>
 
 	<update id="deleteReply">
 		UPDATE reply

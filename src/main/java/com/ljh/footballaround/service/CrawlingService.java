@@ -32,11 +32,13 @@ public class CrawlingService {
 
 		StringBuilder sb = new StringBuilder();
 		for (Element el : element.select("td")) {
+			System.out.println("확인 : " + el.text() );
 			sb.append(el.text() + ",");
 		}
 
 		String sbdata = sb.toString();
 		String[] data = sbdata.split(",");
+		
 		
 		List<Map<String, Object>> leagueData = organizeData(1, data);
 
@@ -75,74 +77,6 @@ public class CrawlingService {
 
 		return "{\"1\":\"1\"}";
 	}
-	
-	public String crawlingKL3() throws IOException {
-
-		String url = "https://www.joinkfa.com/";
-
-		Document doc = Jsoup.connect(url).get();
-
-		Elements element = doc.select("div.nexainnercontainer");
-
-		StringBuilder sb = new StringBuilder();
-		for (Element el : element.select("div")) {
-			sb.append(el.text() + ":");
-		}
-		
-		System.out.println("체크체크 = " + sb.toString());
-		/*
-		String sbdata = sb.toString();
-		String[] data = sbdata.split(":");
-		
-		List<Map<String, Object>> leagueData = organizeData(1, data);
-		
-		System.out.println("HI");
-		
-		for (Map<String, Object> teamData : leagueData) {
-			if ( teamData.size()  > 0 ) {
-				System.out.println(teamData);
-				teamData.put("leagueId", 1);
-				clubdataDao.updateLeagueDataByLeagueIdAndClubName(teamData);				
-			}
-		}
-		*/
-		return "{\"1\":\"1\"}";
-	}
-	
-	public String crawlingWKL() throws IOException {
-
-		String url = "https://www.kwff.or.kr/record-league";
-
-		Document doc = Jsoup.connect(url).get();
-
-		Elements element = doc.select("table.table.table-responsive");
-
-		StringBuilder sb = new StringBuilder();
-		for (Element el : element.select("td")) {
-			sb.append(el.text() + ",");
-		}
-		
-		String sbdata = sb.toString();
-		String[] data = sbdata.split(",");
-		
-		System.out.println("리그 다타 : " + sbdata);
-		
-		List<Map<String, Object>> leagueData = organizeData(1, data);
-		
-		System.out.println("리그 다타2 : " + leagueData);
-		
-		/*
-		for (Map<String, Object> teamData : leagueData) {
-			if ( teamData.size()  > 0 ) {
-				System.out.println(teamData);
-				teamData.put("leagueId", 1);
-				clubdataDao.updateLeagueDataByLeagueIdAndClubName(teamData);				
-			}
-		}
-		*/
-
-		return "{\"1\":\"1\"}";
-	}
 
 	public List<Map<String, Object>> organizeData(int leagueId, String[] data) {
 		int repeatTimes = 0;
@@ -153,15 +87,6 @@ public class CrawlingService {
 			break;
 		case 2:
 			repeatTimes = 10;
-			break;
-		case 3:
-			repeatTimes = 16;
-			break;
-		case 4:
-			repeatTimes = 13;
-			break;
-		case 5:
-			repeatTimes = 8;
 			break;
 		}
 

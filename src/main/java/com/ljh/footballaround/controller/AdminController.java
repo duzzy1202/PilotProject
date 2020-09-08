@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ljh.footballaround.dto.Article;
 import com.ljh.footballaround.dto.Club;
 import com.ljh.footballaround.dto.Member;
+import com.ljh.footballaround.dto.Punishment;
 import com.ljh.footballaround.dto.Reply;
 import com.ljh.footballaround.dto.Report;
 import com.ljh.footballaround.service.AdminService;
@@ -120,7 +121,7 @@ public class AdminController {
 	public String doUpdateData(Model model, @RequestParam Map<String, Object> param) {
 		clubdataService.updateClubdata(param);
 		
-		model.addAttribute("redirectUri", "/adm/admin/dataCenter");
+		model.addAttribute("redirectUri", "/adm/admin/adminPage");
 		model.addAttribute("alertMsg", "데이터 수정이 완료되었습니다.");
 		return "common/redirect";
 	}
@@ -189,6 +190,28 @@ public class AdminController {
 		return "/admin/reportDetail";
 	}
 	
+	@RequestMapping("/adm/admin/reportReplyDetail")
+	public String reportReplyDetail(Model model, HttpServletRequest req, int id) {
+		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
+		if (member == null || member.getLevel() != 3) {
+			model.addAttribute("redirectUri", "/usr/home/main");
+			model.addAttribute("alertMsg", "접근 권한이 없습니다.");
+			return "common/redirect";
+		}
+		
+		Reply reply = replyService.getReplyById(id);
+		Member writer = memberService.getMemberById(reply.getMemberId());
+		Report report = adminService.getReportByReportedIdAndReportedType(reply.getId(), "Reply");
+		
+		System.out.println("댓글 엑스트라 : " + reply.getExtra());
+		
+		model.addAttribute("reply", reply);
+		model.addAttribute("member", writer);
+		model.addAttribute("report", report);
+		
+		return "/admin/reportReplyDetail";
+	}
+	
 	@RequestMapping("/adm/admin/processReport")
 	public String processReport(Model model, HttpServletRequest req, @RequestParam Map<String, Object> param) throws ParseException {
 		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
@@ -198,14 +221,27 @@ public class AdminController {
 			return "common/redirect";
 		}
 		
-		int articleId = Integer.parseInt((String)param.get("articleId"));
+		int reportedId = 0;
 		int memberId = Integer.parseInt((String)param.get("memberId"));
 		String articleProcess = (String)param.get("processArticle");
 		String processMember = (String)param.get("processMember");
 		String reportedType = (String)param.get("reportedType");
+		String reason = (String)param.get("selectReason");
+		
+		if (reportedType.equals("Article")) {
+			reportedId = Integer.parseInt((String)param.get("articleId"));
+		}
+		if (reportedType.equals("Reply")) {
+			reportedId = Integer.parseInt((String)param.get("replyId"));
+		}
 		
 		if (articleProcess.equals("delete")) {
-			articleService.deleteArticleById(articleId);
+			if (reportedType.equals("Article")) {
+				articleService.deleteArticleById(reportedId);
+			}
+			else if (reportedType.equals("Reply")) {
+				replyService.deleteReply(reportedId);
+			}
 		}
 		
 		if (!processMember.equals("none")) {
@@ -215,10 +251,22 @@ public class AdminController {
 			memberService.updateRedLine(memberId, writersRedLine);
 		}
 		
-		int adminMemberId = (int)req.getAttribute("loggedInMemberId");
-		adminService.processReport(articleId, reportedType, adminMemberId);
+		if (!reason.equals("none")) {
+			List<Punishment> punishments = adminService.getPunishment(memberId);
+			if (punishments == null) {
+				int punishmentCount = 0;
+				adminService.insertPunishment(memberId, reason, punishmentCount);
+			} else if(punishments != null) {
+				int lastCount =  punishments.size() - 1;
+				int punishmentCount = lastCount + 1;
+				adminService.insertPunishment(memberId, reason, punishmentCount);
+			}
+		}
 		
-		model.addAttribute("redirectUri", "/adm/admin/reportList");
+		int adminMemberId = (int)req.getAttribute("loggedInMemberId");
+		adminService.processReport(reportedId, reportedType, adminMemberId);
+		
+		model.addAttribute("redirectUri", "/adm/admin/adminPage");
 		model.addAttribute("alertMsg", "처리가 완료되었습니다.");
 		
 		return "common/redirect";
@@ -236,7 +284,7 @@ public class AdminController {
 		List<Report> reportedReplys = adminService.getReportedListByReportedType("Reply");
 		List<Reply> replys = new ArrayList<>();
 		for (Report data : reportedReplys) {
-			Reply reply = replyService.getForPrintReplyById(data.getReportedId());
+			Reply reply = replyService.getReplyById(data.getReportedId());
 			replys.add(reply);
 		}
 		
@@ -258,7 +306,7 @@ public class AdminController {
 		List<Report> reportedReplys = adminService.getProcessedReportListByReportedType("Reply");
 		List<Reply> replys = new ArrayList<>();
 		for (Report data : reportedReplys) {
-			Reply reply = replyService.getForPrintReplyById(data.getReportedId());
+			Reply reply = replyService.getReplyById(data.getReportedId());
 			replys.add(reply);
 		}
 		

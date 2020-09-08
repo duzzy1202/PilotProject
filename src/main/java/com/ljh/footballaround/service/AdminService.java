@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.ljh.footballaround.dao.AdminDao;
 import com.ljh.footballaround.dto.Attr;
+import com.ljh.footballaround.dto.Punishment;
 import com.ljh.footballaround.dto.Report;
 
 @Service
@@ -162,6 +163,10 @@ public class AdminService {
 
 	public Report getReportByReportedIdAndReportedType(int reportedId, String reportedType) {
 		return adminDao.getReportByReportedIdAndReportedType(reportedId, reportedType);
+	}
+
+	public List<Punishment> getPunishment(int memberId) {
+		return adminDao.getPunishment(memberId);
 	}
 	
 	

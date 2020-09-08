@@ -78,7 +78,7 @@
 			var fileUploadFormData = new FormData(form);
 
 			$.ajax({
-				url : './../file/doUploadAjax',
+				url : '/usr/file/doUploadAjax',
 				data : fileUploadFormData,
 				processData : false,
 				contentType : false,

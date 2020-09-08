@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.ljh.footballaround.dto.Punishment;
 import com.ljh.footballaround.dto.Report;
 
 @Mapper
@@ -21,5 +22,7 @@ public interface AdminDao {
 	List<Report> getProcessedReportListByReportedType(String reportedType);
 
 	Report getReportByReportedIdAndReportedType(int reportedId, String reportedType);
+
+	List<Punishment> getPunishment(int memberId);
 
 }
