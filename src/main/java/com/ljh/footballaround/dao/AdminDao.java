@@ -23,6 +23,4 @@ public interface AdminDao {
 
 	Report getReportByReportedIdAndReportedType(int reportedId, String reportedType);
 
-	List<Punishment> getPunishment(int memberId);
-
 }

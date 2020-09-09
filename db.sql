@@ -135,10 +135,19 @@ CREATE TABLE report (
     regDate DATETIME,
     updateDate DATETIME,
     processDate DATETIME,
-    reportedType CHAR(50) NOT NULL,
+    reportedType char(50) not null,
     reportedId INT(10) UNSIGNED NOT NULL,
     reportedCount INT(10) UNSIGNED NOT NULL,
     reportedReason CHAR(200) NOT NULL,
     isProcessed TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-    processMemberId INT(10) UNSIGNED NOT NULL DEFAULT 0
+    processMemberId INT(10) UNSIGNED NOT null default 0
+);
+
+DROP TABLE IF EXISTS punishment;
+CREATE TABLE punishment (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME,
+    memberId INT(10) UNSIGNED NOT NULL,
+    `count` INT(10) UNSIGNED NOT NULL,
+    reason CHAR(200) NOT NULL
 );

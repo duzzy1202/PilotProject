@@ -1,6 +1,7 @@
 package com.ljh.footballaround.service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.ljh.footballaround.dao.MemberDao;
 import com.ljh.footballaround.dto.Member;
+import com.ljh.footballaround.dto.Punishment;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.util.Util;
 import com.ljh.footballaround.util.mailUtil;
@@ -123,6 +125,14 @@ public class MemberService {
 
 	public void updateRedLine(int memberId, int writersRedLine) {
 		memberDao.updateRedLine(memberId, writersRedLine);
+	}
+	
+	public List<Punishment> getPunishment(int memberId) {
+		return memberDao.getPunishment(memberId);
+	}
+
+	public void insertPunishment(int memberId, String reason, int punishmentCount) {
+		memberDao.insertPunishment(memberId, reason, punishmentCount);
 	}
 
 }

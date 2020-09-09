@@ -105,6 +105,18 @@
 					<option value="365days">활동정지 365일</option>
 					<option value="forever">영구 활동정지</option>
 				</select>
+				<span>징계 사유 선택</span> 
+				<select name="selectReason" id="selectReason">
+					<option value="none">처리하지 않음</option>
+					<option value="타인에게 심각한 욕설 및 비난을 함">타인에게 심각한 욕설 및 비난을 함</option>
+					<option value="불법적인 행위 포착">불법적인 행위 포착</option>
+					<option value="음란물 게시">음란물 게시</option>
+					<option value="정치적 성향을 과도하게 피력함">정치적 성향을 과도하게 피력함</option>
+					<option value="불법 성인사이트 및 도박사이트 홍보">불법 성인사이트 및 도박사이트 홍보</option>
+					<option value="특정 사상을 타인에게 과도하게 전파함">특정 사상을 타인에게 과도하게 전파함</option>
+					<option value="기타" >기타</option>
+				</select>
+				<input type="text" id="selectETC" name="reasonETC" placeholder="징계 사유 직접입력"/> 
 				<input type="submit" value="처리하기">
 			</form>
 		</div>
@@ -116,3 +128,19 @@
 </div>
 
 <%@ include file="../part/foot.jspf"%>
+
+<script>
+
+$(function(){
+      //직접입력 인풋박스 기존에는 숨어있다가
+$("#selectETC").hide();
+$("#selectReason").change(function() {
+                //직접입력을 누를 때 나타남
+		if($("#selectReason").val() == "기타") {
+			$("#selectETC").show();
+		}  else {
+			$("#selectETC").hide();
+		}
+	}) 
+});
+</script>

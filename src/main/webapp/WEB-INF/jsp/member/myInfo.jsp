@@ -31,7 +31,12 @@
 					<td>기록 없음</td>
 				</c:if>
 				<c:if test="${loggedInMember.redLine > 0}">
-					<td>전과 ${loggedInMember.redLine}범</td>
+					<td>
+						전과 ${loggedInMember.redLine}범<br>
+						<c:forEach var="pnsh" items="${punishments}" >
+							${pnsh.count}. ${pnsh.reason} / ${pnsh.regDate}<br>
+						</c:forEach>
+					</td>
 				</c:if>
 			</tr>
 			<tr>

@@ -226,3 +226,24 @@
 .reply-list-box > .reply-list > .reply-content > .button-box > .reply-modibtn {
 	margin: 0 10px;
 }
+
+/* 유저정보 박스 */
+.article-detail > .detail-table > .userInfo  {
+	border: 2px solid #EEEEEE;
+	display: none;
+	background-color: white;
+	position: absolute;
+	width: 120px;
+	height: 115px;
+	text-align: center;
+	color: grey;
+}
+.article-detail > .detail-table > .userInfo > div {
+	display: block;
+	padding: 3px;
+}
+
+.article-detail > .detail-table > .userInfo > a {
+	border: 2px solid grey;
+	padding: 1px;
+}

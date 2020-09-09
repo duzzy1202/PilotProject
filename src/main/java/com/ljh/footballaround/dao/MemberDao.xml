@@ -78,5 +78,20 @@
 		redLine = #{writersRedLine}
 		WHERE id = #{memberId}
 	</update>
+	
+	<select id="getPunishment" resultType="Punishment">
+		SELECT * 
+		FROM punishment
+		WHERE memberId = #{memberId}
+		ORDER BY id ASC
+	</select>
+	
+	<insert id="insertPunishment" useGeneratedKeys="true">
+		INSERT INTO punishment
+		SET regDate = NOW(),
+		reason = #{reason},
+		memberId = #{memberId},
+		count = #{punishmentCount}
+	</insert>
 
 </mapper>

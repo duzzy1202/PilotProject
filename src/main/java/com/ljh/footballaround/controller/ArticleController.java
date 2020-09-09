@@ -17,12 +17,14 @@ import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Board;
 import com.ljh.footballaround.dto.Club;
 import com.ljh.footballaround.dto.Member;
+import com.ljh.footballaround.dto.Punishment;
 import com.ljh.footballaround.dto.Report;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.service.AdminService;
 import com.ljh.footballaround.service.ArticleService;
 import com.ljh.footballaround.service.AttrService;
 import com.ljh.footballaround.service.ClubdataService;
+import com.ljh.footballaround.service.MemberService;
 import com.ljh.footballaround.util.Util;
 
 @Controller
@@ -35,6 +37,8 @@ public class ArticleController {
 	private AttrService attrService;
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private MemberService memberService;
 
 	@RequestMapping("/usr/article/{boardCode}-list")
 	public String showList(Model model, @PathVariable("boardCode") String boardCode) {
@@ -110,9 +114,11 @@ public class ArticleController {
 		Member loggedInMember = (Member)req.getAttribute("loggedInMember");
 
 		Article article = articleService.getForPrintArticleById(loggedInMember, id);
-
+		Member articleWriter = memberService.getMemberById(article.getMemberId());
+		
 		model.addAttribute("article", article);
-
+		model.addAttribute("writer", articleWriter);
+		
 		return "article/detail";
 	}
 	

@@ -24,8 +24,16 @@
 			<div class="detail-title">${article.forPrintTitle}</div>
 		</div>
 		<div class="detail-box-etc">
-			<div class="detail-writer">${article.extra.writer}</div>
+			<div class="detail-writer"><a href="#" onclick="javascript:changeDisplayBlock()">${article.extra.writer}</a></div>
 			<div class="detail-regDate">${article.regDate}</div>
+		</div>
+		<div class="userInfo" id="userInfo">
+			<div>${writer.nickname}</div>
+			<div><a href="#">쪽지보내기</a></div>
+			<c:if test="${writer.redLine > 0}">
+			<div>전과 ${writer.redLine}범</div>
+			</c:if>
+			<a href="#" onclick="javascript:changeDisplayNone()">닫기</a>
 		</div>
 		<div class="detail-body">
 			<script type="text/x-template">${article.body}</script>
@@ -283,6 +291,17 @@
 		</form>
 	</div>
 </div>
+
+<script>
+var userInfo = document.getElementById('userInfo');
+function changeDisplayBlock() {
+	userInfo.style.display = 'block';
+}
+
+function changeDisplayNone() {
+	userInfo.style.display = 'none';
+}
+</script>
 
 <script>
 	var ReplyList__$box = $('.reply-list-box');

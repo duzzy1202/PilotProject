@@ -252,14 +252,14 @@ public class AdminController {
 		}
 		
 		if (!reason.equals("none")) {
-			List<Punishment> punishments = adminService.getPunishment(memberId);
+			List<Punishment> punishments = memberService.getPunishment(memberId);
 			if (punishments == null) {
-				int punishmentCount = 0;
-				adminService.insertPunishment(memberId, reason, punishmentCount);
+				int punishmentCount = 1;
+				memberService.insertPunishment(memberId, reason, punishmentCount);
 			} else if(punishments != null) {
-				int lastCount =  punishments.size() - 1;
+				int lastCount =  punishments.size();
 				int punishmentCount = lastCount + 1;
-				adminService.insertPunishment(memberId, reason, punishmentCount);
+				memberService.insertPunishment(memberId, reason, punishmentCount);
 			}
 		}
 		

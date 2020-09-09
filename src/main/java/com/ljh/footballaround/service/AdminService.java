@@ -164,11 +164,5 @@ public class AdminService {
 	public Report getReportByReportedIdAndReportedType(int reportedId, String reportedType) {
 		return adminDao.getReportByReportedIdAndReportedType(reportedId, reportedType);
 	}
-
-	public List<Punishment> getPunishment(int memberId) {
-		return adminDao.getPunishment(memberId);
-	}
-	
-	
 	
 }

@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Member;
+import com.ljh.footballaround.dto.Punishment;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.service.AttrService;
 import com.ljh.footballaround.service.MemberService;
@@ -27,6 +29,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private AttrService attrService;
+	@Autowired
+	private AttrService adminService;
 
 	@RequestMapping("/usr/member/join")
 	public String showWrite() {
@@ -131,7 +135,15 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/usr/member/myInfo")
-	public String showMyInfo() {
+	public String showMyInfo(HttpSession session,  Model model) {
+		
+		int memberId = (int)session.getAttribute("loggedInMemberId");
+		List<Punishment> pnsh = memberService.getPunishment(memberId);
+		
+		if (pnsh.size() > 0) {
+			model.addAttribute("punishments", pnsh);
+		}
+		
 		return "member/myInfo";
 	}
 	
