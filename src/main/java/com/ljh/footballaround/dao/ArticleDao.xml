@@ -79,6 +79,18 @@
 		WHERE id = #{id}
 	</update>
 	
+	<select id="getArticlesByMemberId" resultMap="article">
+		SELECT A.*,
+		B.name AS extra__boardName
+		FROM article AS A
+		INNER JOIN board AS B
+		ON A.boardId = B.id
+		WHERE A.displayStatus = 1
+		AND memberId = #{memberId}
+		AND A.delStatus = 0
+		ORDER BY A.id DESC
+	</select>
+	
 	<resultMap type="Article" id="article">
 		<id property="id" column="id" />
 		<id property="regDate" column="regDate" />

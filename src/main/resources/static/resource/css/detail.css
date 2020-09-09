@@ -234,7 +234,7 @@
 	background-color: white;
 	position: absolute;
 	width: 120px;
-	height: 115px;
+	height: 120px;
 	text-align: center;
 	color: grey;
 }
@@ -244,6 +244,9 @@
 }
 
 .article-detail > .detail-table > .userInfo > a {
-	border: 2px solid grey;
-	padding: 1px;
+	border: 2px solid #EEEEEE;
+}
+
+.article-detail > .detail-table > .userInfo a:hover {
+	text-decoration: underline;
 }

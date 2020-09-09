@@ -15,10 +15,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.ljh.footballaround.dto.Article;
 import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Member;
 import com.ljh.footballaround.dto.Punishment;
 import com.ljh.footballaround.dto.ResultData;
+import com.ljh.footballaround.service.ArticleService;
 import com.ljh.footballaround.service.AttrService;
 import com.ljh.footballaround.service.MemberService;
 import com.ljh.footballaround.util.Util;
@@ -30,7 +32,7 @@ public class MemberController {
 	@Autowired
 	private AttrService attrService;
 	@Autowired
-	private AttrService adminService;
+	private ArticleService articleService;
 
 	@RequestMapping("/usr/member/join")
 	public String showWrite() {
@@ -290,5 +292,23 @@ public class MemberController {
 		model.addAttribute("alertMsg", "입력하신 이메일 주소로 회원님의 임시비밀번호가 발송되었습니다.");
 
 		return "common/redirect";
+	}
+	
+	@RequestMapping("/usr/member/userInfo")
+	public String userInfo(HttpSession session,  Model model, int id) {
+		
+		Member member = memberService.getMemberById(id);
+		
+		List<Punishment> pnsh = memberService.getPunishment(member.getId());
+		if (pnsh.size() > 0) {
+			model.addAttribute("punishments", pnsh);
+		}
+		
+		List<Article> articles = articleService.getArticlesByMemberId(id);
+		
+		model.addAttribute("member", member);
+		model.addAttribute("articles", articles);
+		
+		return "member/userInfo";
 	}
 }

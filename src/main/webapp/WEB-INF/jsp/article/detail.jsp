@@ -28,7 +28,7 @@
 			<div class="detail-regDate">${article.regDate}</div>
 		</div>
 		<div class="userInfo" id="userInfo">
-			<div>${writer.nickname}</div>
+			<div><a href="/usr/member/userInfo?id=${writer.id}">${writer.nickname}</a></div>
 			<div><a href="#">쪽지보내기</a></div>
 			<c:if test="${writer.redLine > 0}">
 			<div>전과 ${writer.redLine}범</div>

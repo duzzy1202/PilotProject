@@ -26,4 +26,6 @@ public interface ArticleDao {
 	Board getBoardByLeagueId(int leagueId);
 
 	void deleteArticleById(int id);
+
+	List<Article> getArticlesByMemberId(int memberId);
 }
