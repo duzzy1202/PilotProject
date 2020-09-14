@@ -21,11 +21,6 @@ public class MemberService {
 	private MemberDao memberDao;
 	@Autowired
 	private MailService mailService;
-	@Value("${custom.siteMainUri}")
-	private String siteMainUri;
-	@Value("${custom.siteName}")
-	private String siteName;
-
 
 	public Member getMemberById(int id) {
 		return memberDao.getMemberById(id);
@@ -41,8 +36,8 @@ public class MemberService {
 	
 	/* 가입 완료 메일 */
 	private void sendJoinCompleteMail(String email) {
-		String mailTitle = String.format("[%s] 가입이 완료되었습니다.", siteName);
-		String mailBody = mailUtil.joinCompleteMailBody(siteMainUri, siteName);
+		String mailTitle = String.format("[%s] 가입이 완료되었습니다.", "Football Around");
+		String mailBody = mailUtil.joinCompleteMailBody("localhost:8085/usr/home/main", "Football Around");
 		
 		mailService.send(email, mailTitle, mailBody);
 	}
@@ -95,8 +90,8 @@ public class MemberService {
 		String email = member.getEmail();
 		String loginId = member.getLoginId();
 		
-		String mailTitle = String.format("[%s] 커뮤니티 회원님의 아이디 입니다.", siteName);
-		String mailBody = mailUtil.findIdMailBody(siteMainUri, siteName, name, loginId);
+		String mailTitle = String.format("[%s] 커뮤니티 회원님의 아이디 입니다.", "Football Around");
+		String mailBody = mailUtil.findIdMailBody("localhost:8085/usr/home/main", "Football Around", name, loginId);
 		
 		mailService.send(email, mailTitle, mailBody);
 	}
@@ -109,8 +104,8 @@ public class MemberService {
 		String name = member.getName();
 		String email = member.getEmail();
 		
-		String mailTitle = String.format("[%s] 커뮤니티 회원님의 임시비밀번호 입니다.", siteName);
-		String mailBody = mailUtil.findPwMailBody(siteMainUri, siteName, name, tempPw);
+		String mailTitle = String.format("[%s] 커뮤니티 회원님의 임시비밀번호 입니다.", "Football Around");
+		String mailBody = mailUtil.findPwMailBody("localhost:8085/usr/home/main", "Football Around", name, tempPw);
 		
 		mailService.send(email, mailTitle, mailBody);
 	}

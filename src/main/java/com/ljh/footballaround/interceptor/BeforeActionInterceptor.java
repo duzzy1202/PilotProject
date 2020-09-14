@@ -18,8 +18,6 @@ import com.ljh.footballaround.util.Util;
 @Component("beforeActionInterceptor") // 컴포넌트 이름 설정
 public class BeforeActionInterceptor implements HandlerInterceptor {
 	@Autowired
-	@Value("${custom.logoText}")
-	private String siteName;
 	@Value("${spring.profiles.active}")
 	private String activeProfile;
 	

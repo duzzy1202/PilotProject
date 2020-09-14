@@ -1,13 +1,8 @@
 package com.ljh.footballaround.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.ljh.footballaround.service.ClubdataService;
-import com.ljh.footballaround.service.CrawlingService;
-import com.ljh.footballaround.service.MemberService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +17,9 @@ public class HomeController {
 
 	@RequestMapping("/")
 	public String showMain2() {
-		return "redirect:/home/main";
+		return "home/main";
 	}
+	
 }
+
+

@@ -1,5 +1,3 @@
-server:
-  port: 8083
 spring:
   profiles:
     active: local # 기본적으로 local이 선택된다는 뜻
@@ -14,27 +12,49 @@ spring:
           auth: true
           starttls:
             enable: true
-  mvc:
-    view:
-      prefix: /WEB-INF/jsp/ 
-      suffix: .jsp
-  datasource:
-    # driver-class-name: com.mysql.cj.jdbc.Driver
-    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:mysql://localhost:3306/FootballAround?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull
-    username: root 
-    password: 
   servlet:
     multipart:
-      enabled: true
+      file-size-threshold: 1MB
+      location: C:\temp
       max-file-size: 100MB
-      max-request-size: 100MB      
+      max-request-size: 100MB
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+  datasource:
+    driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+    url: jdbc:log4jdbc:mysql://localhost:3306/FootballAround?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeBehavior=convertToNull
+    username: root
+    password: 
 mybatis:
   type-aliases-package: com.ljh.footballaround.dto
+server:
+  error:
+    include-exception: true
+    include-stacktrace: always
+    include-message: always
+    include-binding-errors: always
 custom:
-  siteName: FOOTBALL AROUND
-  siteMainUri: http://localhost:8083/home/main
-  logoText: FOOTBALL AROUND
   emailFrom: footballaroundcomnunity@gmail.com
   emailFromName: FOOTBALL AROUND COMMUNITY 
- 
+    
+---
+
+spring:
+  profiles: local
+server:
+  port: 8085
+
+---
+
+spring:
+  profiles: production
+  servlet:
+    multipart:
+      location: /tmp
+  datasource:
+    username: duzzy1202
+    password: wjdgks2651
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/FootballAround?useUnicode=true&characterEncoding=utf8&autoReconnect=true&serverTimezone=Asia/Seoul&useOldAliasMetadataBehavior=true&zeroDateTimeNehavior=convertToNull
