@@ -17,7 +17,6 @@ import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Board;
 import com.ljh.footballaround.dto.Club;
 import com.ljh.footballaround.dto.Member;
-import com.ljh.footballaround.dto.Punishment;
 import com.ljh.footballaround.dto.Report;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.service.AdminService;

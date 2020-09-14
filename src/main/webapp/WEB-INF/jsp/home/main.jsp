@@ -5,7 +5,7 @@
 <c:set var="pageName" value="메인" />
 <%@ include file="../part/head.jspf"%>
 <div class="con">
-	<h1> 0.1 Ver </h1>
+	<h1> 0.1 Ver aaaa</h1>
 	<h2> 구현된 기능들 </h2>
 	<ul>
 		<li> ○ 게시판 관련 </li>
