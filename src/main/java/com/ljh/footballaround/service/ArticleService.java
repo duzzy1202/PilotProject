@@ -159,4 +159,8 @@ public class ArticleService {
 	public List<Article> getArticlesByMemberId(int memberId) {
 		return articleDao.getArticlesByMemberId(memberId);
 	}
+
+	public Article getLastestNotice() {
+		return articleDao.getLastestNotice();
+	}
 }

@@ -20,4 +20,5 @@ public class Member {
 	private String email;
 	private int level;
 	private int redLine;
+	private double rating;
 }

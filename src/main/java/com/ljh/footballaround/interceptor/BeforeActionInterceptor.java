@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.ljh.footballaround.dto.Article;
 import com.ljh.footballaround.dto.Member;
+import com.ljh.footballaround.service.ArticleService;
 import com.ljh.footballaround.service.MemberService;
 import com.ljh.footballaround.util.Util;
 
@@ -23,6 +25,8 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ArticleService articleService;
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
@@ -93,6 +97,14 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 		request.setAttribute("loggedInMemberId", loggedInMemberId);
 		request.setAttribute("isLoggedIn", isLoggedIn);
 		request.setAttribute("loggedInMember", loggedInMember);
+		
+		// 상단 공지사항을 불러오기 위함
+		
+		Article notice = articleService.getLastestNotice();
+		
+		if (notice != null) {
+			request.setAttribute("lastestNotice", notice);
+		}
 
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}

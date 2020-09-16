@@ -35,4 +35,6 @@ public interface MemberDao {
 	List<Punishment> getPunishment(int memberId);
 
 	void insertPunishment(int memberId, String reason, int punishmentCount);
+
+	void updateRating(int memberId, double averageRating);
 }

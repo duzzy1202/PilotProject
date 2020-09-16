@@ -28,4 +28,6 @@ public interface ArticleDao {
 	void deleteArticleById(int id);
 
 	List<Article> getArticlesByMemberId(int memberId);
+
+	Article getLastestNotice();
 }

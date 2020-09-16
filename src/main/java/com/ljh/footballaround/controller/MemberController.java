@@ -296,6 +296,12 @@ public class MemberController {
 	
 	@RequestMapping("/usr/member/userInfo")
 	public String userInfo(HttpSession session,  Model model, int id) {
+		Object check = session.getAttribute("loggedInMemberId"); 
+		if (check == null) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "로그인 후 열람 가능합니다.");
+			return "common/redirect";
+		}
 		
 		Member member = memberService.getMemberById(id);
 		
@@ -310,5 +316,37 @@ public class MemberController {
 		model.addAttribute("articles", articles);
 		
 		return "member/userInfo";
+	}
+	
+	@RequestMapping("/usr/member/rateUser")
+	public String rateUser(HttpSession session, @RequestParam Map<String, Object> param, Model model) {
+		
+		int ratedMemberId = Integer.parseInt((String)param.get("ratedMemberId"));
+		int rating = Integer.parseInt((String)param.get("rating"));
+		int currentMemberId = (int)session.getAttribute("loggedInMemberId");
+		
+		Member ratedMember = memberService.getMemberById(ratedMemberId);
+		
+		String attrName = "raterMemberId__"+ currentMemberId + "__ratedMemberId__" + ratedMemberId;
+		
+		String ratingStr = rating+"";
+		attrService.setValue(attrName, ratingStr);
+		
+		List<String> memberRatings = attrService.getValueByTypeCodeAndType2Code(attrName); 
+		int sumMemberRatings = 0;
+		for (String rate : memberRatings) {
+			sumMemberRatings = sumMemberRatings + Integer.parseInt(rate);
+		}
+		double averageRating = sumMemberRatings / memberRatings.size();
+		
+		System.out.println("레이팅 합 : " + sumMemberRatings);
+		System.out.println("멤버사이즈" + memberRatings.size());
+		System.out.println("레이팅 평균 : " + averageRating);
+		
+		memberService.updateRating(ratedMemberId, averageRating);
+		
+		model.addAttribute("historyBack", true);
+		model.addAttribute("alertMsg", ratedMember.getNickname() + "님에게 평점 " + rating + "점을 평가하였습니다.");
+		return "common/redirect";
 	}
 }

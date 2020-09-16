@@ -45,6 +45,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+			<div style="display: block; text-align: center;">* 구단 이름을 클릭하면 해당 구단의 게시판으로 이동합니다.</div>
 		</div>
 	</c:if>
 	
@@ -103,7 +104,7 @@
 	</table>
 </div>
  -->
-<<c:if test="${isLoggedIn == true }">
+<c:if test="${isLoggedIn == true }">
 <div class="list-btn-box con">
 	<a class="list-btn" href="./${board.code}-write">글쓰기</a>
 </div>

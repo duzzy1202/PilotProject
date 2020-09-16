@@ -93,5 +93,12 @@
 		memberId = #{memberId},
 		count = #{punishmentCount}
 	</insert>
+	
+	<update id="updateRating" keyProperty="id">
+		UPDATE member
+		SET updateDate = NOW(),
+		rating = #{averageRating}
+		WHERE id = #{memberId}
+	</update>
 
 </mapper>

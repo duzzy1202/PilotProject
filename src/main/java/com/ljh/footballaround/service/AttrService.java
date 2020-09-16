@@ -99,4 +99,16 @@ public class AttrService {
 		attrDao.deleteAttr(id);
 	}
 	
+	public List<String> getValueByTypeCodeAndType2Code(String name) {
+		String[] nameBits = name.split("__");
+		
+		Map<String, Object> attr = new HashMap<>();
+		attr.put("relTypeCode", nameBits[0]);
+		attr.put("relId", Integer.parseInt(nameBits[1]));
+		attr.put("typeCode", nameBits[2]);
+		attr.put("type2Code", nameBits[3]);
+		
+		return attrDao.getValueByTypeCodeAndType2Code(attr);
+	}
+	
 }

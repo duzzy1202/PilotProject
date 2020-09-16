@@ -130,4 +130,8 @@ public class MemberService {
 		memberDao.insertPunishment(memberId, reason, punishmentCount);
 	}
 
+	public void updateRating(int memberId, double averageRating) {
+		memberDao.updateRating(memberId, averageRating);
+	}
+
 }

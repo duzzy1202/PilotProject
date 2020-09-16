@@ -10,42 +10,46 @@
 <link rel="stylesheet" href="/resource/css/myinfo.css" />
 
 <div class="myinfo con">
-	<table>
+	<div class="info-table">
 		<h2>회원정보</h2>
-		<tbody class="member-info-box">
-			<tr>
-				<th>아이디</th>
-				<td>${loggedInMember.loginId}</td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td>${loggedInMember.nickname}</td>
-			</tr>
-			<tr>
-				<th>성함</th>
-				<td>${loggedInMember.name}</td>
-			</tr>
-			<tr>
-				<th>활동 정지 기록</th>
+		<div class="member-info-box">
+			<div class="member-info">
+				<div class="subject">아이디</div>
+				<div class="subject-body">${loggedInMember.loginId}</div>
+			</div>
+			<div class="member-info">
+				<div class="subject">닉네임</div>
+				<div class="subject-body">${loggedInMember.nickname}</div>
+			</div>
+			<div class="member-info">
+				<div class="subject">성함</div>
+				<div class="subject-body">${loggedInMember.name}</div>
+			</div>
+			<div class="member-info">
+				<div class="subject">활동 평점</div>
+				<div class="subject-body">${loggedInMember.rating}</div>
+			</div>
+			<div class="member-info">
+				<div class="subject">활동 정지 기록</div>
 				<c:if test="${loggedInMember.redLine == 0}">
-					<td>기록 없음</td>
+					<div class="subject-body">기록 없음</div>
 				</c:if>
 				<c:if test="${loggedInMember.redLine > 0}">
-					<td>
+					<div class="subject-body">
 						전과 ${loggedInMember.redLine}범<br>
 						<c:forEach var="pnsh" items="${punishments}" >
 							${pnsh.count}. ${pnsh.reason} / ${pnsh.regDate}<br>
 						</c:forEach>
-					</td>
+					</div>
 				</c:if>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td>${loggedInMember.email}</td>
-			</tr>
-			<tr>
-				<th>이메일 인증여부</th>
-				<td><c:choose>
+			</div>
+			<div class="member-info">
+				<div class="subject">이메일</div>
+				<div class="subject-body">${loggedInMember.email}</div>
+			</div>
+			<div class="member-info">
+				<div class="subject">이메일 인증여부</div>
+				<div class="subject-body"><c:choose>
 						<c:when test="${loggedInMember.level == 1 }">
 						미인증 <a href="#" style="color: grey;">메일 인증하기</a>
 					</c:when>
@@ -57,10 +61,10 @@
 						<button type="button" onclick="location.href='/adm/admin/adminPage'">관리자 페이지</button>
 					</c:when>
 					</c:choose>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+				</div>
+			</div>
+		</div>
+	</div>
 	<div class="btns flex flex-jc-c">
 		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/checkPw'">정보수정</button>
 	</div>

@@ -26,5 +26,7 @@ public interface AttrDao {
 
 	void updateRelTypeCode(int relId, String relTypeCode, String typeCode, String type2Code);
 
+	List<String> getValueByTypeCodeAndType2Code(Map<String, Object> attr);
+
 	
 }

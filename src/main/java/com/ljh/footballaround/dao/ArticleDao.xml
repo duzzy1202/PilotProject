@@ -81,7 +81,8 @@
 	
 	<select id="getArticlesByMemberId" resultMap="article">
 		SELECT A.*,
-		B.name AS extra__boardName
+		B.name AS extra__boardName,
+		B.code AS extra__boardCode
 		FROM article AS A
 		INNER JOIN board AS B
 		ON A.boardId = B.id
@@ -89,6 +90,16 @@
 		AND memberId = #{memberId}
 		AND A.delStatus = 0
 		ORDER BY A.id DESC
+	</select>
+	
+	<select id="getLastestNotice" resultMap="article">
+		SELECT *
+		FROM article
+		WHERE displayStatus = 1
+		AND delStatus = 0
+		AND boardId = 1
+		ORDER BY id DESC
+		LIMIT 1
 	</select>
 	
 	<resultMap type="Article" id="article">
@@ -103,6 +114,8 @@
 		<id property="boardId" column="boardId" />
 		<association property="extra" javaType="map">
 			<id property="writer" column="extra__writer" />
+			<id property="boardName" column="extra__boardName" />
+			<id property="boardCode" column="extra__boardCode" />
 		</association>
 	</resultMap>
 	

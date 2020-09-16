@@ -5,6 +5,7 @@
 <c:set var="pageTitle" value="회원정보" />
 
 <%@ include file="../part/head.jspf"%>
+<link rel="stylesheet" href="/resource/css/admin.css" />
 
 <div class="adminPage con">
 	<h1>관리자 페이지</h1>

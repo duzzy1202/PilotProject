@@ -8,8 +8,9 @@
 <link rel="stylesheet" href="/resource/css/admin.css" />
 
 <div class="dataUpdate con">
+	<h2 class="block ta-c">데이터 업데이트</h2>
 	<form class="dataUpdate-box" action="/adm/admin/doUpdateData" method="GET">
-		<select name="id" >
+		<select name="id">
 			<c:forEach var="club" items="${clubs}" >
 				<option value="${club.id}">${club.name}</option>
 			</c:forEach>

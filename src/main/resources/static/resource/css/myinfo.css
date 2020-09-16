@@ -1,68 +1,85 @@
-.myinfo > table {
-	width: 70%;
-	margin-left: auto;
-	margin-right: auto;
-	display: flex;
-	justify-content: center;	
-}
 
-.myinfo > h2 {
+.myinfo h2 {
 	display: block;
 	text-align: center;
 }
 
-.myinfo > table > .member-info-box {
-	border: 1px solid black;
-	width: 100%;
-}
-
-.myinfo > table > .member-info-box > tr {
-	width: 100%;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.myinfo > table > .member-info-box > tr > th {
-	border: 1px solid black;
-	width: 30%;
-	height: 50px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.myinfo > table > .member-info-box > tr > td {
-	border: 1px solid black;
-	width: 70%;
-	height: 50px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.myinfo > table > .member-info-box > tr > td > a {
-	margin: 15px;
-}
-.dataCenter {
-	margin-top: 20px;
-}
-.dataCenter > .dataCenter-box {
-	padding: 20px;
-	border: 3px solid black;
+.myinfo > .info-table > .member-info-box {
+	background-color: #EEEEEE;
+	width: 800px;
 	margin-left: auto;
 	margin-right: auto;
+}
+
+.myinfo > .info-table > .member-info-box > .member-info {
+	width: 100%;
+	display: flex;
+}
+
+.myinfo > .info-table > .member-info-box > .member-info > div {
+	border: 5px solid #EEEEEE;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.myinfo > .info-table > .member-info-box > .member-info > .subject {
+	background-color: #F5A9A9;
+	width: 30%;
+	font-weight: bold;
+	font-size: 1.1rem;
+}
+
+.myinfo > .info-table > .member-info-box > .member-info > .subject-body {
+	background-color: #AFDEFF;
+	width: 70%;
+}
+
+.myinfo > .info-table > .member-info-box > .member-info > .subject-rating {
+	border: 5px solid #EEEEEE;
+	padding: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #AFDEFF;
+	width: 70%;
+	font-size: .9rem;
+}
+
+.myinfo > .info-table > .member-info-box > .member-info > .subject-rating > input {
+	margin-left: 10px;
+}
+
+/* 작성한 글목록 */
+.myinfo > .articleList > .articleList-box {
+	background-color: #EEEEEE;
 	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
 }
-.dataCenter > .dataCenter-box > div > div {
-	margin-bottom: 10px;
+.myinfo > .articleList > .articleList-box > .article {
+	display: flex;
 }
-.dataCenter > .dataCenter-box > div > div > span {
-	width: 50%;
+.myinfo > .articleList > .articleList-box > .article > div {
+	border: 5px solid #EEEEEE;
+	background-color: #AFDEFF;
+	padding: 3px;
+	display: flex;
+	align-items: center;
 	justify-content: center;
-	text-align: center;
 }
-.dataCenter > .dataCenter-box > div > div > input {
-	width: 50%;
-	justify-content: center;
+.myinfo > .articleList > .articleList-box > .article > div:nth-child(1) {
+	width: 10%;
+}
+.myinfo > .articleList > .articleList-box > .article > div:nth-child(2) {
+	width: 45%;
+	justify-content: start;
+}
+.myinfo > .articleList > .articleList-box > .article > div:nth-child(3) {
+	width: 20%;
+}
+.myinfo > .articleList > .articleList-box > .article > div:nth-child(4) {
+	width: 22%;
+	
 }

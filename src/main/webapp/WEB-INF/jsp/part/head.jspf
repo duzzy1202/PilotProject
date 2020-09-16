@@ -95,7 +95,12 @@
 		</div>
 		<div class="top-menu-1-box">
 			<div class="emptybox">
-				<span>[공지사항] 뭐가 어쩌구 저쩌구 됐습니다.</span>
+				<c:if test="${lastestNotice == null }">
+					<span>최신 공지사항이 없습니다.</span>
+				</c:if>
+				<c:if test="${lastestNotice != null }">
+					<span><a href="/usr/article/notice-detail?id=${lastestNotice.id}">[공지사항] ${lastestNotice.title}</a></span>
+				</c:if>
 			</div>
 			<c:if test="${isLoggedIn == false}">
 				<form class="headLoginForm" action="/usr/member/doLogin" method="POST"
@@ -131,7 +136,7 @@
 					<li><a href="/usr/article/wkl-list">WK리그</a></li>
 				</ul></li>
 			<li><a href="/usr/article/foreign-list">해외축구</a></li>
-			<li><a href="/usr/article/free-list">기타</a></li>
+			<li><a href="/usr/article/free-list">자유</a></li>
 			<li><a href="/usr/article/notice-list">공지사항</a></li>
 		</ul>
 	</div>

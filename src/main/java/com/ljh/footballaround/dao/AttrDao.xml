@@ -65,5 +65,12 @@
 		DELETE FROM attr
 		WHERE id = #{id}
 	</delete>
+	
+	<select id="getValueByTypeCodeAndType2Code" resultType="String">
+		SELECT value FROM attr
+		WHERE 1
+		AND typeCode = #{typeCode}
+		AND type2Code = #{type2Code}
+	</select>
 
 </mapper>

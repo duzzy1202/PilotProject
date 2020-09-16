@@ -5,9 +5,10 @@
 <c:set var="pageTitle" value="회원정보" />
 
 <%@ include file="../part/head.jspf"%>
-<link rel="stylesheet" href="/resource/css/myinfo.css" />
+<link rel="stylesheet" href="/resource/css/admin.css" />
 
 <div class="dataCenter con">
+	<h2 class="block ta-c">신규 데이터 추가</h2>
 	<form class="dataCenter-box" action="adm/admin/addData" method="GET">
 		<div class="block">
 			<div class="flex">
