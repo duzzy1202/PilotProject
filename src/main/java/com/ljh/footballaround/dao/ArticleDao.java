@@ -30,4 +30,6 @@ public interface ArticleDao {
 	List<Article> getArticlesByMemberId(int memberId);
 
 	Article getLastestNotice();
+
+	void updateHitOfArticle(int id, int hits);
 }

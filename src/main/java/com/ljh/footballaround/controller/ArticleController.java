@@ -114,6 +114,13 @@ public class ArticleController {
 		Member loggedInMember = (Member)req.getAttribute("loggedInMember");
 
 		Article article = articleService.getForPrintArticleById(loggedInMember, id);
+		System.out.println("알티클 : " + article);
+		System.out.println("알티클 겟힛 : " + article.getHit());
+		int hits = article.getHit() + 1;
+		System.out.println("힛츠 : " + hits);
+		articleService.updateHitOfArticle(id, hits);
+		article = articleService.getForPrintArticleById(loggedInMember, id);
+		
 		Member articleWriter = memberService.getMemberById(article.getMemberId());
 		
 		model.addAttribute("article", article);

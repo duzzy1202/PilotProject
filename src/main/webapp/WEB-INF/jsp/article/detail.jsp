@@ -25,13 +25,19 @@
 		</div>
 		<div class="detail-box-etc">
 			<div class="detail-writer"><a href="#" onclick="javascript:changeDisplayBlock()">${article.extra.writer}</a></div>
+			<div class="detail-hit">조회수 : ${article.hit}</div>
 			<div class="detail-regDate">${article.regDate}</div>
 		</div>
 		<div class="userInfo" id="userInfo">
-			<div><a href="/usr/member/userInfo?id=${writer.id}">${writer.nickname}</a></div>
+			<c:if test="${writer.id != loggedInMemberId}">
+				<div><a href="/usr/member/userInfo?id=${writer.id}">${writer.nickname}</a></div>
+			</c:if>
+			<c:if test="${writer.id == loggedInMemberId}">
+				<div><a href="/usr/member/myInfo">${writer.nickname}</a></div>
+			</c:if>
 			<div><a href="#">쪽지보내기</a></div>
 			<c:if test="${writer.redLine > 0}">
-			<div>전과 ${writer.redLine}범</div>
+				<div>전과 ${writer.redLine}범</div>
 			</c:if>
 			<a href="#" onclick="javascript:changeDisplayNone()">닫기</a>
 		</div>
@@ -75,6 +81,8 @@
 	</c:if>
 
 	<a href="${listUrl}" class="article-listbtn artbtn">목록</a>
+	<span>${article.extra.likePoint}</span>
+	<a href="./doLike?id=${article.id}&redirectUrl=/article/detail?id=${article.id}" >추천</a>
 </div>
 
 <c:if test="${isLoggedIn}">

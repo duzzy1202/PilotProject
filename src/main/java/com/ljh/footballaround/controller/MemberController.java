@@ -312,6 +312,14 @@ public class MemberController {
 		
 		List<Article> articles = articleService.getArticlesByMemberId(id);
 		
+		String currentMemberId = String.format("%s", session.getAttribute("loggedInMemberId"));
+		String attrName = "raterMemberId__"+ currentMemberId + "__ratedMemberId__" + id;
+		String ratedPoint = attrService.getValue(attrName);
+		
+		if (ratedPoint != null) {
+			model.addAttribute("ratedPoint", ratedPoint);
+		}
+		
 		model.addAttribute("member", member);
 		model.addAttribute("articles", articles);
 		
@@ -337,15 +345,12 @@ public class MemberController {
 		for (String rate : memberRatings) {
 			sumMemberRatings = sumMemberRatings + Integer.parseInt(rate);
 		}
-		double averageRating = sumMemberRatings / memberRatings.size();
-		
-		System.out.println("레이팅 합 : " + sumMemberRatings);
-		System.out.println("멤버사이즈" + memberRatings.size());
-		System.out.println("레이팅 평균 : " + averageRating);
+		double averageRating = (double)sumMemberRatings / (double)memberRatings.size();
 		
 		memberService.updateRating(ratedMemberId, averageRating);
 		
-		model.addAttribute("historyBack", true);
+		model.addAttribute("locationReload", true);
+		model.addAttribute("redirectUri", "/usr/member/userinfo?id="+ratedMemberId);
 		model.addAttribute("alertMsg", ratedMember.getNickname() + "님에게 평점 " + rating + "점을 평가하였습니다.");
 		return "common/redirect";
 	}

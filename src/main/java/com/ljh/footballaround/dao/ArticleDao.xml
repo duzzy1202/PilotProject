@@ -102,6 +102,13 @@
 		LIMIT 1
 	</select>
 	
+	<update id="updateHitOfArticle">
+		UPDATE article
+		SET updateDate = NOW(),
+		hit = #{hits}
+		WHERE id = #{id}
+	</update>
+	
 	<resultMap type="Article" id="article">
 		<id property="id" column="id" />
 		<id property="regDate" column="regDate" />
@@ -112,6 +119,8 @@
 		<id property="body" column="body" />
 		<id property="memberId" column="memberId" />
 		<id property="boardId" column="boardId" />
+		<id property="hit" column="hit" />
+		<id property="recommend" column="recommend" />
 		<association property="extra" javaType="map">
 			<id property="writer" column="extra__writer" />
 			<id property="boardName" column="extra__boardName" />

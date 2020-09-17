@@ -163,4 +163,8 @@ public class ArticleService {
 	public Article getLastestNotice() {
 		return articleDao.getLastestNotice();
 	}
+
+	public void updateHitOfArticle(int id, int hits) {
+		articleDao.updateHitOfArticle(id, hits);
+	}
 }

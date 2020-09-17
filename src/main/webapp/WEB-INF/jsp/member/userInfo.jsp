@@ -18,7 +18,7 @@
 			</div>
 			<div class="member-info">
 				<div class="subject">활동 평점</div>
-				<div class="subject-body">${member.rating}</div>
+				<div class="subject-body">${member.rating} 점</div>
 			</div>
 			<div class="member-info">
 				<div class="subject">활동 정지 기록</div>
@@ -36,19 +36,24 @@
 			</div>
 			<div class="member-info">
 				<div class="subject">평점주기</div>
-				<form class="subject-rating" action="/usr/member/rateUser">
-					<c:forEach var="i" begin="1" end="5">
-						<input type="radio" id="rating_${i}" name="rating" value="${i}">
-						<label for="rating_${i}">${i}.0</label>
-					</c:forEach>
-					<br>
-					<c:forEach var="i" begin="6" end="10">
-						<input type="radio" id="rating_${i}" name="rating" value="${i}">
-						<label for="rating_${i}">${i}.0</label>
-					</c:forEach>
-					<input type="hidden" name="ratedMemberId" value="${member.id}">
-					<input type="submit" value="평가">
-				</form>
+				<c:if test="${ratedPoint == null}">
+					<form class="subject-rating" action="/usr/member/rateUser">
+						<c:forEach var="i" begin="1" end="5">
+							<input type="radio" id="rating_${i}" name="rating" value="${i}">
+							<label for="rating_${i}">${i}.0</label>
+						</c:forEach>
+						<br>
+						<c:forEach var="i" begin="6" end="10">
+							<input type="radio" id="rating_${i}" name="rating" value="${i}">
+							<label for="rating_${i}">${i}.0</label>
+						</c:forEach>
+						<input type="hidden" name="ratedMemberId" value="${member.id}">
+						<input type="submit" value="평가">
+					</form>
+				</c:if>
+				<c:if test="${ratedPoint != null}">
+					<div class="subject-body"> 이미 평가를 한 회원입니다.(${ratedPoint}점)</div>
+				</c:if>
 			</div>
 		</div>
 	</div>

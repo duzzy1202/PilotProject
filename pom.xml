@@ -155,7 +155,7 @@
 				<version>2.2</version>
 				<configuration>
 					<url>http://footballaround.site:8080/manager/text</url>
-					<server>footballaround_site__manager_text</server>
+					<server>footballaround.site</server>
 					<path>/</path>
 				</configuration>
 			</plugin>
