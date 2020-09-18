@@ -303,6 +303,13 @@ public class MemberController {
 			return "common/redirect";
 		}
 		
+		String currentMemberId = String.format("%s", session.getAttribute("loggedInMemberId"));
+		int cMemberId = Integer.parseInt(currentMemberId);
+		if (cMemberId == id) {
+			model.addAttribute("redirectUri", "/usr/member/myInfo");
+			return "common/redirect";
+		}
+		
 		Member member = memberService.getMemberById(id);
 		
 		List<Punishment> pnsh = memberService.getPunishment(member.getId());
@@ -312,7 +319,6 @@ public class MemberController {
 		
 		List<Article> articles = articleService.getArticlesByMemberId(id);
 		
-		String currentMemberId = String.format("%s", session.getAttribute("loggedInMemberId"));
 		String attrName = "raterMemberId__"+ currentMemberId + "__ratedMemberId__" + id;
 		String ratedPoint = attrService.getValue(attrName);
 		
@@ -350,7 +356,7 @@ public class MemberController {
 		memberService.updateRating(ratedMemberId, averageRating);
 		
 		model.addAttribute("locationReload", true);
-		model.addAttribute("redirectUri", "/usr/member/userinfo?id="+ratedMemberId);
+		model.addAttribute("redirectUri", "/usr/member/userInfo?id="+ratedMemberId);
 		model.addAttribute("alertMsg", ratedMember.getNickname() + "님에게 평점 " + rating + "점을 평가하였습니다.");
 		return "common/redirect";
 	}

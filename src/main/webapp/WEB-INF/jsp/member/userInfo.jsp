@@ -29,7 +29,7 @@
 					<div class="subject-body">
 						전과 ${member.redLine}범<br>
 						<c:forEach var="pnsh" items="${punishments}" >
-							${pnsh.count}. ${pnsh.reason} / ${pnsh.regDate}<br>
+							${pnsh.count}. / ${pnsh.reason} / ${pnsh.regDate}<br>
 						</c:forEach>
 					</div>
 				</c:if>

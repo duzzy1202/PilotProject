@@ -9,8 +9,7 @@
 		updateDate = NOW(),
 		reportedType = #{reportedType},
 		reportedId = #{id},
-		reportedCount = 1,
-		reportedReason = #{reportedReason}
+		reportedCount = 1
 	</insert>
 	
 	<select id="getReportByReportedIdAndReportedType" resultType="Report">

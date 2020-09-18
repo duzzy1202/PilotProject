@@ -11,7 +11,7 @@
 
 <div class="myinfo con">
 	<div class="info-table">
-		<h2>회원정보</h2>
+		<h2>내 정보</h2>
 		<div class="member-info-box">
 			<div class="member-info">
 				<div class="subject">아이디</div>

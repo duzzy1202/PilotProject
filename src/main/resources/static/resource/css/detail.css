@@ -67,6 +67,32 @@
 .article-detail > .detail-table > .detail-body > .toast-editor {
 	padding: 0 5px;
 }
+
+.article-detail > .detail-table > .like-box {
+	display: flex;
+	justify-content: center;
+	padding: 2px;
+}
+.article-detail > .detail-table > .like-box > a {
+	margin: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	border-radius: 10px;
+	background-color: #AFDEFF;
+}
+.article-detail > .detail-table > .like-box > a:hover {
+	background-color: skyblue;
+	font-weight: bold;
+}
+.article-detail > .detail-table > .like-box > span {
+	display: flex;
+	padding: 5px;
+	justify-content: center;
+	align-items: center;
+}
+
 .button-box {
 	display: flex;
 	justify-content: center;

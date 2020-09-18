@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -114,10 +115,9 @@ public class ArticleController {
 		Member loggedInMember = (Member)req.getAttribute("loggedInMember");
 
 		Article article = articleService.getForPrintArticleById(loggedInMember, id);
-		System.out.println("알티클 : " + article);
-		System.out.println("알티클 겟힛 : " + article.getHit());
+
 		int hits = article.getHit() + 1;
-		System.out.println("힛츠 : " + hits);
+
 		articleService.updateHitOfArticle(id, hits);
 		article = articleService.getForPrintArticleById(loggedInMember, id);
 		
@@ -130,7 +130,19 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("/usr/article/{boardCode}-write")
-	public String showWrite(@PathVariable("boardCode") String boardCode, Model model, String listUrl) {
+	public String showWrite(@PathVariable("boardCode") String boardCode, Model model, HttpSession session, String listUrl) {
+		
+		int currentMemeberId = (int) session.getAttribute("loggedInMemberId");
+		Member member = memberService.getMemberById(currentMemeberId);
+		
+		if (boardCode.equals("notice")) {
+			if (member.getLevel() != 3) {
+				model.addAttribute("historyBack", true);
+				model.addAttribute("alertMsg", "공지사항은 관리자만 작성 가능합니다.");
+				return "common/redirect";
+			}
+		}
+		
 		if ( listUrl == null ) {
 			listUrl = "./" + boardCode + "-list";
 		}
@@ -231,5 +243,51 @@ public class ArticleController {
 		return "common/redirect";
 	}
 
+	@RequestMapping("/usr/article/doLike")
+	public String doDelete(Model model, int id, String redirectUrl, HttpServletRequest request) {
+
+		int loggedInMemberId = (int) request.getAttribute("loggedInMemberId");
+
+		Map<String, Object> articleLikeAvailableRs = articleService.getArticleLikeAvailable(id, loggedInMemberId);
+
+		if (((String) articleLikeAvailableRs.get("resultCode")).startsWith("F-")) {
+			model.addAttribute("alertMsg", articleLikeAvailableRs.get("msg"));
+			model.addAttribute("historyBack", true);
+
+			return "common/redirect";
+		}
+
+		Map<String, Object> rs = articleService.likeArticle(id, loggedInMemberId);
+
+		String msg = (String) rs.get("msg");
+
+		model.addAttribute("alertMsg", msg);
+		model.addAttribute("redirectUri", redirectUrl);
+
+		return "common/redirect";
+	}
 	
+	@RequestMapping("/usr/article/doDislike")
+	public String doDislike(Model model, int id, String redirectUrl, HttpServletRequest request) {
+
+		int loggedInMemberId = (int) request.getAttribute("loggedInMemberId");
+
+		Map<String, Object> articleLikeAvailableRs = articleService.getArticleLikeAvailable(id, loggedInMemberId);
+
+		if (((String) articleLikeAvailableRs.get("resultCode")).startsWith("F-")) {
+			model.addAttribute("alertMsg", articleLikeAvailableRs.get("msg"));
+			model.addAttribute("historyBack", true);
+
+			return "common/redirect";
+		}
+
+		Map<String, Object> rs = articleService.dislikeArticle(id, loggedInMemberId);
+
+		String msg = (String) rs.get("msg");
+
+		model.addAttribute("alertMsg", msg);
+		model.addAttribute("redirectUri", redirectUrl);
+
+		return "common/redirect";
+	}
 }

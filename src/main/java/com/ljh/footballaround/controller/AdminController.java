@@ -227,6 +227,7 @@ public class AdminController {
 		String processMember = (String)param.get("processMember");
 		String reportedType = (String)param.get("reportedType");
 		String reason = (String)param.get("selectReason");
+		String reasonETC = (String)param.get("reasonETC");
 		
 		if (reportedType.equals("Article")) {
 			reportedId = Integer.parseInt((String)param.get("articleId"));
@@ -253,6 +254,9 @@ public class AdminController {
 		
 		if (!reason.equals("none")) {
 			List<Punishment> punishments = memberService.getPunishment(memberId);
+			if (reason.equals("etc")) {
+				reason = reasonETC;
+			}
 			if (punishments == null) {
 				int punishmentCount = 1;
 				memberService.insertPunishment(memberId, reason, punishmentCount);

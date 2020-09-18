@@ -131,8 +131,6 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		
-		
 	<!-- 스프링부트 기본 -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -155,7 +153,7 @@
 				<version>2.2</version>
 				<configuration>
 					<url>http://footballaround.site:8080/manager/text</url>
-					<server>footballaround.site</server>
+					<server>footballaround_site</server>
 					<path>/</path>
 				</configuration>
 			</plugin>

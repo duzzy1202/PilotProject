@@ -25,8 +25,11 @@ CREATE TABLE `member` (
     `level` INT(10) UNSIGNED NOT NULL,
     delStatus TINYINT(1) UNSIGNED,
     delDate DATETIME,
-    redLine INT(10) UNSIGNED NOT NULL DEFAULT 0
+    redLine INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    rating DECIMAL(3,1) UNSIGNED NOT NULL DEFAULT 0
 );
+
+ALTER TABLE `member` MODIFY COLUMN rating DECIMAL(3,1) UNSIGNED NOT NULL DEFAULT 0;
 
 DROP TABLE IF EXISTS attr;
 CREATE TABLE attr (
@@ -56,7 +59,7 @@ CREATE TABLE `board` (
 );
 
 # article 테이블 세팅
-DROP TABLE IF EXISTS article
+DROP TABLE IF EXISTS article;
 CREATE TABLE article (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
     regDate DATETIME,
@@ -67,7 +70,9 @@ CREATE TABLE article (
 	displayStatus TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
 	`memberId` INT(10) UNSIGNED NOT NULL,
     title CHAR(200) NOT NULL,
-    `body` LONGTEXT NOT NULL
+    `body` LONGTEXT NOT NULL,
+    hit INT(10) UNSIGNED NOT NULL DEFAULT 0,
+    recommend INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
 
 DROP TABLE IF EXISTS club;
@@ -135,12 +140,12 @@ CREATE TABLE report (
     regDate DATETIME,
     updateDate DATETIME,
     processDate DATETIME,
-    reportedType char(50) not null,
+    reportedType CHAR(50) NOT NULL,
     reportedId INT(10) UNSIGNED NOT NULL,
     reportedCount INT(10) UNSIGNED NOT NULL,
     reportedReason CHAR(200) NOT NULL,
     isProcessed TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
-    processMemberId INT(10) UNSIGNED NOT null default 0
+    processMemberId INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
 
 DROP TABLE IF EXISTS punishment;
@@ -150,4 +155,24 @@ CREATE TABLE punishment (
     memberId INT(10) UNSIGNED NOT NULL,
     `count` INT(10) UNSIGNED NOT NULL,
     reason CHAR(200) NOT NULL
+);
+
+DROP TABLE IF EXISTS articleRecommend;
+CREATE TABLE articleRecommend (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY(id),
+  regDate DATETIME NOT NULL,
+  articleId INT(10) UNSIGNED NOT NULL,
+  memberId INT(10) UNSIGNED NOT NULL,
+  `point` TINYINT(1) UNSIGNED NOT NULL
+);
+
+DROP TABLE IF EXISTS articleDislike;
+CREATE TABLE articleDislike (
+  id INT(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY(id),
+  regDate DATETIME NOT NULL,
+  articleId INT(10) UNSIGNED NOT NULL,
+  memberId INT(10) UNSIGNED NOT NULL,
+  `point` TINYINT(1) UNSIGNED NOT NULL
 );

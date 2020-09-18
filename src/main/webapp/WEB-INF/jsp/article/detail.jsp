@@ -26,6 +26,7 @@
 		<div class="detail-box-etc">
 			<div class="detail-writer"><a href="#" onclick="javascript:changeDisplayBlock()">${article.extra.writer}</a></div>
 			<div class="detail-hit">조회수 : ${article.hit}</div>
+			<div class="detail-recommend">추천수 : ${article.extra.likePoint}</div>
 			<div class="detail-regDate">${article.regDate}</div>
 		</div>
 		<div class="userInfo" id="userInfo">
@@ -66,6 +67,11 @@
 				</div>
 			</c:if>
 		</c:forEach>
+		<div class="like-box">
+			<a href="/usr/article/doLike?id=${article.id}&redirectUrl=/usr/article/${board.code}-detail?id=${article.id}" >추천</a>
+			<span>${article.extra.likePoint - article.extra.dislikePoint}</span>
+			<a href="/usr/article/doDislike?id=${article.id}&redirectUrl=/usr/article/${board.code}-detail?id=${article.id}" >비추</a>
+		</div>
 	</div>
 </div>
 
@@ -77,12 +83,10 @@
 		<a class="article-delbtn artbtn" href="${board.code}-doDelete?id=${article.id}" onclick="if ( confirm('삭제하시겠습니까?') == false ) return false;">삭제</a>
 	</c:if>
 	<c:if test="${isLoggedIn && article.memberId != loggedInMemberId}">
-		<a class="article-repbtn artbtn" href="doSendArticleReport?id=${article.id}&reportedType=Article&reportedReason=그냥" onclick="if ( confirm('신고하시겠습니까?') == false ) return false;">신고</a>
+		<a class="article-repbtn artbtn" href="doSendArticleReport?id=${article.id}&reportedType=Article" onclick="if ( confirm('신고하시겠습니까?') == false ) return false;">신고</a>
 	</c:if>
 
 	<a href="${listUrl}" class="article-listbtn artbtn">목록</a>
-	<span>${article.extra.likePoint}</span>
-	<a href="./doLike?id=${article.id}&redirectUrl=/article/detail?id=${article.id}" >추천</a>
 </div>
 
 <c:if test="${isLoggedIn}">

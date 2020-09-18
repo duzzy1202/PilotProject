@@ -4,26 +4,42 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ljh.footballaround.dao.ArticleDao">
 	<select id="getForPrintArticles" resultMap="article">
-		SELECT A.*,
-		M.nickname AS extra__writer
+		SELECT A.*, M.nickname
+		AS extra__writer,
+		IFNULL(SUM(AR.point), 0) AS extra__likePoint,
+		IFNULL(SUM(AD.point), 0) AS extra__dislikePoint
 		FROM article AS A
-		INNER JOIN member AS M
+		INNER JOIN board AS B
+		ON A.boardId = B.id
+		INNER JOIN `member` AS M
 		ON A.memberId = M.id
+		LEFT JOIN articleRecommend AS AR
+		ON A.id = AR.articleId
+		LEFT JOIN articleDislike AS AD
+		ON A.id = AD.articleId
 		WHERE A.displayStatus = 1
 		AND boardId = #{boardId}
 		AND A.delStatus = 0
+		GROUP BY A.id
 		ORDER BY A.id DESC
 	</select>
 
 	<select id="getForPrintArticleById" resultMap="article">
 		SELECT A.*,
-		M.nickname AS extra__writer
+		M.name AS extra__writer,
+		IFNULL(SUM(AR.point), 0) AS extra__likePoint,
+		IFNULL(SUM(AD.point), 0) AS extra__dislikePoint
 		FROM article AS A
-		INNER JOIN member AS M
+		INNER JOIN `member` AS M
 		ON A.memberId = M.id
+		LEFT JOIN articleRecommend AS AR
+		ON A.id = AR.articleId
+		LEFT JOIN articleDislike AS AD
+		ON A.id = AD.articleId
 		WHERE A.displayStatus = 1
 		AND A.delStatus = 0
 		AND A.id = #{id}
+		GROUP BY A.id
 	</select>
 
 	<select id="getArticleById" resultType="Article">
@@ -109,6 +125,42 @@
 		WHERE id = #{id}
 	</update>
 	
+	<select id="getLikePointByMemberId" resultType="int">
+		SELECT
+		IFNULL(SUM(AR.point), 0) AS `recommenPoint`
+		FROM articleRecommend AS AR
+		WHERE
+		AR.articleId = #{id}
+		AND AR.memberId = #{memberId}
+	</select>
+	
+	<select id="getDislikePointByMemberId" resultType="int">
+		SELECT
+		IFNULL(SUM(AR.point), 0) AS `dislikePoint`
+		FROM articleDislike AS AR
+		WHERE
+		AR.articleId = #{id}
+		AND AR.memberId = #{memberId}
+	</select>
+
+	<insert id="likeArticle" parameterType="map">
+		INSERT INTO articleRecommend
+		SET regDate
+		= NOW(),
+		articleId = #{id},
+		memberId = #{memberId},
+		`point` = 1
+	</insert>
+	
+	<insert id="dislikeArticle" parameterType="map">
+		INSERT INTO articleDislike
+		SET regDate
+		= NOW(),
+		articleId = #{id},
+		memberId = #{memberId},
+		`point` = 1
+	</insert>
+	
 	<resultMap type="Article" id="article">
 		<id property="id" column="id" />
 		<id property="regDate" column="regDate" />
@@ -125,6 +177,8 @@
 			<id property="writer" column="extra__writer" />
 			<id property="boardName" column="extra__boardName" />
 			<id property="boardCode" column="extra__boardCode" />
+			<id property="likePoint" column="extra__likePoint" />
+			<id property="dislikePoint" column="extra__dislikePoint" />
 		</association>
 	</resultMap>
 	

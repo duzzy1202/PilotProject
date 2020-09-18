@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 
-public class articleRecommend {
+public class ArticleDislike {
 	private int id;
 	private String regDate;
 	private String updateDate;

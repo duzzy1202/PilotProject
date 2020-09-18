@@ -114,7 +114,7 @@
 					<option value="정치적 성향을 과도하게 피력함">정치적 성향을 과도하게 피력함</option>
 					<option value="불법 성인사이트 및 도박사이트 홍보">불법 성인사이트 및 도박사이트 홍보</option>
 					<option value="특정 사상을 타인에게 과도하게 전파함">특정 사상을 타인에게 과도하게 전파함</option>
-					<option value="기타" >기타</option>
+					<option value="etc" >기타</option>
 				</select>
 				<input type="text" id="selectETC" name="reasonETC" placeholder="징계 사유 직접입력"/> 
 				<input type="submit" value="처리하기">
@@ -136,7 +136,7 @@ $(function(){
 $("#selectETC").hide();
 $("#selectReason").change(function() {
                 //직접입력을 누를 때 나타남
-		if($("#selectReason").val() == "기타") {
+		if($("#selectReason").val() == "etc") {
 			$("#selectETC").show();
 		}  else {
 			$("#selectETC").hide();
