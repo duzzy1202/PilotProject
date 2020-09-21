@@ -1,5 +1,6 @@
 package com.ljh.footballaround.controller;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Board;
 import com.ljh.footballaround.dto.Club;
 import com.ljh.footballaround.dto.Member;
-import com.ljh.footballaround.dto.Punishment;
+import com.ljh.footballaround.dto.Reply;
 import com.ljh.footballaround.dto.Report;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.service.AdminService;
@@ -26,6 +27,7 @@ import com.ljh.footballaround.service.ArticleService;
 import com.ljh.footballaround.service.AttrService;
 import com.ljh.footballaround.service.ClubdataService;
 import com.ljh.footballaround.service.MemberService;
+import com.ljh.footballaround.service.ReplyService;
 import com.ljh.footballaround.util.Util;
 
 @Controller
@@ -40,6 +42,8 @@ public class ArticleController {
 	private AdminService adminService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private ReplyService replyService;
 
 	@RequestMapping("/usr/article/{boardCode}-list")
 	public String showList(Model model, @PathVariable("boardCode") String boardCode) {
@@ -127,6 +131,18 @@ public class ArticleController {
 		model.addAttribute("writer", articleWriter);
 		
 		return "article/detail";
+	}
+	
+	@RequestMapping("/usr/article/detail")
+	public String showDetailWithoutBoardCode(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req, String listUrl) {
+		
+		Member loggedInMember = (Member)req.getAttribute("loggedInMember");
+		int id = Integer.parseInt((String) param.get("id"));
+		Article article = articleService.getForPrintArticleById(loggedInMember, id);
+		Board board = articleService.getBoardById(article.getBoardId());
+		String boardCode = board.getCode();
+		
+		return showDetail(model, param, req, boardCode, listUrl);
 	}
 	
 	@RequestMapping("/usr/article/{boardCode}-write")
@@ -289,5 +305,31 @@ public class ArticleController {
 		model.addAttribute("redirectUri", redirectUrl);
 
 		return "common/redirect";
+	}
+	
+	@RequestMapping("/usr/article/totalSearch")
+	public String totalSearch(@RequestParam Map<String, Object> param, Model model) {
+		
+		String keyword = (String)param.get("searchKeyword");
+		
+		System.out.println("sdfadsfa : " + keyword);
+		
+		List<Article> searchTitleResultArticles = articleService.getArticlesByTitleKeyword(keyword);
+		List<Article> searchBodyResultArticles = articleService.getArticlesMyBodyKeyword(keyword);
+		List<Reply> searchResultReplies = replyService.getReplysByKeyword(keyword);
+		
+		if (searchTitleResultArticles.size() > 0) {
+			model.addAttribute("searchTitleResultArticles", searchTitleResultArticles);
+		}
+		if (searchBodyResultArticles.size() > 0) {
+			model.addAttribute("searchBodyResultArticles", searchBodyResultArticles);
+		}
+		if (searchResultReplies.size() > 0) {
+			model.addAttribute("searchResultReplies", searchResultReplies);
+		}
+		
+		model.addAttribute("keyword", keyword);
+		
+		return "article/totalSearch";
 	}
 }

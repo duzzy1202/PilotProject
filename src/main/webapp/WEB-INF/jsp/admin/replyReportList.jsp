@@ -6,7 +6,7 @@
 <%@ include file="../part/head.jspf"%>
 
 <!-- 리스트 CSS -->
-<link rel="stylesheet" href="/resource/css/articleList.css" />
+<link rel="stylesheet" href="/resource/css/admin.css" />
 
 <!-- PC용 -->
 <div class="list-box con">
@@ -14,21 +14,21 @@
 
 	<div class="article-list">
 		<div class="thead">
-			<div class="flex">
-				<div style="padding: 5px;">댓글번호</div>
-				<div style="padding: 5px;">댓글 내용</div>
-				<div style="padding: 5px;">신고 당한 수</div>
-				<div style="padding: 5px;">작성일</div>
+			<div>
+				<div>댓글번호</div>
+				<div>댓글 내용</div>
+				<div>신고 당한 수</div>
+				<div>작성일</div>
 			</div>
 		</div>
 		<div class="tbody">
 			<c:forEach var="reply" items="${replys}" varStatus="status">
 				<div class="block">
-					<div class="flex" style="padding: 5px;">
-						<div style="padding: 5px;">${reply.id}</div>
-						<div style="padding: 5px;"><a href="/adm/admin/reportReplyDetail?id=${reply.id}">${reply.body}</a></div>
-						<div style="padding: 5px;">${reportedReplys[status.index].reportedCount}</div>
-						<div style="padding: 5px;">${reply.regDate}</div>
+					<div class="flex" >
+						<div>${reply.id}</div>
+						<div><a href="/adm/admin/reportReplyDetail?id=${reply.id}">${reply.body}</a></div>
+						<div>${reportedReplys[status.index].reportedCount}</div>
+						<div>${reply.regDate}</div>
 					</div>
 					
 					<div class="flex" style="padding: 5px;"></div>

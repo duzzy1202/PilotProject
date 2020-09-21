@@ -6,7 +6,7 @@
 <%@ include file="../part/head.jspf"%>
 
 <!-- 리스트 CSS -->
-<link rel="stylesheet" href="/resource/css/articleList.css" />
+<link rel="stylesheet" href="/resource/css/admin.css" />
 
 <!-- PC용 -->
 <div class="list-box con">
@@ -14,20 +14,20 @@
 
 	<div class="article-list">
 		<div class="thead">
-			<div class="flex">
-				<div style="padding: 5px;">글번호</div>
-				<div style="padding: 5px;">제목</div>
-				<div style="padding: 5px;">신고 당한 수</div>
-				<div style="padding: 5px;">작성일</div>
+			<div>
+				<div>글번호</div>
+				<div>제목</div>
+				<div>신고 당한 수</div>
+				<div>작성일</div>
 			</div>
 		</div>
 		<div class="tbody">
 			<c:forEach var="article" items="${articles}" varStatus="status">
-				<div class="flex" style="padding: 5px; ">
-					<div style="padding: 5px;">${article.id}</div>
-					<div style="padding: 5px;"><a href="/adm/admin/reportDetail?id=${article.id}">${article.title}</a></div>
-					<div style="padding: 5px;">${reportedArticles[status.index].reportedCount}</div>
-					<div style="padding: 5px;">${article.regDate}</div>
+				<div>
+					<div>${article.id}</div>
+					<div><a href="/adm/admin/reportDetail?id=${article.id}">${article.title}</a></div>
+					<div>${reportedArticles[status.index].reportedCount}</div>
+					<div>${article.regDate}</div>
 				</div>
 			</c:forEach>
 		</div>

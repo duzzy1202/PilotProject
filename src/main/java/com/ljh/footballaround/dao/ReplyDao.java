@@ -21,4 +21,6 @@ public interface ReplyDao {
 	void modifyReply(Map<String, Object> param);
 
 	Reply getReplyById(int id);
+
+	List<Reply> getReplysByKeyword(String keyword);
 }

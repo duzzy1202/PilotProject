@@ -41,4 +41,10 @@ public interface ArticleDao {
 	
 	void dislikeArticle(@Param("id") int id, @Param("memberId") int memberId);
 
+	List<Article> getArticlesByTitleKeyword(String keyword);
+	
+	List<Article> getArticlesByBodyKeyword(String keyword);
+
+	Board getBoardById(int boardId);
+
 }

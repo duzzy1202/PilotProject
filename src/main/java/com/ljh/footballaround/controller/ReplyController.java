@@ -67,7 +67,7 @@ public class ReplyController {
 		int newReplyId = replyService.writeReply(param);
 		rsDataBody.put("replyId", newReplyId);
 
-		return new ResultData("S-1", String.format("%d번 댓글이 생성되었습니다.", newReplyId), rsDataBody);
+		return new ResultData("S-1", String.format("댓글을 등록하였습니다."), rsDataBody);
 	}
 
 	@RequestMapping("/usr/reply/doDeleteReplyAjax")

@@ -113,7 +113,8 @@
 					<option value="음란물 게시">음란물 게시</option>
 					<option value="정치적 성향을 과도하게 피력함">정치적 성향을 과도하게 피력함</option>
 					<option value="불법 성인사이트 및 도박사이트 홍보">불법 성인사이트 및 도박사이트 홍보</option>
-					<option value="특정 사상을 타인에게 과도하게 전파함">특정 사상을 타인에게 과도하게 전파함</option>
+					<option value="특정 사상을 과도하게 전파함">특정 사상을 타인에게 과도하게 전파함</option>
+					<option value="아무 의미없는 뻘글">아무 의미없는 뻘글</option>
 					<option value="etc" >기타</option>
 				</select>
 				<input type="text" id="selectETC" name="reasonETC" placeholder="징계 사유 직접입력"/> 

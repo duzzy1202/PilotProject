@@ -51,16 +51,16 @@
 			<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
 			<c:if test="${file != null}">
 				<div>
-					<span>첨부파일 ${fileNo} ${file}</span>
+					<span>첨부파일</span>
 					<span>
 						<c:if test="${file.fileExtTypeCode == 'video'}">
 							<div class="video-box">
-								<video controls src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}"></video>
+								<video controls src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}" height: 300px; width: 300px;></video>
 							</div>
 						</c:if>
 						<c:if test="${file.fileExtTypeCode == 'img'}">
 							<div class="img-box img-box-auto">
-								<img src="/usr/file/img?id=${file.id}&updateDate=${file.updateDate}" alt="" />
+								<img src="/usr/file/img?id=${file.id}&updateDate=${file.updateDate} " max-height: 500px; max-width: 1000px; alt="" />
 							</div>
 						</c:if>
 					</span>
@@ -578,7 +578,6 @@ function changeDisplayNone() {
 		var html = '';
 		for (var fileNo = 1; fileNo <= 3; fileNo++) {
             var file = null;
-            console.log(reply.extra.file__common__attachment[fileNo][fileId]);
             if (reply.extra.file__common__attachment && reply.extra.file__common__attachment[fileNo]) {
                 file = reply.extra.file__common__attachment[fileNo];
             }

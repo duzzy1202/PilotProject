@@ -4,12 +4,13 @@
 <c:set var="pageTitle" value="${board.name} 게시물 작성" />
 <%@ include file="../part/head.jspf"%>
 <%@ include file="../part/toastuiEditor.jspf"%>
+<%@ include file="../part/summernote.jspf"%>
 
 <script>
 	var ArticleWriteForm__submitDone = false;
 
 	function ArticleWriteForm__submit(form) {
-		if (ArticleWriteForm__submitDone = false) {
+		if (ArticleWriteForm__submitDone == false) {
 			alert('처리중입니다.');
 			return;
 		}
@@ -142,7 +143,7 @@
 				<c:set var="fileNo" value="${String.valueOf(i)}" />
 				<c:set var="fileExtTypeCode" value="${appConfig.getAttachmentFileExtTypeCode('article', i)}" />
 				<tr>
-					<th>첨부${fileNo} ${appConfig.getAttachmentFileExtTypeDisplayName('article', i)}</th>
+					<th>첨부${appConfig.getAttachmentFileExtTypeDisplayName('article', i)}</th>
 					<td>
 						<div class="form-control-box">
 							<input type="file" accept="${appConfig.getAttachemntFileInputAccept('article', i)}" name="file__article__0__common__attachment__${fileNo}">

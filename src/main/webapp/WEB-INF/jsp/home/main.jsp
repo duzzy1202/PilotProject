@@ -7,7 +7,7 @@
 <div class="con">
 	<h1> 0.1 Ver </h1>
 	<h2> 개발중인 사이트</h2>
-	<img src="/resource/img/gareth_bale_golf.png" width="1200px" height="690px">
+	<img src="/resource/img/shm4g.jpg" width="1024px" height="685px">
 </div>
 
 <%@ include file="../part/foot.jspf"%>

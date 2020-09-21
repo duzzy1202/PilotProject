@@ -64,6 +64,13 @@
 		board
 		WHERE leagueId = #{leagueId}
 	</select>
+	
+	<select id="getBoardById" resultType="Board">
+		SELECT *
+		FROM
+		board
+		WHERE id = #{id}
+	</select>
 
 	<insert id="write" useGeneratedKeys="true" keyProperty="id">
 		INSERT
@@ -160,6 +167,48 @@
 		memberId = #{memberId},
 		`point` = 1
 	</insert>
+	
+	<select id="getArticlesByTitleKeyword" resultMap="article">
+		SELECT A.*, M.nickname
+		AS extra__writer,
+		IFNULL(SUM(AR.point), 0) AS extra__likePoint,
+		IFNULL(SUM(AD.point), 0) AS extra__dislikePoint
+		FROM article AS A
+		INNER JOIN board AS B
+		ON A.boardId = B.id
+		INNER JOIN `member` AS M
+		ON A.memberId = M.id
+		LEFT JOIN articleRecommend AS AR
+		ON A.id = AR.articleId
+		LEFT JOIN articleDislike AS AD
+		ON A.id = AD.articleId
+		WHERE A.displayStatus = 1
+		AND A.delStatus = 0
+		AND title LIKE CONCAT ('%', #{keyword}, '%')
+		GROUP BY A.id
+		ORDER BY A.id DESC
+	</select>
+	
+	<select id="getArticlesByBodyKeyword" resultMap="article">
+		SELECT A.*, M.nickname
+		AS extra__writer,
+		IFNULL(SUM(AR.point), 0) AS extra__likePoint,
+		IFNULL(SUM(AD.point), 0) AS extra__dislikePoint
+		FROM article AS A
+		INNER JOIN board AS B
+		ON A.boardId = B.id
+		INNER JOIN `member` AS M
+		ON A.memberId = M.id
+		LEFT JOIN articleRecommend AS AR
+		ON A.id = AR.articleId
+		LEFT JOIN articleDislike AS AD
+		ON A.id = AD.articleId
+		WHERE A.displayStatus = 1
+		AND A.delStatus = 0
+		AND body LIKE CONCAT ('%', #{keyword}, '%')
+		GROUP BY A.id
+		ORDER BY A.id DESC
+	</select>
 	
 	<resultMap type="Article" id="article">
 		<id property="id" column="id" />

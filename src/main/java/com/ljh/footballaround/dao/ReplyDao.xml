@@ -76,7 +76,21 @@
 		</set>
 		WHERE id = #{id}
 	</update>
-
+	
+	<select id="getReplysByKeyword" resultMap="reply">
+	    <![CDATA[
+		SELECT AR.*,
+		M.nickname AS extra__writer
+		FROM reply AS AR
+		INNER JOIN member AS M
+		ON AR.memberId = M.id
+		WHERE body LIKE CONCAT ('%', #{keyword}, '%')
+		AND AR.displayStatus = 1
+		AND AR.delStatus = 0
+		ORDER BY AR.id ASC
+		]]>
+	</select>
+	
 	<resultMap type="Reply" id="reply">
 		<id property="id" column="id" />
 		<id property="regDate" column="regDate" />

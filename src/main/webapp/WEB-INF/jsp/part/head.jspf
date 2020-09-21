@@ -34,6 +34,7 @@
 <script src="/resource/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 
+
 <script>
 	var MemberLoginForm__submitDone = false;
 	function MemberLoginForm__submit(form) {
@@ -140,4 +141,9 @@
 			<li><a href="/usr/article/notice-list">공지사항</a></li>
 		</ul>
 	</div>
-	<div class="top-menu-3 con"></div>
+	<div class="top-menu-3 con">
+		<form action="/usr/article/totalSearch" method="GET">
+			<input type="text" name="searchKeyword" placeholder="통합 검색">
+			<input type="submit" value="검색">
+		</form>
+	</div>

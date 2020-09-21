@@ -217,4 +217,17 @@ public class ArticleService {
 
 		return rs;
 	}
+
+	public List<Article> getArticlesByTitleKeyword(String keyword) {
+		return articleDao.getArticlesByTitleKeyword(keyword);
+	}
+
+	public List<Article> getArticlesMyBodyKeyword(String keyword) {
+		return articleDao.getArticlesByBodyKeyword(keyword);
+	}
+
+	public Board getBoardById(int boardId) {
+		return articleDao.getBoardById(boardId);
+	}
+
 }

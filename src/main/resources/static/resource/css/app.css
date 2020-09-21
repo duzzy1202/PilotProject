@@ -132,4 +132,6 @@ html {
 .top-menu-3 {
 	background-color: #424242;
 	height: 25px;
+	display: flex;
+	justify-content: flex-end;
 }
