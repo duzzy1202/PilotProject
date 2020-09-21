@@ -56,10 +56,5 @@
 	</table>
 </div>
  -->
-<c:if test="${isLoggedIn == true }">
-<div class="list-btn-box con">
-	<a class="list-btn" href="./${board.code}-write">글쓰기</a>
-</div>
-</c:if>
 
 <%@ include file="../part/foot.jspf"%>

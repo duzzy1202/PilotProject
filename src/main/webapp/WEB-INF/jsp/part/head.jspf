@@ -127,7 +127,7 @@
 
 	<div class="top-menu-2 con">
 		<ul>
-			<li><a href="/usr/home/main">인기 게시물</a></li>
+			<li><a href="/usr/home/main">홈</a></li>
 			<li><a href="/usr/article/national-list">국내축구</a>
 				<ul>
 					<li><a href="/usr/article/kl1-list">K-리그 1</a></li>

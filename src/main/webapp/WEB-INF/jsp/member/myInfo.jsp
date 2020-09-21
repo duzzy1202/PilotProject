@@ -36,7 +36,7 @@
 				</c:if>
 				<c:if test="${loggedInMember.redLine > 0}">
 					<div class="subject-body">
-						전과 ${loggedInMember.redLine}범<br>
+						${loggedInMember.redLine} 회<br>
 						<c:forEach var="pnsh" items="${punishments}" >
 							${pnsh.count}. ${pnsh.reason} / ${pnsh.regDate}<br>
 						</c:forEach>

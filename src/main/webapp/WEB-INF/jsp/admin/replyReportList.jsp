@@ -23,15 +23,11 @@
 		</div>
 		<div class="tbody">
 			<c:forEach var="reply" items="${replys}" varStatus="status">
-				<div class="block">
-					<div class="flex" >
-						<div>${reply.id}</div>
-						<div><a href="/adm/admin/reportReplyDetail?id=${reply.id}">${reply.body}</a></div>
-						<div>${reportedReplys[status.index].reportedCount}</div>
-						<div>${reply.regDate}</div>
-					</div>
-					
-					<div class="flex" style="padding: 5px;"></div>
+				<div class="flex" >
+					<div>${reply.id}</div>
+					<div><a href="/adm/admin/reportReplyDetail?id=${reply.id}">${reply.body}</a></div>
+					<div>${reportedReplys[status.index].reportedCount}</div>
+					<div>${reply.regDate}</div>
 				</div>
 			</c:forEach>
 		</div>
