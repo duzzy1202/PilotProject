@@ -21,7 +21,7 @@
 		FROM member
 		WHERE loginId = #{loginId}
 	</select>
-
+	
 	<insert id="join" useGeneratedKeys="true" keyProperty="id">
 		INSERT
 		INTO member
@@ -100,5 +100,23 @@
 		rating = #{averageRating}
 		WHERE id = #{memberId}
 	</update>
+	
+	<select id="getMemberByKeywordId" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE id LIKE CONCAT ('%', #{id}, '%')
+	</select>
+	
+	<select id="getMemberByKeywordLoginId" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE loginId LIKE CONCAT ('%', #{loginId}, '%')
+	</select>
+	
+	<select id="getMemberByKeywordNickname" resultType="Member">
+		SELECT *
+		FROM member
+		WHERE nickname LIKE CONCAT ('%', #{nickname}, '%')
+	</select>
 
 </mapper>

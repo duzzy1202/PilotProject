@@ -319,4 +319,10 @@ public class AdminController {
 		
 		return "/admin/processedReplyReportList";
 	}
+	
+	@RequestMapping("/adm/admin/searchMember")
+	public String searchMember(Model model, HttpServletRequest req) {
+		
+		return "/admin/searchMember";
+	}
 }

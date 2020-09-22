@@ -37,4 +37,10 @@ public interface MemberDao {
 	void insertPunishment(int memberId, String reason, int punishmentCount);
 
 	void updateRating(int memberId, double averageRating);
+
+	List<Member> getMemberByKeywordId(int id);
+
+	List<Member> getMemberByKeywordLoginId(String loginId);
+
+	List<Member> getMemberByKeywordNickname(String nickname);
 }

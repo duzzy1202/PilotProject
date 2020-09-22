@@ -134,4 +134,16 @@ public class MemberService {
 		memberDao.updateRating(memberId, averageRating);
 	}
 
+	public List<Member> getMemberByKeywordId(int id) {
+		return memberDao.getMemberByKeywordId(id);
+	}
+
+	public List<Member> getMemberByKeywordLoginId(String loginId) {
+		return memberDao.getMemberByKeywordLoginId(loginId);
+	}
+
+	public List<Member> getMemberByKeywordNickname(String nickname) {
+		return memberDao.getMemberByKeywordNickname(nickname);
+	}
+
 }

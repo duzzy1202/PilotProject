@@ -2,11 +2,14 @@ package com.ljh.footballaround.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +17,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ljh.footballaround.dto.Article;
 import com.ljh.footballaround.dto.Attr;
 import com.ljh.footballaround.dto.Member;
 import com.ljh.footballaround.dto.Punishment;
+import com.ljh.footballaround.dto.Reply;
 import com.ljh.footballaround.dto.ResultData;
 import com.ljh.footballaround.service.ArticleService;
 import com.ljh.footballaround.service.AttrService;
@@ -359,5 +364,31 @@ public class MemberController {
 		model.addAttribute("redirectUri", "/usr/member/userInfo?id="+ratedMemberId);
 		model.addAttribute("alertMsg", ratedMember.getNickname() + "님에게 평점 " + rating + "점을 평가하였습니다.");
 		return "common/redirect";
+	}
+	
+	@RequestMapping("/adm/member/getMembersAjax")
+	@ResponseBody
+	public ResultData getMembersAjax(@RequestParam Map<String, Object> param, HttpServletRequest request) {
+		Map<String, Object> rsDataBody = new HashMap<>();
+		
+		String selectItemForSearch = (String)param.get("selectItemForSearch");
+		String keyword = (String)param.get("keyword");
+		
+		List<Member> members = new ArrayList<Member>();
+		
+		if (selectItemForSearch.equals("id")) {
+			int id = Integer.parseInt(keyword);
+			members = memberService.getMemberByKeywordId(id);
+		}
+		if (selectItemForSearch.equals("loginId")) {
+			members = memberService.getMemberByKeywordLoginId(keyword);
+		}
+		if (selectItemForSearch.equals("nickname")) {
+			members = memberService.getMemberByKeywordNickname(keyword);
+		}
+		
+		rsDataBody.put("members", members);
+
+		return new ResultData("S-1", String.format("%d개의 회원 계정을 불러왔습니다.", members.size()), rsDataBody);
 	}
 }
