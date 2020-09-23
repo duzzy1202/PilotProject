@@ -6,6 +6,7 @@
 	<select id="getForPrintArticles" resultMap="article">
 		SELECT A.*, M.nickname
 		AS extra__writer,
+		IFNULL(SUM(R.displayStatus), 0) AS extra__replyCount,
 		IFNULL(SUM(AR.point), 0) AS extra__likePoint,
 		IFNULL(SUM(AD.point), 0) AS extra__dislikePoint
 		FROM article AS A
@@ -17,6 +18,8 @@
 		ON A.id = AR.articleId
 		LEFT JOIN articleDislike AS AD
 		ON A.id = AD.articleId
+		LEFT JOIN reply AS R
+		ON A.id = R.relId
 		WHERE A.displayStatus = 1
 		AND boardId = #{boardId}
 		AND A.delStatus = 0
@@ -27,6 +30,7 @@
 	<select id="getForPrintArticleById" resultMap="article">
 		SELECT A.*,
 		M.name AS extra__writer,
+		IFNULL(SUM(R.displayStatus), 0) AS extra__replyCount,
 		IFNULL(SUM(AR.point), 0) AS extra__likePoint,
 		IFNULL(SUM(AD.point), 0) AS extra__dislikePoint
 		FROM article AS A
@@ -36,6 +40,8 @@
 		ON A.id = AR.articleId
 		LEFT JOIN articleDislike AS AD
 		ON A.id = AD.articleId
+		LEFT JOIN reply AS R
+		ON A.id = R.relId
 		WHERE A.displayStatus = 1
 		AND A.delStatus = 0
 		AND A.id = #{id}
@@ -226,6 +232,7 @@
 			<id property="writer" column="extra__writer" />
 			<id property="boardName" column="extra__boardName" />
 			<id property="boardCode" column="extra__boardCode" />
+			<id property="replyCount" column="extra__replyCount" />
 			<id property="likePoint" column="extra__likePoint" />
 			<id property="dislikePoint" column="extra__dislikePoint" />
 		</association>

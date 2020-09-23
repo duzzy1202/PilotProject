@@ -1,0 +1,45 @@
+.write > .empty-space {
+	background-color: grey;
+	display: block;
+	height: 100px;
+}
+
+.write > span {
+	text-align: center;
+	background-color: #F5A9A9;
+	font-weight: bold;
+	display: block;
+	font-size: 1.4rem;
+	padding: 10px;
+}
+
+.write > .write-box {
+	border: 20px solid #AFDEFF;
+}
+.write > .write-box > div {
+	background-color: #AFDEFF;
+}
+.write > .write-box > .title-box {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 20px;
+}
+.write > .write-box > .title-box > input {
+	width: 800px;
+	height: 30px;
+	font-size: 1.3rem;
+}
+
+.write > .write-box > .button-box {
+	display: flex;
+	justify-content: center;
+}
+
+.write > .write-box > .button-box > button {
+	margin-top: 20px;
+	margin-left: 10px;
+	margin-right: 10px;
+	width: 60px;
+	height: 30px;
+	font-weight: bold;
+}

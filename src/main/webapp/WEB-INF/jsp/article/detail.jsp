@@ -26,6 +26,7 @@
 		<div class="detail-box-etc">
 			<div class="detail-writer"><a href="#" onclick="javascript:changeDisplayBlock()">${article.extra.writer}</a></div>
 			<div class="detail-hit">조회수 : ${article.hit}</div>
+			<div class="detail-replies">댓글수 : ${article.extra.replyCount}</div>
 			<div class="detail-recommend">추천수 : ${article.extra.likePoint}</div>
 			<div class="detail-regDate">${article.regDate}</div>
 		</div>
@@ -46,27 +47,7 @@
 			<script type="text/x-template">${article.body}</script>
             <div class="toast-editor toast-editor-viewer"></div>
 		</div>
-		<c:forEach var="i" begin="1" end="3" step="1">
-			<c:set var="fileNo" value="${String.valueOf(i)}" />
-			<c:set var="file" value="${article.extra.file__common__attachment[fileNo]}" />
-			<c:if test="${file != null}">
-				<div>
-					<span>첨부파일</span>
-					<span>
-						<c:if test="${file.fileExtTypeCode == 'video'}">
-							<div class="video-box">
-								<video controls src="/usr/file/streamVideo?id=${file.id}&updateDate=${file.updateDate}" height: 300px; width: 300px;></video>
-							</div>
-						</c:if>
-						<c:if test="${file.fileExtTypeCode == 'img'}">
-							<div class="img-box img-box-auto">
-								<img src="/usr/file/img?id=${file.id}&updateDate=${file.updateDate} " max-height: 500px; max-width: 1000px; alt="" />
-							</div>
-						</c:if>
-					</span>
-				</div>
-			</c:if>
-		</c:forEach>
+		
 		<div class="like-box">
 			<a href="/usr/article/doLike?id=${article.id}&redirectUrl=/usr/article/${board.code}-detail?id=${article.id}" >추천</a>
 			<span>${article.extra.likePoint - article.extra.dislikePoint}</span>
@@ -97,7 +78,7 @@
 	
 		function WriteReplyForm__submit(form) {
 			
-			if (WriteReplyForm__submitDone = false) {
+			if (WriteReplyForm__submitDone) {
 				alert('처리중입니다.');
 			}
 
@@ -168,9 +149,11 @@
 						form.file__reply__0__common__attachment__1.value = '';
 					}
 
-					WriteReplyForm__submitDone = true;
+					
 				});
 			});
+			
+			WriteReplyForm__submitDone = true;
 		}
 	</script>
 
@@ -420,7 +403,7 @@ function changeDisplayNone() {
 
 		// 댓글 수정 시작
 		var startModifyReply = function(fileIdsStr) {
-			$.post('../reply/doModifyReplyAjax', {
+			$.post('/usr/reply/doModifyReplyAjax', {
 				id : id,
 				body : body,
 				fileIdsStr : fileIdsStr
@@ -431,11 +414,11 @@ function changeDisplayNone() {
 		var onModifyReplyComplete = function(data) {
 			if (data.resultCode && data.resultCode.substr(0, 2) == 'S-') {
 				// 성공시에는 기존에 그려진 내용을 수정해야 한다.!!
-				$('.reply-list-box tbody > tr[data-id="' + id + '"]').data('data-originBody', body);
-				$('.reply-list-box tbody > tr[data-id="' + id + '"] .reply-body').empty().append(getHtmlEncoded(body).replaceAll('\n', '<br>'));
+				$('.reply-list-box .reply-list > div[data-id="' + id + '"]').data('data-originBody', body);
+				$('.reply-list-box .reply-list > div[data-id="' + id + '"] .reply-body').empty().append(getHtmlEncoded(body).replaceAll('\n', '<br>'));
 
-				$('.reply-list-box tbody > tr[data-id="' + id + '"] .video-box').empty();
-				$('.reply-list-box tbody > tr[data-id="' + id + '"] .img-box').empty();
+				$('.reply-list-box .reply-list > div[data-id="' + id + '"] .video-box').empty();
+				$('.reply-list-box .reply-list > div[data-id="' + id + '"] .img-box').empty();
 
 				if (data && data.body && data.body.file__common__attachment) {
 					for ( var fileNo in data.body.file__common__attachment) {
@@ -443,10 +426,10 @@ function changeDisplayNone() {
 
 						if (file.fileExtTypeCode == 'video') {
 							var html = '<video controls src="/file/streamVideo?id=' + file.id + '&updateDate=' + file.updateDate + '">video not supported</video>';
-							$('.reply-list-box tbody > tr[data-id="' + id + '"] [data-file-no="' + fileNo + '"].video-box').append(html);
+							$('.reply-list-box .reply-list > div[data-id="' + id + '"] [data-file-no="' + fileNo + '"].video-box').append(html);
 						} else {
 							var html = '<img src="/file/img?id=' + file.id + '&updateDate=' + file.updateDate + '">';
-							$('.reply-list-box tbody > tr[data-id="' + id + '"] [data-file-no="' + fileNo + '"].img-box').append(html);
+							$('.reply-list-box .reply-list > div[data-id="' + id + '"] [data-file-no="' + fileNo + '"].img-box').append(html);
 						}
 					}
 				}

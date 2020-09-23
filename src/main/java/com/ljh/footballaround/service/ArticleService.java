@@ -25,9 +25,7 @@ public class ArticleService {
 	private FileService fileService;
 
 	public List<Article> getForPrintArticles(int boardId) {
-		List<Article> articles = articleDao.getForPrintArticles(boardId);
-
-		return articles;
+		return articleDao.getForPrintArticles(boardId);
 	}
 
 	private void updateForPrintInfo(Member actor, Article article) {

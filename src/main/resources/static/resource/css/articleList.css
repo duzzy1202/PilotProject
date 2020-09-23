@@ -60,13 +60,21 @@
 	text-align: center;
 }
 .list-box > .article-list > table tr th:nth-child(2) {
-	width: 70%;
+	width: 54%;
 }
 .list-box > .article-list > table tr th:nth-child(3) {
-	width: 10%;
+	width: 8%;
 	text-align: center;
 }
 .list-box > .article-list > table tr th:nth-child(4) {
+	width: 8%;
+	text-align: center;
+}
+.list-box > .article-list > table tr th:nth-child(5) {
+	width: 10%;
+	text-align: center;
+}
+.list-box > .article-list > table tr th:nth-child(6) {
 	width: 15%;
 	text-align: center;
 }
@@ -78,7 +86,7 @@
 }
 
 .list-box > .article-list > table tr:hover td {
-	background-color: #F78181;
+	background-color: #81BEF7;
 	font-weight: bold;
 }
 

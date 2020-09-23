@@ -59,6 +59,8 @@
 				<tr>
 					<th>번호</th>
 					<th>제목</th>
+					<th>댓글</th>
+					<th>추천</th>
 					<th>작성자</th>
 					<th>날짜</th>
 				</tr>
@@ -68,6 +70,8 @@
 					<tr>
 						<td>${article.id}</td>
 						<td><a href="${article.getDetailLink(board.code)}">${article.forPrintTitle}</a></td>
+						<td>${article.extra.replyCount}</td>
+						<td>${article.extra.likePoint - article.extra.dislikePoint}</td>
 						<td>${article.extra.writer}</td>
 						<td>${article.regDate}</td>
 					</tr>

@@ -224,7 +224,7 @@
 				initialValue : initialValue,
 				hooks : {
 					'addImageBlobHook' : function(blob, callback) {
-						var maxSizeMb = 20;
+						var maxSizeMb = 45;
 						var maxSize = maxSizeMb * 1024 * 1024 //50MB
 						if (blob.size > maxSize) {
 							alert(maxSizeMb + "MB 이하의 이미지를 선택해주세요.");
