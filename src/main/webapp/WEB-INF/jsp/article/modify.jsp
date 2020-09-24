@@ -173,7 +173,7 @@
 	<form class="write-box" method="POST" action="${board.code}-doModify" onsubmit="ArticleModifyForm__submit(this); return false;">
 		<input type="hidden" name="fileIdsStr" /> 
 		<input type="hidden" name="body" /> 
-		<input type="hidden" name="redirectUri" value="/usr/article/${board.code}-detail?id=#id">
+		<input type="hidden" name="redirectUri" value="/usr/article/${board.code}-detail?id=${article.id}">
 		<input type="hidden" name="id" value="${article.id}" />
 
 		<div class="title-box">

@@ -29,7 +29,7 @@
 
 	<select id="getForPrintArticleById" resultMap="article">
 		SELECT A.*,
-		M.name AS extra__writer,
+		M.nickname AS extra__writer,
 		IFNULL(SUM(R.displayStatus), 0) AS extra__replyCount,
 		IFNULL(SUM(AR.point), 0) AS extra__likePoint,
 		IFNULL(SUM(AD.point), 0) AS extra__dislikePoint
