@@ -43,4 +43,6 @@ public interface MemberDao {
 	List<Member> getMemberByKeywordLoginId(String loginId);
 
 	List<Member> getMemberByKeywordNickname(String nickname);
+
+	void signoutMemberById(int memberId);
 }

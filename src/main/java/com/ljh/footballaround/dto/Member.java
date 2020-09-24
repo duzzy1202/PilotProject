@@ -11,7 +11,7 @@ public class Member {
 	private int id;
 	private String regDate;
 	private String updateDate;
-	private boolean delStatus;
+	private int delStatus;
 	private String delDate;
 	private String loginId;
 	private String loginPw;

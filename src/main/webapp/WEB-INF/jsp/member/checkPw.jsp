@@ -40,7 +40,7 @@
 	<span>비밀번호 확인</span>
 	<form method="POST" class="join-table-box" action="doCheckPw"
 	onsubmit="MemberLoginForm__submit(this); return false;">
-		<input type="hidden" name="redirectUri" value="/usr/member/modify">
+		<input type="hidden" name="redirectUri" value="${nextUri}">
 		<input type="hidden" name="loginPwReal">
 
 		<div class="subject">
@@ -53,6 +53,10 @@
 			<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
 				name="loginPw" maxlength="30" />
 		</div>
+		
+		<c:if test="${nextUri == '/usr/member/signout'}">
+			<span style="text-align: center; display: block;"> * 비밀번호 입력 후, 확인 클릭시 즉시 탈퇴됩니다. 유의하시길 바랍니다. * </span>
+		</c:if>
 		
 		<div class="login-button-box">
 			<button class="button" type="submit">확인</button>

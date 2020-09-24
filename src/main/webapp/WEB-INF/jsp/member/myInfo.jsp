@@ -62,7 +62,8 @@
 		</div>
 	</div>
 	<div class="btns flex flex-jc-c">
-		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/checkPw'">정보수정</button>
+		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/checkPw?code=modify'">정보수정</button>
+		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/checkPw?code=signout'">회원탈퇴</button>
 	</div>
 </div>
 

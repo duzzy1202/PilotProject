@@ -14,7 +14,11 @@
 		<div class="member-info-box">
 			<div class="member-info">
 				<div class="subject">닉네임</div>
-				<div class="subject-body">${member.nickname}</div>
+				<div class="subject-body">${member.nickname}
+					<c:if test="${member.delStatus == 1}">
+						(탈퇴한 회원)
+					</c:if>
+				</div>
 			</div>
 			<div class="member-info">
 				<div class="subject">활동 평점</div>

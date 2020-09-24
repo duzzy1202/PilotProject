@@ -146,4 +146,8 @@ public class MemberService {
 		return memberDao.getMemberByKeywordNickname(nickname);
 	}
 
+	public void signoutMemberById(int memberId) {
+		memberDao.signoutMemberById(memberId);
+	}
+
 }

@@ -102,6 +102,12 @@ public class MemberController {
 			return "common/redirect";
 		}
 		
+		if (member.getDelStatus() == 1) {
+			model.addAttribute("redirectUri", "/usr/member/login");
+			model.addAttribute("alertMsg", "탈퇴한 회원입니다.");
+			return "common/redirect";
+		}
+		
 		Attr attr = attrService.get("member__" + member.getId() + "__extra__AccountSuspension");
 		if (attr != null) {
 			Date now = new Date();
@@ -144,7 +150,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/usr/member/myInfo")
-	public String showMyInfo(HttpSession session,  Model model) {
+	public String showMyInfo(HttpSession session, Model model) {
 		
 		int memberId = (int)session.getAttribute("loggedInMemberId");
 		List<Punishment> pnsh = memberService.getPunishment(memberId);
@@ -157,7 +163,18 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/usr/member/checkPw")
-	public String checkPw() {
+	public String checkPw(Model model, String code) {
+		
+		String nextUri = "";
+		if (code.equals("modify")) {
+			nextUri = "/usr/member/modify";
+		}
+		if (code.equals("signout")) {
+			nextUri = "/usr/member/signout";
+		}
+		
+		model.addAttribute("nextUri", nextUri);
+		
 		return "member/checkPw";
 	}
 	
@@ -392,5 +409,18 @@ public class MemberController {
 		rsDataBody.put("members", members);
 
 		return new ResultData("S-1", String.format("%d개의 회원 계정을 불러왔습니다.", members.size()), rsDataBody);
+	}
+	
+	@RequestMapping("/usr/member/signout")
+	public String doSignout(Model model, HttpSession session) {
+		
+		int memberId = (int)session.getAttribute("loggedInMemberId");
+		
+		memberService.signoutMemberById(memberId);
+		
+		model.addAttribute("redirectUri", "/usr/member/doLogout");
+		model.addAttribute("alertMsg", "탈퇴되었습니다. 이용해주셔서 감사합니다.");
+		
+		return "common/redirect";
 	}
 }
