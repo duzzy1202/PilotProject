@@ -1,6 +1,7 @@
 html {
 	/* 영문이면 roboto가 적용되고, 한글이면 Noto Sans KR가 적용되도록 아래와 같은 순서로 배치 */
 	font-family: "Roboto", "Noto Sans KR", sans-serif;
+	background-color: #FAFAFA;
 }
 
 /* 커스텀 */

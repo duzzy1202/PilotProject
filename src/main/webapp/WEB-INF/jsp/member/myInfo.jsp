@@ -22,10 +22,6 @@
 				<div class="subject-body">${loggedInMember.nickname}</div>
 			</div>
 			<div class="member-info">
-				<div class="subject">성함</div>
-				<div class="subject-body">${loggedInMember.name}</div>
-			</div>
-			<div class="member-info">
 				<div class="subject">활동 평점</div>
 				<div class="subject-body">${loggedInMember.rating}</div>
 			</div>

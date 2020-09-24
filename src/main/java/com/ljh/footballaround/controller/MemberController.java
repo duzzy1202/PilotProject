@@ -235,10 +235,9 @@ public class MemberController {
 	
 	@RequestMapping("/usr/member/doFindId")
 	public String doFindId(@RequestParam Map<String, Object> param, Model model) {
-		String name = (String)param.get("name");
 		String email = (String)param.get("email");
 		
-		Member member = memberService.getMemberByNameAndEmail(name, email);
+		Member member = memberService.getMemberByEmail(email);
 		
 		if (member == null) {
 			model.addAttribute("historyBack", true);
@@ -263,11 +262,10 @@ public class MemberController {
 	@RequestMapping("/usr/member/doFindPw")
 	public String doFindPw(@RequestParam Map<String, Object> param, Model model) {
 		String loginId = (String)param.get("loginId");
-		String name = (String)param.get("name");
 		String email = (String)param.get("email");
 		
 		/* 입력한 내용의 회원이 있는지 확인 */
-		Member member = memberService.getMemberByLoginIdAndNameAndEmail(loginId, name, email);
+		Member member = memberService.getMemberByLoginIdAndEmail(loginId, email);
 		if (member == null) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", "입력하신 정보가 올바르지 않거나, 존재하지 않는 회원입니다.");

@@ -30,7 +30,6 @@
 		level = 1,
 		loginId = #{loginId},
 		loginPw = #{loginPw},
-		`name` = #{name},
 		nickname = #{nickname},
 		email = #{email}
 	</insert>
@@ -57,18 +56,16 @@
 		WHERE email = #{email}
 	</select>
 	
-	<select id="getMemberByNameAndEmail" resultType="Member">
+	<select id="getMemberByEmail" resultType="Member">
 		SELECT *
 		FROM member
-		WHERE name = #{name}
-		AND email = #{email}
+		WHERE email = #{email}
 	</select>
 	
-	<select id="getMemberByLoginIdAndNameAndEmail" resultType="Member">
+	<select id="getMemberByLoginIdAndEmail" resultType="Member">
 		SELECT *
 		FROM member
 		WHERE loginId = #{loginId}
-		AND name = #{name}
 		AND email = #{email}
 	</select>
 	

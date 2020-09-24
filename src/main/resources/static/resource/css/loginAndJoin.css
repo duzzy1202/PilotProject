@@ -1,0 +1,78 @@
+/* 회원가입 */
+.join-box {
+	background-color: #EEEEEE;
+}
+
+.join-box > .empty-space {
+	background-color: #EEEEEE;
+	display: block;
+	height: 100px;
+}
+
+.join-box > span {
+	display: block;
+	width: 580px;
+	text-align: center;
+	font-size: 1.4rem;
+	background-color: #F5A9A9;
+	font-weight: bold;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 10px;
+}
+
+.join-box > .join-table-box {
+	width: 600px;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #AFDEFF;
+}
+
+.join-box > .join-table-box > .subject {
+	display: flex;
+	padding: 20px;
+}
+.join-box > .join-table-box > .subject > div {
+	width: 30%;
+	font-weight: bold;
+	text-align: center;
+	font-size: 1.1rem;
+}
+.join-box > .join-table-box > .subject > input {
+	width: 70%;
+}
+.join-box > .join-table-box > span {
+	display: block;
+	padding: 15px;
+}
+.join-box > .join-table-box > .button-box {
+	display: flex;
+	justify-content: center;
+	padding: 15px;
+}
+.join-box > .join-table-box > .button-box > .button {
+	width: 50px;
+	height: 30px;
+	font-weight: bold;
+}
+
+/* 로그인 */
+
+.join-box > .join-table-box > .login-button-box {
+	display: flex;
+	justify-content: center;
+	padding: 15px;
+}
+.join-box > .join-table-box > .login-button-box > button {
+	width: 60px;
+	height: 30px;
+	font-weight: bold;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.join-box > .join-table-box > .login-button-box > button:nth-child(2) {
+	width: 120px;
+}
+.join-box > .join-table-box > .login-button-box > button:nth-child(3) {
+	width: 120px;
+}

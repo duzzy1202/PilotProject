@@ -81,31 +81,31 @@ public class MemberService {
 		return new ResultData("F-1", "이미 사용중인 닉네임입니다.", "email", email);
 	}
 
-	public Member getMemberByNameAndEmail(String name, String email) {
-		return memberDao.getMemberByNameAndEmail(name, email);
+	public Member getMemberByEmail( String email) {
+		return memberDao.getMemberByEmail(email);
 	}
 
 	public void sendFindId(Member member) {
-		String name = member.getName();
+		String nickname = member.getNickname();
 		String email = member.getEmail();
 		String loginId = member.getLoginId();
 		
 		String mailTitle = String.format("[%s] 커뮤니티 회원님의 아이디 입니다.", "Football Around");
-		String mailBody = mailUtil.findIdMailBody("localhost:8085/usr/home/main", "Football Around", name, loginId);
+		String mailBody = mailUtil.findIdMailBody("localhost:8085/usr/home/main", "Football Around", nickname, loginId);
 		
 		mailService.send(email, mailTitle, mailBody);
 	}
 
-	public Member getMemberByLoginIdAndNameAndEmail(String loginId, String name, String email) {
-		return memberDao.getMemberByLoginIdAndNameAndEmail(loginId, name, email);
+	public Member getMemberByLoginIdAndEmail(String loginId, String email) {
+		return memberDao.getMemberByLoginIdAndEmail(loginId, email);
 	}
 
 	public void sendFindPw(Member member, String tempPw) {
-		String name = member.getName();
+		String nickname = member.getNickname();
 		String email = member.getEmail();
 		
 		String mailTitle = String.format("[%s] 커뮤니티 회원님의 임시비밀번호 입니다.", "Football Around");
-		String mailBody = mailUtil.findPwMailBody("localhost:8085/usr/home/main", "Football Around", name, tempPw);
+		String mailBody = mailUtil.findPwMailBody("localhost:8085/usr/home/main", "Football Around", nickname, tempPw);
 		
 		mailService.send(email, mailTitle, mailBody);
 	}

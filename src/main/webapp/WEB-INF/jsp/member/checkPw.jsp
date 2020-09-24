@@ -6,6 +6,9 @@
 
 <%@ include file="../part/head.jspf"%>
 
+<!-- 로그인, 가입 CSS -->
+<link rel="stylesheet" href="/resource/css/loginAndJoin.css" />
+
 
 <script>
 	var MemberLoginForm__submitDone = false;
@@ -31,37 +34,31 @@
 		MemberLoginForm__submitDone = true;
 	}
 </script>
-<form method="POST" class="table-box con form1" action="doCheckPw"
-	onsubmit="MemberLoginForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/usr/member/modify">
-	<input type="hidden" name="loginPwReal">
 
-	<table>
-		<colgroup>
-			<col width="100">
-		</colgroup>
-		<tbody>
-			<tr>
-				<th>로그인 아이디</th>
-				<td>${loggedInMember.loginId}</td>
-			</tr>
-			<tr>
-				<th>로그인 비번</th>
-				<td>
-					<div class="form-control-box">
-						<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
-							name="loginPw" maxlength="30" />
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>로그인</th>
-				<td>
-					<button class="btn btn-primary" type="submit">로그인</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</form>
+<div class="join-box con">
+	<div class="empty-space"></div>
+	<span>비밀번호 확인</span>
+	<form method="POST" class="join-table-box" action="doCheckPw"
+	onsubmit="MemberLoginForm__submit(this); return false;">
+		<input type="hidden" name="redirectUri" value="/usr/member/modify">
+		<input type="hidden" name="loginPwReal">
+
+		<div class="subject">
+			<div>아이디</div>
+			<div style="width: 80%;">${loggedInMember.loginId}</div>
+		</div>
+		
+		<div class="subject">
+			<div>비밀번호</div>
+			<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
+				name="loginPw" maxlength="30" />
+		</div>
+		
+		<div class="login-button-box">
+			<button class="button" type="submit">확인</button>
+		</div>
+	</form>
+	<div class="empty-space"></div>
+</div>
 
 <%@ include file="../part/foot.jspf"%>

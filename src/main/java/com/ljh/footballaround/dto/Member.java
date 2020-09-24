@@ -15,7 +15,6 @@ public class Member {
 	private String delDate;
 	private String loginId;
 	private String loginPw;
-	private String name;
 	private String nickname;
 	private String email;
 	private int level;

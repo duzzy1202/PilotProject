@@ -5,6 +5,9 @@
 <c:set var="pageTitle" value="회원가입" />
 <%@ include file="../part/head.jspf"%>
 
+<!-- 로그인, 가입 CSS -->
+<link rel="stylesheet" href="/resource/css/loginAndJoin.css" />
+
 <script>
 	var MemberJoinForm__submitDone = false;
 	function MemberJoinForm__submit(form) {
@@ -97,80 +100,46 @@
 		MemberJoinForm__submitDone = true;
 	}
 </script>
-<form method="POST" class="table-box con form1" action="doJoin"
-	onsubmit="MemberJoinForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/usr/home/main">
-	<input type="hidden" name="loginPwReal" >
+<div class="join-box con">
+	<div class="empty-space"></div>
+	<span>회원가입</span>
+	<form method="POST" class="join-table-box" action="doJoin"
+		onsubmit="MemberJoinForm__submit(this); return false;">
+		<input type="hidden" name="redirectUri" value="/usr/home/main">
+		<input type="hidden" name="loginPwReal">
 
-	<table>
-		<colgroup>
-			<col width="100">
-		</colgroup>
-		<tbody>
-			<tr>
-				<th>로그인 아이디</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
-							maxlength="30" autocomplete="off"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>로그인 비번</th>
-				<td>
-					<div class="form-control-box">
-						<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
-							name="loginPw" maxlength="30" />
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>로그인 비번 확인</th>
-				<td>
-					<div class="form-control-box">
-						<input type="password" placeholder="로그인 비밀번호 확인을 입력해주세요."
-							name="loginPwConfirm" maxlength="30" />
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="이름을 입력해주세요." name="name"
-							maxlength="20" autocomplete="off"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>닉네임</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="활동명 입력해주세요." name="nickname"
-							maxlength="20" autocomplete="off"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td>
-					<div class="form-control-box">
-						<input type="email" placeholder="이메일 입력해주세요." name="email"
-							maxlength="50" autocomplete="off"/>
-						<span>*현재 이메일 변경이 불가하므로 정확히 입력하지 않으면
-							이메일 인증이 불가할 수 있으니, 정확히 입력해주시길 바랍니다.</span>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>가입</th>
-				<td>
-					<button class="btn btn-primary" type="submit">가입</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</form>
+		<div class="subject">
+			<div>아이디</div>
+			<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
+				maxlength="30" autocomplete="off" />
+		</div>
+		<div class="subject">
+			<div>비밀번호</div>
+			<input type="password" placeholder="로그인 비밀번호를 입력해주세요." name="loginPw"
+				maxlength="30" />
+		</div>
+		<div class="subject">
+			<div>비밀번호 확인</div>
+			<input type="password" placeholder="로그인 비밀번호 확인을 입력해주세요."
+				name="loginPwConfirm" maxlength="30" />
+		</div>
+		<div class="subject">
+			<div>닉네임</div>
+			<input type="text" placeholder="활동명 입력해주세요." name="nickname"
+				maxlength="20" autocomplete="off" />
+		</div>
+		<div class="subject">
+			<div>이메일</div>
+			<input type="email" placeholder="이메일 입력해주세요." name="email"
+				maxlength="50" autocomplete="off" /> 
+		</div>
+		<span>* 현재 이메일 변경이 불가하므로
+				정확히 입력하지 않으면 이메일 인증이 불가할 수 있으니, 정확히 입력해주시길 바랍니다.</span>
+		<div class="button-box">
+			<button class="button" type="submit">가입</button>
+		</div>
+	</form>
+	<div class="empty-space"></div>
+</div>
 
 <%@ include file="../part/foot.jspf"%>

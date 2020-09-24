@@ -26,9 +26,9 @@ public interface MemberDao {
 
 	int getEmailDupCount(String email);
 
-	Member getMemberByNameAndEmail(String name, String email);
+	Member getMemberByEmail(String email);
 
-	Member getMemberByLoginIdAndNameAndEmail(String loginId, String name, String email);
+	Member getMemberByLoginIdAndEmail(String loginId, String email);
 
 	void updateRedLine(int memberId, int writersRedLine);
 	

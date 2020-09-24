@@ -6,6 +6,9 @@
 
 <%@ include file="../part/head.jspf"%>
 
+<!-- 로그인, 가입 CSS -->
+<link rel="stylesheet" href="/resource/css/loginAndJoin.css" />
+
 
 <script>
 	var MemberLoginForm__submitDone = false;
@@ -57,41 +60,33 @@
 		MemberLoginForm__submitDone = true;
 	}
 </script>
-<form method="POST" class="table-box con form1" action="doLogin"
+<div class="join-box con">
+	<div class="empty-space"></div>
+	<span>로그인</span>
+	<form method="POST" class="join-table-box" action="doLogin"
 	onsubmit="MemberLoginForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/usr/home/main">
-	<input type="hidden" name="loginPwReal">
+		<input type="hidden" name="redirectUri" value="/usr/home/main">
+		<input type="hidden" name="loginPwReal">
 
-	<table>
-		<colgroup>
-			<col width="100">
-		</colgroup>
-		<tbody>
-			<tr>
-				<th>로그인 아이디</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
-							maxlength="30" autofocus="autofocus" autocomplete="off"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>로그인 비번</th>
-				<td>
-					<div class="form-control-box">
-						<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
-							name="loginPw" maxlength="30" autocomplete="off"/>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="btns flex flex-jc-c">
-		<button class="btn btn-margin" type="submit">로그인</button>
-		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/findId'">아이디 찾기</button>
-		<button class="btn btn-margin" type="button" onclick="location.href='/usr/member/findPw'">비밀번호 찾기</button>
-	</div>
-</form>
+		<div class="subject">
+			<div>아이디</div>
+			<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
+				maxlength="30" autofocus="autofocus" autocomplete="off"/>
+		</div>
+		<div class="subject">
+			<div>비밀번호</div>
+			<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
+				name="loginPw" maxlength="30" autocomplete="off"/>
+		</div>
+		
+		<div class="login-button-box">
+			<button class="button" type="submit">로그인</button>
+			<button class="button" type="button" onclick="location.href='/usr/member/findId'">아이디 찾기</button>
+			<button class="button" type="button" onclick="location.href='/usr/member/findPw'">비밀번호 찾기</button>
+		</div>
+	</form>
+	<div class="empty-space"></div>
+</div>
 
 <%@ include file="../part/foot.jspf"%>
+

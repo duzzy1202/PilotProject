@@ -5,6 +5,9 @@
 <c:set var="pageTitle" value="회원가입" />
 <%@ include file="../part/head.jspf"%>
 
+<!-- 로그인, 가입 CSS -->
+<link rel="stylesheet" href="/resource/css/loginAndJoin.css" />
+
 <script>
 	var MemberJoinForm__submitDone = false;
 	function MemberJoinForm__submit(form) {
@@ -25,15 +28,6 @@
 			return;
 		}
 
-		form.name.value = form.name.value.trim();
-
-		if (form.name.value.length == 0) {
-			form.name.focus();
-			alert('이름을 입력해주세요.');
-
-			return;
-		}
-
 		form.email.value = form.email.value.trim();
 
 		if (form.email.value.length == 0) {
@@ -47,46 +41,32 @@
 		MemberJoinForm__submitDone = true;
 	}
 </script>
-<form method="POST" class="table-box con form1" action="doFindPw"
+
+<div class="join-box con">
+	<div class="empty-space"></div>
+	<span>비밀번호 찾기</span>
+	<form method="POST" class="join-table-box" action="doFindPw"
 	onsubmit="MemberJoinForm__submit(this); return false;">
-	<input type="hidden" name="redirectUri" value="/usr/member/login">
-	<table>
-		<colgroup>
-			<col width="100">
-		</colgroup>
-		<tbody>
-			<tr>
-				<th>로그인 아이디</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
-							maxlength="30" autocomplete="off"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>이름</th>
-				<td>
-					<div class="form-control-box">
-						<input type="text" placeholder="이름을 입력해주세요." name="name"
-							maxlength="20" autocomplete="off"/>
-					</div>
-				</td>
-			</tr>
-			<tr>
-				<th>이메일</th>
-				<td>
-					<div class="form-control-box">
-						<input type="email" placeholder="이메일 입력해주세요." name="email"
-							maxlength="50" autocomplete="off"/>
-					</div>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-	<div class="btns flex flex-jc-c">
-		<button class="btn btn-margin" type="submit">비밀번호 찾기</button>
-	</div>
-</form>
+		<input type="hidden" name="redirectUri" value="/usr/member/login">
+
+		<div class="subject">
+			<div>아이디</div>
+			<input type="text" placeholder="로그인 아이디 입력해주세요." name="loginId"
+				maxlength="30" autocomplete="off"/>
+		</div>
+		
+		<div class="subject">
+			<div>가입시 등록한 이메일</div>
+			<input type="email" placeholder="이메일 입력해주세요." name="email"
+				maxlength="50" autocomplete="off"/>
+		</div>
+		
+		<div class="login-button-box">
+			<button class="button" type="submit" style="width: 100px;">비밀번호 찾기</button>
+		</div>
+	</form>
+	<div class="empty-space"></div>
+</div>
 
 <%@ include file="../part/foot.jspf"%>
+
