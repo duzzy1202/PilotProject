@@ -10,6 +10,7 @@
 
 <script>
 	var MemberJoinForm__submitDone = false;
+	
 	function MemberJoinForm__submit(form) {
 		if (MemberJoinForm__submitDone) {
 			alert('처리중입니다.');
@@ -65,20 +66,11 @@
 			return;
 		}
 
-		form.name.value = form.name.value.trim();
-
-		if (form.name.value.length == 0) {
-			form.name.focus();
-			alert('이름을 입력해주세요.');
-
-			return;
-		}
-
 		form.nickname.value = form.nickname.value.trim();
 
 		if (form.nickname.value.length == 0) {
 			form.nickname.focus();
-			alert('활동명을 입력해주세요.');
+			alert('닉네임을 입력해주세요.');
 
 			return;
 		}
@@ -105,7 +97,7 @@
 	<span>회원가입</span>
 	<form method="POST" class="join-table-box" action="doJoin"
 		onsubmit="MemberJoinForm__submit(this); return false;">
-		<input type="hidden" name="redirectUri" value="/usr/home/main">
+		<input type="hidden" name="redirectUri" value="/usr/member/login">
 		<input type="hidden" name="loginPwReal">
 
 		<div class="subject">
@@ -125,7 +117,7 @@
 		</div>
 		<div class="subject">
 			<div>닉네임</div>
-			<input type="text" placeholder="활동명 입력해주세요." name="nickname"
+			<input type="text" placeholder="닉네임을 입력해주세요." name="nickname"
 				maxlength="20" autocomplete="off" />
 		</div>
 		<div class="subject">

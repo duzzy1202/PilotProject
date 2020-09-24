@@ -11,6 +11,7 @@
 
 <script>
 	var MemberJoinForm__submitDone = false;
+	
 	function MemberJoinForm__submit(form) {
 		if (MemberJoinForm__submitDone) {
 			alert('처리중입니다.');
@@ -68,10 +69,10 @@
 
 <div class="join-box con">
 	<div class="empty-space"></div>
-	<span>비밀번호 확인</span>
-	<form method="POST" class="join-table-box" action="doCheckPw"
-	onsubmit="MemberLoginForm__submit(this); return false;">
-		<input type="hidden" name="redirectUri" value="/usr/member/modify">
+	<span>정보 수정</span>
+	<form method="POST" class="join-table-box" action="doModify"
+	onsubmit="MemberJoinForm__submit(this); return false;">
+		<input type="hidden" name="redirectUri" value="/usr/member/myInfo">
 		<input type="hidden" name="loginPwReal">
 
 		<div class="subject">
@@ -81,13 +82,13 @@
 		
 		<div class="subject">
 			<div>비밀번호</div>
-			<input type="password" placeholder="로그인 비밀번호를 입력해주세요."
+			<input type="password" placeholder="비밀번호를 입력해주세요."
 				name="loginPw" maxlength="30" />
 		</div>
 		
 		<div class="subject">
 			<div>비밀번호 확인</div>
-			<input type="password" placeholder="로그인 비밀번호 확인을 입력해주세요."
+			<input type="password" placeholder="비밀번호 확인을 입력해주세요."
 				name="loginPwConfirm" maxlength="30" />
 		</div>
 		

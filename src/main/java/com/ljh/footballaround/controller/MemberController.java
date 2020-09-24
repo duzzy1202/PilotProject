@@ -75,6 +75,7 @@ public class MemberController {
 
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", "가입이 완료되었습니다.");
 
 		return "common/redirect";
 	}
@@ -138,6 +139,7 @@ public class MemberController {
 		}
 
 		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", "로그아웃 성공하였습니다.");
 		return "common/redirect";
 	}
 	
@@ -188,6 +190,7 @@ public class MemberController {
 	
 	@RequestMapping("/usr/member/doModify")
 	public String doModifyMember(@RequestParam Map<String, Object> param, Model model, HttpSession session) {
+		System.out.println("처음 파람 : " + param);
 		Util.changeMapKey(param, "loginPwReal", "loginPw");
 
 		String loginPw = (String)param.get("loginPw");
@@ -214,6 +217,7 @@ public class MemberController {
 		}
 		
 		int id = -1;
+		System.out.println("파람 : " + param);
 		id = memberService.modifyMember(param);
 		
 		if (id == -1) {
