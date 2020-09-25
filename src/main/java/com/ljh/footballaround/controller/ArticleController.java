@@ -226,6 +226,27 @@ public class ArticleController {
 		return "redirect:" + redirectUri;
 	}
 	
+	@RequestMapping("/usr/article/{boardCode}-doDelete")
+	public String doDelete(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode) {
+		
+		int id = Integer.parseInt((String) param.get("id"));
+		Article article = articleService.getArticleById(id);
+		Member loggedInMember = (Member)req.getAttribute("loggedInMember");
+		
+		if (article.getMemberId() != loggedInMember.getId()) {
+			model.addAttribute("alertMsg", "권한이 없습니다.");
+			model.addAttribute("historyBack", true);
+			return "common/redirect";
+		}
+		
+		articleService.deleteArticleById(id);
+
+		model.addAttribute("alertMsg", "삭제되었습니다.");
+		model.addAttribute("redirectUri", "/usr/article/" + boardCode + "-list");
+
+		return "common/redirect";
+	}
+	
 	@RequestMapping("/usr/article/doSendArticleReport")
 	public String doSendArticleReport(@RequestParam Map<String, Object> param, HttpServletRequest req, int id, Model model) {
 		
@@ -260,7 +281,7 @@ public class ArticleController {
 	}
 
 	@RequestMapping("/usr/article/doLike")
-	public String doDelete(Model model, int id, String redirectUrl, HttpServletRequest request) {
+	public String doLike(Model model, int id, String redirectUrl, HttpServletRequest request) {
 
 		int loggedInMemberId = (int) request.getAttribute("loggedInMemberId");
 
