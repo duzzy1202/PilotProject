@@ -56,10 +56,6 @@
 				<div>${member.nickname}</div>
 			</div>
 			<div style="margin: 10px;">
-				<div>이름</div>
-				<div>${member.name}</div>
-			</div>
-			<div style="margin: 10px;">
 				<div>아이디</div>
 				<div>${member.loginId}</div>
 			</div>
