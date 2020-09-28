@@ -27,6 +27,10 @@ public class ArticleService {
 	public List<Article> getForPrintArticles(int boardId) {
 		return articleDao.getForPrintArticles(boardId);
 	}
+	
+	public Board getBoardByCode(String boardCode) {
+		return articleDao.getBoardByCode(boardCode);
+	}
 
 	private void updateForPrintInfo(Member actor, Article article) {
 		Util.putExtraVal(article, "actorCanDelete", actorCanDelete(actor, article));
@@ -136,10 +140,6 @@ public class ArticleService {
 				fileService.changeRelId(fileId, id);
 			}
 		}
-	}
-
-	public Board getBoardByCode(String boardCode) {
-		return articleDao.getBoardByCode(boardCode);
 	}
 
 	public Board getBoardByLeagueId(int leagueId) {

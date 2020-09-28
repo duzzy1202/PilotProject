@@ -71,6 +71,10 @@ public class MemberService {
 	public int modifyMember(Map<String, Object> param) {
 		return memberDao.modifyMember(param);
 	}
+	
+	public List<Punishment> getPunishment(int memberId) {
+		return memberDao.getPunishment(memberId);
+	}
 
 	public Member getMemberByEmail( String email) {
 		return memberDao.getMemberByEmail(email);
@@ -111,10 +115,6 @@ public class MemberService {
 
 	public void updateRedLine(int memberId, int writersRedLine) {
 		memberDao.updateRedLine(memberId, writersRedLine);
-	}
-	
-	public List<Punishment> getPunishment(int memberId) {
-		return memberDao.getPunishment(memberId);
 	}
 
 	public void insertPunishment(int memberId, String reason, int punishmentCount) {

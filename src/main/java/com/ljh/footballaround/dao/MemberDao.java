@@ -25,14 +25,14 @@ public interface MemberDao {
 	Member getMemberByLoginId(@Param("loginId") String loginId);
 
 	int modifyMember(Map<String, Object> param);
+	
+	List<Punishment> getPunishment(int memberId);
 
 	Member getMemberByEmail(String email);
 
 	Member getMemberByLoginIdAndEmail(String loginId, String email);
 
 	void updateRedLine(int memberId, int writersRedLine);
-	
-	List<Punishment> getPunishment(int memberId);
 
 	void insertPunishment(int memberId, String reason, int punishmentCount);
 

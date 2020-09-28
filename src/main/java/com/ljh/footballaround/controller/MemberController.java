@@ -148,7 +148,6 @@ public class MemberController {
 	
 	@RequestMapping("/usr/member/myInfo")
 	public String showMyInfo(HttpSession session, Model model) {
-		
 		int memberId = (int)session.getAttribute("loggedInMemberId");
 		List<Punishment> pnsh = memberService.getPunishment(memberId);
 		
@@ -157,44 +156,6 @@ public class MemberController {
 		}
 		
 		return "member/myInfo";
-	}
-	
-	@RequestMapping("/usr/member/checkPw")
-	public String checkPw(Model model, String code) {
-		
-		String nextUri = "";
-		if (code.equals("modify")) {
-			nextUri = "/usr/member/modify";
-		}
-		if (code.equals("signout")) {
-			nextUri = "/usr/member/signout";
-		}
-		
-		model.addAttribute("nextUri", nextUri);
-		
-		return "member/checkPw";
-	}
-	
-	@RequestMapping("/usr/member/doCheckPw")
-	public String doCheckPw(String loginPwReal, String redirectUri, Model model, HttpSession session) {
-		String loginPw = loginPwReal;
-		int memberId = (int)session.getAttribute("loggedInMemberId");
-		Member member = memberService.getMemberById(memberId);
-
-		if (member.getLoginPw().equals(loginPw) == false) {
-			model.addAttribute("historyBack", true);
-			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
-			return "common/redirect";
-		}
-
-		if (redirectUri == null || redirectUri.length() == 0) {
-			redirectUri = "/usr/home/main";
-		}
-
-		model.addAttribute("redirectUri", redirectUri);
-		model.addAttribute("alertMsg", String.format("비밀번호가 확인되었습니다."));
-
-		return "common/redirect";
 	}
 	
 	@RequestMapping("/usr/member/modify")
@@ -242,6 +203,44 @@ public class MemberController {
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("alertMsg", "정보수정에 성공하였습니다.");
 		model.addAttribute("redirectUri", redirectUri);
+
+		return "common/redirect";
+	}
+	
+	@RequestMapping("/usr/member/checkPw")
+	public String checkPw(Model model, String code) {
+		
+		String nextUri = "";
+		if (code.equals("modify")) {
+			nextUri = "/usr/member/modify";
+		}
+		if (code.equals("signout")) {
+			nextUri = "/usr/member/signout";
+		}
+		
+		model.addAttribute("nextUri", nextUri);
+		
+		return "member/checkPw";
+	}
+	
+	@RequestMapping("/usr/member/doCheckPw")
+	public String doCheckPw(String loginPwReal, String redirectUri, Model model, HttpSession session) {
+		String loginPw = loginPwReal;
+		int memberId = (int)session.getAttribute("loggedInMemberId");
+		Member member = memberService.getMemberById(memberId);
+
+		if (member.getLoginPw().equals(loginPw) == false) {
+			model.addAttribute("historyBack", true);
+			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");
+			return "common/redirect";
+		}
+
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = "/usr/home/main";
+		}
+
+		model.addAttribute("redirectUri", redirectUri);
+		model.addAttribute("alertMsg", String.format("비밀번호가 확인되었습니다."));
 
 		return "common/redirect";
 	}

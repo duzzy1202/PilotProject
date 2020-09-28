@@ -13,6 +13,8 @@ import com.ljh.footballaround.dto.Board;
 public interface ArticleDao {
 	List<Article> getForPrintArticles(int boardId);
 
+	Board getBoardByCode(String boardCode);
+
 	Article getForPrintArticleById(@Param("id") int id);
 	
 	Article getArticleById(@Param("id") int id);
@@ -20,8 +22,6 @@ public interface ArticleDao {
 	void write(Map<String, Object> param);
 
 	void modify(Map<String, Object> param);
-
-	Board getBoardByCode(String boardCode);
 
 	Board getBoardByLeagueId(int leagueId);
 

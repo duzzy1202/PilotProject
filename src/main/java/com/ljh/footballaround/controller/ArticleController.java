@@ -88,8 +88,9 @@ public class ArticleController {
 		model.addAttribute("board", board);
 		
 		/* 게시판 코드와 연결되는 클럽의 데이터를 가져옴 */
-		
 		Club club = clubdataService.getClubdataByClubCode(boardCode);
+		
+		/* 현재 구단이 속해있는 리그의 정보를 가져옴 */
 		Board clubLeague = articleService.getBoardByLeagueId(club.getLeagueId());
 		
 		model.addAttribute("club", club);
@@ -105,23 +106,19 @@ public class ArticleController {
 
 	@RequestMapping("/usr/article/{boardCode}-detail")
 	public String showDetail(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req, @PathVariable("boardCode") String boardCode, String listUrl) {
-		
 		if ( listUrl == null ) {
 			listUrl = "./" + boardCode + "-list";
 		}
 		model.addAttribute("listUrl", listUrl);
-		
+
 		Board board = articleService.getBoardByCode(boardCode);
 		model.addAttribute("board", board);
 		
 		int id = Integer.parseInt((String) param.get("id"));
-
 		Member loggedInMember = (Member)req.getAttribute("loggedInMember");
-
+		
 		Article article = articleService.getForPrintArticleById(loggedInMember, id);
-
 		int hits = article.getHit() + 1;
-
 		articleService.updateHitOfArticle(id, hits);
 		article = articleService.getForPrintArticleById(loggedInMember, id);
 		
@@ -133,9 +130,9 @@ public class ArticleController {
 		return "article/detail";
 	}
 	
+	/* 게시판 코드가 없는 경우 */
 	@RequestMapping("/usr/article/detail")
 	public String showDetailWithoutBoardCode(Model model, @RequestParam Map<String, Object> param, HttpServletRequest req, String listUrl) {
-		
 		Member loggedInMember = (Member)req.getAttribute("loggedInMember");
 		int id = Integer.parseInt((String) param.get("id"));
 		Article article = articleService.getForPrintArticleById(loggedInMember, id);
@@ -147,7 +144,6 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/{boardCode}-write")
 	public String showWrite(@PathVariable("boardCode") String boardCode, Model model, HttpSession session, String listUrl) {
-		
 		int currentMemeberId = (int) session.getAttribute("loggedInMemberId");
 		Member member = memberService.getMemberById(currentMemeberId);
 		
