@@ -11,6 +11,7 @@ SELECT * FROM article;
 SELECT * FROM club;
 SELECT * FROM reply;
 SELECT * FROM `file`;
+SELECT * FROM punishment;
 
 DROP TABLE IF EXISTS `member`;
 CREATE TABLE `member` (
@@ -19,17 +20,14 @@ CREATE TABLE `member` (
     updateDate DATETIME NOT NULL,
     `loginId` CHAR(100) NOT NULL UNIQUE,
     `loginPw` CHAR(255) NOT NULL,
-    `name` CHAR(100) NOT NULL,
     email CHAR(200) NOT NULL,
     `nickname` CHAR(200) NOT NULL,
     `level` INT(10) UNSIGNED NOT NULL,
-    delStatus TINYINT(1) UNSIGNED,
+    delStatus TINYINT(1) UNSIGNED DEFAULT 0,
     delDate DATETIME,
     redLine INT(10) UNSIGNED NOT NULL DEFAULT 0,
     rating DECIMAL(3,1) UNSIGNED NOT NULL DEFAULT 0
 );
-
-ALTER TABLE `member` MODIFY COLUMN rating DECIMAL(3,1) UNSIGNED NOT NULL DEFAULT 0;
 
 DROP TABLE IF EXISTS attr;
 CREATE TABLE attr (
@@ -143,10 +141,11 @@ CREATE TABLE report (
     reportedType CHAR(50) NOT NULL,
     reportedId INT(10) UNSIGNED NOT NULL,
     reportedCount INT(10) UNSIGNED NOT NULL,
-    reportedReason CHAR(200) NOT NULL,
     isProcessed TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
     processMemberId INT(10) UNSIGNED NOT NULL DEFAULT 0
 );
+
+ALTER TABLE report DROP COLUMN reportedReason;
 
 DROP TABLE IF EXISTS punishment;
 CREATE TABLE punishment (
@@ -176,3 +175,22 @@ CREATE TABLE articleDislike (
   memberId INT(10) UNSIGNED NOT NULL,
   `point` TINYINT(1) UNSIGNED NOT NULL
 );
+
+SELECT A.*, M.nickname
+		AS extra__writer,
+		IFNULL(SUM(AR.point), 0) AS extra__likePoint,
+		IFNULL(SUM(AD.point), 0) AS extra__dislikePoint
+		FROM article AS A
+		INNER JOIN board AS B
+		ON A.boardId = B.id
+		INNER JOIN `member` AS M
+		ON A.memberId = M.id
+		LEFT JOIN articleRecommend AS AR
+		ON A.id = AR.articleId
+		LEFT JOIN articleDislike AS AD
+		ON A.id = AD.articleId
+		WHERE A.displayStatus = 1
+		AND A.delStatus = 0
+		AND body LIKE '%s%'
+		GROUP BY A.id
+		ORDER BY A.id DESC

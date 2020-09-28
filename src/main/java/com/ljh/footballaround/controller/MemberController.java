@@ -51,8 +51,6 @@ public class MemberController {
 		ResultData checkNicknameJoinableResultData = memberService.checkNicknameAbleToUse(Util.getAsStr(param.get("nickname")));
 		ResultData checkEmailJoinableResultData = memberService.checkEmailAbleToUse(Util.getAsStr(param.get("email")));
 
-		
-
 		if (checkLoginIdJoinableResultData.isFail()) {
 			model.addAttribute("historyBack", true);
 			model.addAttribute("alertMsg", checkLoginIdJoinableResultData.getMsg());
@@ -72,7 +70,6 @@ public class MemberController {
 		}
 
 		int newMemberId = memberService.join(param);
-
 		String redirectUri = (String) param.get("redirectUri");
 		model.addAttribute("redirectUri", redirectUri);
 		model.addAttribute("alertMsg", "가입이 완료되었습니다.");
@@ -95,7 +92,7 @@ public class MemberController {
 			model.addAttribute("alertMsg", "존재하지 않는 회원입니다.");
 			return "common/redirect";
 		}
-
+		
 		if (member.getLoginPw().equals(loginPw) == false) {
 			model.addAttribute("redirectUri", "/usr/member/login");
 			model.addAttribute("alertMsg", "비밀번호가 일치하지 않습니다.");

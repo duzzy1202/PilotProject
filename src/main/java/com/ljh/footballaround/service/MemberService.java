@@ -33,24 +33,35 @@ public class MemberService {
 
 		return Util.getAsInt(param.get("id"));
 	}
-	
-	/* 가입 완료 메일 */
 	private void sendJoinCompleteMail(String email) {
 		String mailTitle = String.format("[%s] 가입이 완료되었습니다.", "Football Around");
 		String mailBody = mailUtil.joinCompleteMailBody("localhost:8085/usr/home/main", "Football Around");
 		
 		mailService.send(email, mailTitle, mailBody);
 	}
-	
-
 	public ResultData checkLoginIdJoinable(String loginId) {
 		int count = memberDao.getLoginIdDupCount(loginId);
-
 		if (count == 0) {
 			return new ResultData("S-1", "가입가능한 로그인 아이디 입니다.", "loginId", loginId);
 		}
 
 		return new ResultData("F-1", "이미 사용중인 로그인 아이디 입니다.", "loginId", loginId);
+	}
+	public ResultData checkNicknameAbleToUse(String nickname) {
+		int count = memberDao.getNicknameDupCount(nickname);
+		if (count == 0) {
+			return new ResultData("S-1", "사용가능한 닉네임입니다.", "nickname", nickname);
+		}
+
+		return new ResultData("F-1", "이미 사용중인 닉네임입니다.", "nickname", nickname);
+	}
+	public ResultData checkEmailAbleToUse(String email) {
+		int count = memberDao.getEmailDupCount(email);
+		if (count == 0) {
+			return new ResultData("S-1", "사용가능한 이메일입니다.", "email", email);
+		}
+
+		return new ResultData("F-1", "이미 사용중인 이메일입니다.", "email", email);
 	}
 
 	public Member getMemberByLoginId(String loginId) {
@@ -59,26 +70,6 @@ public class MemberService {
 
 	public int modifyMember(Map<String, Object> param) {
 		return memberDao.modifyMember(param);
-	}
-
-	public ResultData checkNicknameAbleToUse(String nickname) {
-		int count = memberDao.getNicknameDupCount(nickname);
-
-		if (count == 0) {
-			return new ResultData("S-1", "사용가능한 닉네임입니다.", "nickname", nickname);
-		}
-
-		return new ResultData("F-1", "이미 사용중인 닉네임입니다.", "nickname", nickname);
-	}
-
-	public ResultData checkEmailAbleToUse(String email) {
-		int count = memberDao.getEmailDupCount(email);
-
-		if (count == 0) {
-			return new ResultData("S-1", "사용가능한 닉네임입니다.", "email", email);
-		}
-
-		return new ResultData("F-1", "이미 사용중인 닉네임입니다.", "email", email);
 	}
 
 	public Member getMemberByEmail( String email) {

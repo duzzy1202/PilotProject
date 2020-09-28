@@ -10,11 +10,10 @@ public class mailUtil {
 		mailBodySb.append("<div>가입해 주셔서 감사합니다.</div>");
 		mailBodySb.append("<div>사이트 이용 수칙은 다음과 같습니다.</div>");
 		mailBodySb.append("<ul>");
-		mailBodySb.append("<li>첫번째 뭐뭐뭐뭐뭐</li>");
-		mailBodySb.append("<li>두번째 뭐뭐뭐뭐뭐</li>");
-		mailBodySb.append("<li>세번째 뭐뭐뭐뭐뭐</li>");
-		mailBodySb.append("<li>네번째 뭐뭐뭐뭐뭐</li>");
-		mailBodySb.append("<li>다섯번째 뭐뭐뭐뭐뭐</li>");
+		mailBodySb.append("<li>1) 불법적인 행위는 엄격히 금합니다. </li>");
+		mailBodySb.append("<li>2) 타인에게 불쾌감을 줄 수 있는 게시물 또는 댓글 작성을 금합니다.</li>");
+		mailBodySb.append("<li>3) 당사자가 수치심을 느낄 수 있는 성희롱 격의 내용의 게시물 또는 댓글 작성을 금합니다.</li>");
+		mailBodySb.append("<li>4) 불법 도박, 불법 성인사이트 등의 광고 글은 삭제 조치 및 영구적 활동정지 조치가 될 수 있습니다.</li>");
 		mailBodySb.append("</ul>");
 		mailBodySb.append("<div>이상입니다. 감사합니다.</div>");
 		mailBodySb.append(String.format("<p><a href=\"%s\" target=\"_blank\">%s</a>메인으로 이동</p>", siteMainUri, siteName));
