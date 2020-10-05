@@ -77,6 +77,7 @@
 		var WriteReplyForm__submitDone = false;
 	
 		function WriteReplyForm__submit(form) {
+			WriteReplyForm__submitDone = false;
 			
 			if (WriteReplyForm__submitDone) {
 				alert('처리중입니다.');
@@ -194,7 +195,7 @@
     display:none;
 }
 
-.reply-list-box .media-box > :first-chidl {
+.reply-list-box .media-box > :first-child {
     margin-top:10px;
 } 
 </style>
@@ -414,11 +415,11 @@ function changeDisplayNone() {
 		var onModifyReplyComplete = function(data) {
 			if (data.resultCode && data.resultCode.substr(0, 2) == 'S-') {
 				// 성공시에는 기존에 그려진 내용을 수정해야 한다.!!
-				$('.reply-list-box .reply-list > div[data-id="' + id + '"]').data('data-originBody', body);
-				$('.reply-list-box .reply-list > div[data-id="' + id + '"] .reply-body').empty().append(getHtmlEncoded(body).replaceAll('\n', '<br>'));
+				$('.reply-list-box .reply-list > .reply-content[data-id="' + id + '"]').data('data-originBody', body);
+				$('.reply-list-box .reply-list > .reply-content[data-id="' + id + '"] .reply-body').empty().append(getHtmlEncoded(body).replaceAll('\n', '<br>'));
 
-				$('.reply-list-box .reply-list > div[data-id="' + id + '"] .video-box').empty();
-				$('.reply-list-box .reply-list > div[data-id="' + id + '"] .img-box').empty();
+				$('.reply-list-box .reply-list > .reply-content[data-id="' + id + '"] .video-box').empty();
+				$('.reply-list-box .reply-list > .reply-content[data-id="' + id + '"] .img-box').empty();
 
 				if (data && data.body && data.body.file__common__attachment) {
 					for ( var fileNo in data.body.file__common__attachment) {
@@ -448,7 +449,7 @@ function changeDisplayNone() {
 
 	function ReplyList__showModifyFormModal(el) {
 		$('html').addClass('reply-modify-form-modal-actived');
-		var $tr = $(el).closest('tr');
+		var $tr = $(el).closest('.reply-content');
 		var originBody = $tr.data('data-originBody');
 
 		var id = $tr.attr('data-id');
@@ -520,16 +521,16 @@ function changeDisplayNone() {
 	}
 
 	function ReplyList__drawReplies(replies) {
-		for (var i = 0; i < replies.length; i++) {
+		for (var i = replies.length -1; i >= 0; i--) {
 			var reply = replies[i];
 			ReplyList__drawReply(reply);
 		}
 	}
 
-	var ReplyList__delete = false;
+	var ReplyList__delete_done = false;
 
 	function ReplyList__delete(el) {
-	    if (ReplyList__delete) {
+	    if (ReplyList__delete_done) {
             alert('처리중입니다.');
         }
 		
@@ -537,8 +538,7 @@ function changeDisplayNone() {
 			return;
 		}
 
-		var $tr = $(el).closest('tr');
-
+		var $tr = $(el).closest('.reply-content');
 		var id = $tr.attr('data-id');
 
 		$.post('./../reply/doDeleteReplyAjax', {
@@ -552,7 +552,7 @@ function changeDisplayNone() {
 				$tr.remove();
 			}
 
-			ReplyList__delete = true;
+			ReplyList__delete_done = true;
 		}, 'json');
 	}
 

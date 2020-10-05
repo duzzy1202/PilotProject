@@ -32,13 +32,11 @@ public class CrawlingService {
 
 		StringBuilder sb = new StringBuilder();
 		for (Element el : element.select("td")) {
-			System.out.println("확인 : " + el.text() );
 			sb.append(el.text() + ",");
 		}
 
 		String sbdata = sb.toString();
 		String[] data = sbdata.split(",");
-		
 		
 		List<Map<String, Object>> leagueData = organizeData(1, data);
 
@@ -55,7 +53,8 @@ public class CrawlingService {
 	
 	public String crawlingKL2() throws IOException {
 
-		String url = "http://www.kleague.com/rank/get_rank_html?select_league=2&select_year=2020&select_competition=7ZWY64KY7JuQ7YGQIEvrpqzqt7gyIDIwMjA%3D&select_r_detail=&return_type=html";
+		String url = "http://www.kleague.com/rank/get_rank_html?select_league=2&select_year=2020&"
+				+ "select_competition=7ZWY64KY7JuQ7YGQIEvrpqzqt7gyIDIwMjA%3D&select_r_detail=&return_type=html";
 
 		Document doc = Jsoup.connect(url).get();
 
@@ -74,7 +73,6 @@ public class CrawlingService {
 			}
 		}
 		
-
 		return "{\"1\":\"1\"}";
 	}
 

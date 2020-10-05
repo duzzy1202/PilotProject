@@ -329,8 +329,6 @@ public class ArticleController {
 		
 		String keyword = (String)param.get("searchKeyword");
 		
-		System.out.println("sdfadsfa : " + keyword);
-		
 		List<Article> searchTitleResultArticles = articleService.getArticlesByTitleKeyword(keyword);
 		List<Article> searchBodyResultArticles = articleService.getArticlesMyBodyKeyword(keyword);
 		List<Reply> searchResultReplies = replyService.getReplysByKeyword(keyword);

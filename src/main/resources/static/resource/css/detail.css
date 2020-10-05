@@ -164,7 +164,9 @@
 .line {
 	height: 5px;
 	width: 1200px;
-	background-color: white;
+	background-color: #FAFAFA;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* 댓글 목록 */

@@ -29,19 +29,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
 	public void addInterceptors(InterceptorRegistry registry) {
 		// beforeActionInterceptor 인터셉터가 모든 액션 실행전에 실행되도록 처리
 		registry.addInterceptor(beforeActionInterceptor).addPathPatterns("/**").excludePathPatterns("/resource/**");
-
 		// 로그인 없이도 접속할 수 있는 URI 전부 기술
 		registry.addInterceptor(needToLoginInterceptor).addPathPatterns("/**").excludePathPatterns("/")
-				.excludePathPatterns("/resource/**").excludePathPatterns("/home/main")
-				.excludePathPatterns("/member/login").excludePathPatterns("/member/doLogin")
-				.excludePathPatterns("/member/join").excludePathPatterns("/member/doJoin")
-				.excludePathPatterns("/article/*-list").excludePathPatterns("/article/*-detail")
-				.excludePathPatterns("/reply/getForPrintReplies").excludePathPatterns("/file/streamVideo");
-
+				.excludePathPatterns("/resource/**").excludePathPatterns("/usr/home/main")
+				.excludePathPatterns("/usr/member/login").excludePathPatterns("/usr/member/doLogin")
+				.excludePathPatterns("/usr/member/join").excludePathPatterns("/usr/member/doJoin")
+				.excludePathPatterns("/usr/article/*-list").excludePathPatterns("/usr/article/*-detail")
+				.excludePathPatterns("/usr/article/*-clubHouse").excludePathPatterns("/usr/file/img")
+				.excludePathPatterns("/usr/reply/getForPrintReplies").excludePathPatterns("/usr/file/streamVideo");
 		// 로그인 상태에서 접속할 수 없는 URI 전부 기술
-		registry.addInterceptor(needToLogoutInterceptor).addPathPatterns("/member/login")
-				.addPathPatterns("/member/doLogin").addPathPatterns("/member/join")
-				.addPathPatterns("/member/doJoin");
-
+		registry.addInterceptor(needToLogoutInterceptor).addPathPatterns("/usr/member/login")
+				.addPathPatterns("/usr/member/doLogin").addPathPatterns("/usr/member/join")
+				.addPathPatterns("/usr/member/doJoin");
 	}
 }

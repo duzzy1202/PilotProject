@@ -82,7 +82,7 @@ public class ReplyController {
 
 		replyService.deleteReply(id);
 
-		return new ResultData("S-1", String.format("%d번 댓글을 삭제하였습니다.", id));
+		return new ResultData("S-1", String.format("댓글을 삭제하였습니다.", id));
 	}
 
 	@RequestMapping("/usr/reply/doModifyReplyAjax")

@@ -24,7 +24,6 @@ public class ClubdataService {
 
 	public void addClubData(Map<String, Object> param) {
 		clubdataDao.addClubData(param);
-		
 	}
 
 	public List<Club> getAllClubs() {

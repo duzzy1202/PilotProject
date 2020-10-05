@@ -40,8 +40,6 @@ public class AdminController {
 	@Autowired
 	private MemberService memberService;
 	@Autowired
-	private AttrService attrService;
-	@Autowired
 	private ArticleService articleService;
 	@Autowired
 	private AdminService adminService;
@@ -66,7 +64,6 @@ public class AdminController {
 		model.addAttribute("redirectUri", "/usr/home/main");
 		model.addAttribute("alertMsg", "업데이트가 완료되었습니다.");
 		return "common/redirect";
-		
 	}
 	
 	@RequestMapping("/adm/admin/adminPage")
@@ -81,15 +78,6 @@ public class AdminController {
 		return "/admin/adminPage";
 	}
 	
-	@RequestMapping("/adm/admin/addData")
-	public String AddClubData(Model model, @RequestParam Map<String, Object> param) {
-		clubdataService.addClubData(param);
-		
-		model.addAttribute("redirectUri", "/adm/admin/dataCenter");
-		model.addAttribute("alertMsg", "데이터 추가가 완료되었습니다.");
-		return "common/redirect";
-	}
-	
 	@RequestMapping("/adm/admin/newData")
 	public String newData(Model model, HttpServletRequest req) {
 		Member member = memberService.getMemberById((int)req.getAttribute("loggedInMemberId"));
@@ -100,6 +88,15 @@ public class AdminController {
 		}
 		
 		return "/admin/newData";
+	}
+	
+	@RequestMapping("/adm/admin/addData")
+	public String AddClubData(Model model, @RequestParam Map<String, Object> param) {
+		clubdataService.addClubData(param);
+		
+		model.addAttribute("redirectUri", "/adm/admin/dataCenter");
+		model.addAttribute("alertMsg", "데이터 추가가 완료되었습니다.");
+		return "common/redirect";
 	}
 	
 	@RequestMapping("/adm/admin/updateData")
