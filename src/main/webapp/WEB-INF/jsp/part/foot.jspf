@@ -5,3 +5,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 </body>
 </html>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<c:if test="${profiles == 'production'}">
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-179693745-1"></script>
+	<script>
+ 	window.dataLayer = window.dataLayer || [];
+  	function gtag(){dataLayer.push(arguments);}
+  	gtag('js', new Date());
+
+  	gtag('config', 'UA-179693745-1');
+	</script>
+</c:if>
+
