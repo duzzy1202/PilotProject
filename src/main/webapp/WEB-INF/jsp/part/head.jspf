@@ -33,8 +33,13 @@
 <!-- 공통 JS -->
 <script src="/resource/app.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
+
 <!-- 구글 애드센스 인증용 코드 -->
 <script data-ad-client="ca-pub-3491863275459489" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- 구글 서치콘솔 -->
+<meta name="google-site-verification" content="7dWlPbjHRCQRmzghEHpIVMLOqs-F8mPs2Tx3fZdb3xw" />
+<!-- 네이버 웹마스터 -->
+<meta name="naver-site-verification" content="b690543aef1d3c3a9b1c272ef05c97c3d04b88c6" />
 
 <script>
 	var MemberLoginForm__submitDone = false;
